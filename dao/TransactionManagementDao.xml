@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.cqust.dao.TransactionManagementDao">
+	
+	<parameterMap id="transactionManagementPM" type="cn.edu.cqust.bean.TransactionManagement"/>
+	<resultMap id="transactionManagementRM" type="cn.edu.cqust.bean.TransactionManagement"/>
+	
+	<select id="findByEmployeePhone" resultMap="transactionManagementRM">
+		select * from transaction_management
+		where employeePhone = #{employeePhone};
+	</select>
+	
+	<delete id="deleteById">
+		delete from transaction_management
+		where id = #{id};
+	</delete>
+	
+	<insert id="insert" parameterMap="transactionManagementPM">
+		insert into transaction_management (content, time, employeePhone)
+		values (#{content}, #{time}, #{employeePhone});
+	</insert>
+	
+
+</mapper>

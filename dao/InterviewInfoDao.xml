@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.cqust.dao.InterviewInfoDao">
+	
+	<parameterMap id="interviewInfoPM" type="cn.edu.cqust.bean.InterviewInfo"/>
+	<resultMap id="roSignUpListRM" type="cn.edu.cqust.bean.vo.RoSignUpList"/>
+	<resultMap id="roInterviewListAllRM" type="cn.edu.cqust.bean.vo.RoInterviewListAll"/>
+	<resultMap id="interviewInfoRM" type="cn.edu.cqust.bean.InterviewInfo"/>
+	
+	<select id="findByMC1" resultMap="roSignUpListRM">
+		select
+		t5.id,
+		t2.name,
+		t2.idNumber,
+		t2.gender,
+		t2.age,
+		t2.phoneNumber,
+		t2.education,
+		t2.address,
+		t2.professionalSkills,
+		t2.hasCertificate,
+		t2.isDisability,
+		t1.recommendEnterprise,
+		t1.recommendJob,
+		t3.signUpTime,
+		t3.interviewTime,
+		t5.note
+		from phone_call_list as t1
+		inner join
+		(select id,
+		name, #
+		idNumber, #
+		gender,
+		age,
+		phoneNumber, #
+		education,
+		address,
+		professionalSkills,
+		hasCertificate,
+		isDisability
+		from customer_info
+		<where>
+			<if test="customerInfo.name != null">
+				and name like concat('%', #{customerInfo.name}, '%')
+			</if>
+			<if test="customerInfo.idNumber != null">
+				and idNumber like concat('%', #{customerInfo.idNumber}, '%')
+			</if>
+			<if test="customerInfo.phoneNumber != null">
+				and phoneNumber like concat('%', #{customerInfo.phoneNumber}, '%')
+			</if>
+		</where>
+		) as t2
+		on t1.customerId = t2.id
+		inner join sign_up_info as t3
+		on t1.customerId = t3.customerId and
+		t1.employeeId = t3.employeeId and
+		t1.id = t3.phoneCallListId
+		inner join
+		(select id
+		from employee
+		where phone = #{employeePhone}) as t4
+		on t4.id = t3.id
+		inner join interview_info as t5
+		on t5.customerId = t4.id
+		limit #{startIndex}, 10;
+	</select>
+	
+	<select id="countByMC1" resultType="int">
+		select count(t5.id)
+		from phone_call_list as t1
+		inner join
+		(select
+		id,
+		name,
+		idNumber,
+		gender,
+		age,
+		phoneNumber,
+		education,
+		address,
+		professionalSkills,
+		hasCertificate,
+		isDisability
+		from customer_info
+		<where>
+			<if test="customerInfo.name != null">
+				and name like concat('%', #{customerInfo.name}, '%')
+			</if>
+			<if test="customerInfo.idNumber != null">
+				and idNumber like concat('%', #{customerInfo.idNumber}, '%')
+			</if>
+			<if test="customerInfo.phoneNumber != null">
+				and phoneNumber like concat('%', #{customerInfo.phoneNumber}, '%')
+			</if>
+		</where>
+		) as t2
+		on t1.customerId = t2.id
+		inner join
+		sign_up_info as t3
+		on t1.customerId = t3.customerId and
+		t1.employeeId = t3.employeeId and
+		t1.id = t3.phoneCallListId
+		inner join
+		(select id
+		from employee
+		where phone = #{employeePhone}) as t4
+		on t4.id = t3.id
+		inner join interview_info as t5
+		on t5.customerId = t4.id;
+	</select>
+	
+	<insert id="insert">
+		insert into interview_info (note, customerId, phoneCallListId,
+		                            signUpId, employeeId, state)
+		values (#{note}, #{customerId}, #{phoneCallListId},
+		        #{signUpId}, #{employeeId}, #{state});
+	</insert>
+	
+	
+	<select id="findByMC2" resultMap="roInterviewListAllRM">
+		select t3.id as interviewInfoId,
+		t2.name as customerName,
+		t2.idNumber,
+		t2.gender,
+		t2.age,
+		t2.phoneNumber,
+		t2.education,
+		t2.address,
+		t2.professionalSkills,
+		t2.hasCertificate,
+		t2.isDisability,
+		t1.recommendEnterprise,
+		t1.recommendJob,
+		t5.interviewTime,
+		t4.deptName,
+		t4.name as employeeName,
+		t2.id as customerId,
+		t5.id as signUpId,
+		t1.id as phoneCallListId,
+		t4.id as employeeId
+		from (select *
+		from phone_call_list
+		<where>
+			<if test="recommendEnterprise != null">
+				and recommendEnterprise like concat('%', #{recommendEnterprise}, '%')
+			</if>
+		</where>
+		) as t1
+		inner join
+		(select *
+		from customer_info
+		<where>
+			<if test="customerInfo.name != null">
+				and name like concat('%', #{customerInfo.name}, '%')
+			</if>
+			<if test="customerInfo.idNumber != null">
+				and idNumber like concat('%', #{customerInfo.idNumber}, '%')
+			</if>
+			<if test="customerInfo.gender != null">
+				and gender like concat('%', #{customerInfo.gender}, '%')
+			</if>
+			<if test="customerInfo.phoneNumber != null">
+				and phoneNumber like concat('%', #{customerInfo.phoneNumber}, '%')
+			</if>
+			<if test="customerInfo.address != null">
+				and address like concat('%', #{customerInfo.address}, '%')
+			</if>
+		</where>
+		) as t2
+		on t1.customerId = t2.id
+		inner join
+		(select *
+		from interview_info
+		where state = #{state}) as t3
+		on t1.customerId = t3.customerId and
+		t1.employeeId = t3.employeeId and
+		t1.id = t3.phoneCallListId
+		inner join (select *
+		from employee
+		<where>
+			<if test="deptName != null">
+				and deptName like concat('%', #{deptName}, '%')
+			</if>
+			<if test="employeeName != null">
+				and name like concat('%', #{employeeName}, '%')
+			</if>
+		</where>
+		) as t4
+		on t1.employeeId = t4.id
+		inner join (select *
+		from sign_up_info
+		<where>
+			<if test="interviewTime != null">
+				and interviewTime like concat('%', #{interviewTime}, '%')
+			</if>
+		</where>
+		) as t5
+		on t5.id = t3.signUpId
+		limit 0, 10;
+	</select>
+	
+	<select id="countByMC2" resultType="int">
+		select count(t3.id)
+		from (select *
+		from phone_call_list
+		<where>
+			<if test="recommendEnterprise != null">
+				and recommendEnterprise like concat('%', #{recommendEnterprise}, '%')
+			</if>
+		</where>
+		) as t1
+		inner join
+		(select *
+		from customer_info
+		<where>
+			<if test="customerInfo.name != null">
+				and name like concat('%', #{customerInfo.name}, '%')
+			</if>
+			<if test="customerInfo.idNumber != null">
+				and idNumber like concat('%', #{customerInfo.idNumber}, '%')
+			</if>
+			<if test="customerInfo.gender != null">
+				and gender like concat('%', #{customerInfo.gender}, '%')
+			</if>
+			<if test="customerInfo.phoneNumber != null">
+				and phoneNumber like concat('%', #{customerInfo.phoneNumber}, '%')
+			</if>
+			<if test="customerInfo.address != null">
+				and address like concat('%', #{customerInfo.address}, '%')
+			</if>
+		</where>
+		) as t2
+		on t1.customerId = t2.id
+		inner join
+		(select *
+		from interview_info
+		where state = #{state}) as t3
+		on t1.customerId = t3.customerId and
+		t1.employeeId = t3.employeeId and
+		t1.id = t3.phoneCallListId
+		inner join (select *
+		from employee
+		<where>
+			<if test="deptName != null">
+				and deptName like concat('%', #{deptName}, '%')
+			</if>
+			<if test="employeeName != null">
+				and name like concat('%', #{employeeName}, '%')
+			</if>
+		</where>
+		) as t4
+		on t1.employeeId = t4.id
+		inner join (select *
+		from sign_up_info
+		<where>
+			<if test="interviewTime != null">
+				and interviewTime like concat('%', #{interviewTime}, '%')
+			</if>
+		</where>
+		) as t5
+		on t5.id = t3.signUpId;
+	</select>
+	
+	
+	<update id="update">
+		update hrms.interview_info
+		<trim prefix="set" suffixOverrides=",">
+			<if test="note != null "              >note=#{note},</if>
+			<if test="state != null "             >state=#{state},</if>
+			<if test="customerId != null "        >customerId=#{customerId},</if>
+			<if test="phoneCallListId != null "   >phoneCallListId=#{phoneCallListId},</if>
+			<if test="signUpId != null "          >signUpId=#{signUpId},</if>
+			<if test="employeeId != null"         >employeeId=#{employeeId},</if>
+		</trim>
+		where id = #{id};
+	</update>
+	
+	<select id="findById" resultMap="interviewInfoRM">
+		select * from interview_info
+		where id = #{id};
+	</select>
+	
+	
+	<select id="findByState" resultMap="interviewInfoRM">
+		select *
+		from interview_info
+		where state = #{state}
+	</select>
+	
+</mapper>

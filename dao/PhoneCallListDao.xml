@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.cqust.dao.PhoneCallListDao">
+	
+	<parameterMap id="phoneCallListPM" type="cn.edu.cqust.bean.PhoneCallList"/>
+	<resultMap id="phoneCallListRM" type="cn.edu.cqust.bean.PhoneCallList"/>
+	<resultMap id="roCallList" type="cn.edu.cqust.bean.vo.RoCallList"/>
+	
+	<select id="findByMC1" resultMap="roCallList">
+		select
+		t1.name,
+		idNumber,
+		gender,
+		age,
+		phoneNumber,
+		education,
+		address,
+		professionalSkills,
+		hasCertificate,
+		isDisability,
+		sourceOfData,
+		note,
+		t2.id as phoneCallListId,
+		isWechatAdded,
+		recommendEnterprise,
+		recommendJob,
+		customerId,
+		employeeId
+		
+		from (select * from phone_call_list
+		where employeeId =
+		(select employee.id from employee
+		where phone = #{employeePhone}) and addedTime = (select DATE_SUB(curdate(), interval 0 day))) as t2
+		inner join
+		(select * from customer_info
+		<where>
+			<if test="customerInfo.name != null">
+				and name like concat('%', #{customerInfo.name}, '%')
+			</if>
+			<if test="customerInfo.gender != null">
+				and gender like concat('%', #{customerInfo.gender}, '%')
+			</if>
+			<if test="customerInfo.phoneNumber != null">
+				and phoneNumber like concat('%', #{customerInfo.phoneNumber}, '%')
+			</if>
+			<if test="customerInfo.address != null">
+				and address like concat('%', #{customerInfo.address}, '%')
+			</if>
+			<if test="customerInfo.professionalSkills != null">
+				and professionalSkills like concat('%', #{customerInfo.professionalSkills}, '%')
+			</if>
+			<if test="customerInfo.hasCertificate != null">
+				and hasCertificate like concat('%', #{customerInfo.hasCertificate}, '%')
+			</if>
+			<if test="customerInfo.isDisability != null">
+				and isDisability like concat('%', #{customerInfo.isDisability}, '%')
+			</if>
+			<if test="customerInfo.education != null">
+				and education like concat('%', #{customerInfo.education}, '%')
+			</if>
+		</where>
+		)as t1
+		on t1.id = t2.customerId
+		limit #{startIndex}, 10;
+	</select>
+	
+	<select id="findCountByMC1" resultType="int">
+		select count(t1.id)
+		
+		from (select * from phone_call_list
+		where employeeId =
+		(select employee.id from employee
+		where phone = #{employeePhone}) and addedTime = (select DATE_SUB(curdate(), interval 0 day))) as t2
+		inner join
+		(select * from customer_info
+		<where>
+			<if test="customerInfo.name != null">
+				and name like concat('%', #{customerInfo.name}, '%')
+			</if>
+			<if test="customerInfo.gender != null">
+				and gender like concat('%', #{customerInfo.gender}, '%')
+			</if>
+			<if test="customerInfo.phoneNumber != null">
+				and phoneNumber like concat('%', #{customerInfo.phoneNumber}, '%')
+			</if>
+			<if test="customerInfo.address != null">
+				and address like concat('%', #{customerInfo.address}, '%')
+			</if>
+			<if test="customerInfo.professionalSkills != null">
+				and professionalSkills like concat('%', #{customerInfo.professionalSkills}, '%')
+			</if>
+			<if test="customerInfo.hasCertificate != null">
+				and hasCertificate like concat('%', #{customerInfo.hasCertificate}, '%')
+			</if>
+			<if test="customerInfo.isDisability != null">
+				and isDisability like concat('%', #{customerInfo.isDisability}, '%')
+			</if>
+			<if test="customerInfo.education != null">
+				and education like concat('%', #{customerInfo.education}, '%')
+			</if>
+		</where>
+		)as t1
+		on t1.id = t2.customerId;
+	</select>
+	
+	<select id="findByMC2" resultMap="roCallList">
+		select
+		t1.name,
+		idNumber,
+		gender,
+		age,
+		phoneNumber,
+		education,
+		address,
+		professionalSkills,
+		hasCertificate,
+		isDisability,
+		sourceOfData,
+		note,
+		t2.id as phoneCallListId,
+		isWechatAdded,
+		recommendEnterprise,
+		recommendJob,
+		customerId,
+		employeeId
+		
+		from (select * from phone_call_list
+		where employeeId = (select employee.id from employee where phone = #{employeePhone})) as t2
+		inner join
+		(select * from customer_info
+		<where>
+			<if test="customerInfo.name != null">
+				and name like concat('%', #{customerInfo.name}, '%')
+			</if>
+			<if test="customerInfo.gender != null">
+				and gender like concat('%', #{customerInfo.gender}, '%')
+			</if>
+			<if test="customerInfo.phoneNumber != null">
+				and phoneNumber like concat('%', #{customerInfo.phoneNumber}, '%')
+			</if>
+			<if test="customerInfo.address != null">
+				and address like concat('%', #{customerInfo.address}, '%')
+			</if>
+			<if test="customerInfo.professionalSkills != null">
+				and professionalSkills like concat('%', #{customerInfo.professionalSkills}, '%')
+			</if>
+			<if test="customerInfo.hasCertificate != null">
+				and hasCertificate like concat('%', #{customerInfo.hasCertificate}, '%')
+			</if>
+			<if test="customerInfo.isDisability != null">
+				and isDisability like concat('%', #{customerInfo.isDisability}, '%')
+			</if>
+			<if test="customerInfo.education != null">
+				and education like concat('%', #{customerInfo.education}, '%')
+			</if>
+		</where>
+		)as t1
+		on t1.id = t2.customerId
+		limit #{startIndex}, 10;
+	</select>
+	
+	
+	<select id="findCountByMC2" resultType="int">
+		select count(t1.id)
+		
+		from (select * from phone_call_list
+		where employeeId = (select employee.id from employee where phone = #{employeePhone})) as t2
+		inner join
+		(select * from customer_info
+		<where>
+			<if test="customerInfo.name != null">
+				and name like concat('%', #{customerInfo.name}, '%')
+			</if>
+			<if test="customerInfo.gender != null">
+				and gender like concat('%', #{customerInfo.gender}, '%')
+			</if>
+			<if test="customerInfo.phoneNumber != null">
+				and phoneNumber like concat('%', #{customerInfo.phoneNumber}, '%')
+			</if>
+			<if test="customerInfo.address != null">
+				and address like concat('%', #{customerInfo.address}, '%')
+			</if>
+			<if test="customerInfo.professionalSkills != null">
+				and professionalSkills like concat('%', #{customerInfo.professionalSkills}, '%')
+			</if>
+			<if test="customerInfo.hasCertificate != null">
+				and hasCertificate like concat('%', #{customerInfo.hasCertificate}, '%')
+			</if>
+			<if test="customerInfo.isDisability != null">
+				and isDisability like concat('%', #{customerInfo.isDisability}, '%')
+			</if>
+			<if test="customerInfo.education != null">
+				and education like concat('%', #{customerInfo.education}, '%')
+			</if>
+		</where>
+		)as t1
+		on t1.id = t2.customerId;
+	</select>
+	
+	
+	<select id="findAfterSystemTimeLimit" resultMap="phoneCallListRM">
+		select *
+		from phone_call_list
+		where addedTime &lt; (select DATE_SUB(curdate(), interval 0 day))
+		  and addedTime &gt;=
+		      (select DATE_SUB(curdate(), interval (
+			      select value
+			      from system_settings
+			      where id = 2) day))
+		order by addedTime;
+	</select>
+	
+	
+	<select id="findBeforeSystemTimeLimit" resultMap="phoneCallListRM">
+		select *
+		from phone_call_list
+		where addedTime &lt; (select DATE_SUB(curdate(), interval (
+			select value
+			from system_settings
+			where id = 2) day))
+		order by addedTime;
+	</select>
+	
+	
+	<update id="update">
+		update hrms.phone_call_list
+		<trim prefix="set" suffixOverrides=",">
+			<if test="isWechatAdded != null">isWechatAdded=#{isWechatAdded},</if>
+			<if test="recommendEnterprise != null">recommendEnterprise=#{recommendEnterprise},</if>
+			<if test="recommendJob != null">recommendJob=#{recommendJob},</if>
+			<if test="addedTime != null">addedTime=#{addedTime},</if>
+		</trim>
+		where id = #{id};
+	</update>
+	
+	<insert id="insert">
+		insert into phone_call_list(isWechatAdded, recommendEnterprise,
+		                            recommendJob, addedTime, customerId, employeeId)
+		values (#{isWechatAdded}, #{recommendEnterprise},
+		        #{recommendJob}, #{addedTime}, #{customerId}, #{employeeId})
+	</insert>
+	
+	<select id="findAll" resultMap="phoneCallListRM">
+		select * from phone_call_list;
+	</select>
+	
+	<delete id="deleteById">
+		delete
+		from phone_call_list
+		where id = #{id};
+	</delete>
+
+</mapper>

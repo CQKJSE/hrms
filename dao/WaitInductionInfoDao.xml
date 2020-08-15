@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.cqust.dao.WaitInductionInfoDao">
+	
+	<resultMap id="roWaitInductionRM" type="cn.edu.cqust.bean.vo.RoWaitInduction"/>
+	<parameterMap id="waitInductionInfoPM" type="cn.edu.cqust.bean.WaitInductionInfo"/>
+	<resultMap id="waitInductionInfoRM" type="cn.edu.cqust.bean.WaitInductionInfo"/>
+	
+	<select id="findByMC1" resultMap="roWaitInductionRM">
+		select
+		t5.id,
+		t2.name,
+		t2.idNumber,
+		t2.gender,
+		t2.age,
+		t2.phoneNumber,
+		t2.education,
+		t2.address,
+		t2.professionalSkills,
+		t2.hasCertificate,
+		t2.isDisability,
+		t1.recommendEnterprise,
+		t1.recommendJob,
+		t5.interviewQualifiedTime,
+		t5.state,
+		t5.delayTime,
+		t5.note
+		from phone_call_list as t1
+		inner join
+		(select id,
+		name, #
+		idNumber, #
+		gender,
+		age,
+		phoneNumber, #
+		education,
+		address,
+		professionalSkills,
+		hasCertificate,
+		isDisability
+		from customer_info
+		<where>
+			<if test="customerInfo.name != null">
+				and name like concat('%', #{customerInfo.name}, '%')
+			</if>
+			<if test="customerInfo.idNumber != null">
+				and idNumber like concat('%', #{customerInfo.idNumber}, '%')
+			</if>
+			<if test="customerInfo.phoneNumber != null">
+				and phoneNumber like concat('%', #{customerInfo.phoneNumber}, '%')
+			</if>
+		</where>
+		) as t2
+		on t1.customerId = t2.id
+		inner join
+		(select id
+		from employee
+		where phone = #{employeePhone}) as t4
+		on t4.id = t1.employeeId
+		inner join wait_induction_info as t5
+		on t5.customerId = t4.id
+		and t5.employeeId = t4.id
+		and t5.phoneCallListId = t1.id
+		limit #{startIndex}, 10;
+	</select>
+	
+	<select id="countByMC1" resultType="int">
+		select count(t5.id)
+		from phone_call_list as t1
+		inner join
+		(select
+		id,
+		name,
+		idNumber,
+		gender,
+		age,
+		phoneNumber,
+		education,
+		address,
+		professionalSkills,
+		hasCertificate,
+		isDisability
+		from customer_info
+		<where>
+			<if test="customerInfo.name != null">
+				and name like concat('%', #{customerInfo.name}, '%')
+			</if>
+			<if test="customerInfo.idNumber != null">
+				and idNumber like concat('%', #{customerInfo.idNumber}, '%')
+			</if>
+			<if test="customerInfo.phoneNumber != null">
+				and phoneNumber like concat('%', #{customerInfo.phoneNumber}, '%')
+			</if>
+		</where>
+		) as t2
+		on t1.customerId = t2.id
+		inner join
+		(select id
+		from employee
+		where phone = #{employeePhone}) as t4
+		on t4.id = t1.employeeId
+		inner join wait_induction_info as t5
+		on t5.customerId = t4.id
+		and t5.employeeId = t4.id
+		and t5.phoneCallListId = t1.id;
+	</select>
+	
+	<select id="findById" resultMap="waitInductionInfoRM">
+		select *
+		from wait_induction_info
+		where id = #{id};
+	</select>
+	
+	
+	<update id="update">
+		update wait_induction_info
+		<trim prefix="set" suffixOverrides=",">
+			<if test="interviewQualifiedTime != null">
+				interviewQualifiedTime=#{interviewQualifiedTime},
+			</if>
+			<if test="state != null">
+				state=#{state},
+			</if>
+			<if test="medicalQualifiedTime != null">
+				medicalQualifiedTime=#{medicalQualifiedTime},
+			</if>
+			<if test="delayTime != null">
+				delayTime=#{delayTime},
+			</if>
+			<if test="note != null">
+				note=#{note},
+			</if>
+		</trim>
+		where id = #{id};
+	</update>
+	
+	<insert id="insert">
+		insert into wait_induction_info(interviewQualifiedTime, state,
+		                                medicalQualifiedTime, delayTime, note,
+		                                customerId, phoneCallListId, employeeId, stateOne)
+		values (#{interviewQualifiedTime}, #{state},
+		        #{medicalQualifiedTime}, #{delayTime}, #{note},
+		        #{customerId}, #{phoneCallListId}, #{employeeId}, #{stateOne})
+	</insert>
+
+</mapper>

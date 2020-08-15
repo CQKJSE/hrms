@@ -1,0 +1,111 @@
+package cn.edu.cqust.service.impl;
+
+import cn.edu.cqust.bean.CustomerInfo;
+import cn.edu.cqust.bean.InterviewInfo;
+import cn.edu.cqust.bean.PhoneCallList;
+import cn.edu.cqust.bean.WaitInductionInfo;
+import cn.edu.cqust.bean.vo.QoUpdateWaitInduction;
+import cn.edu.cqust.bean.vo.RoWaitInduction;
+import cn.edu.cqust.dao.CustomerInfoDao;
+import cn.edu.cqust.dao.InterviewInfoDao;
+import cn.edu.cqust.dao.PhoneCallListDao;
+import cn.edu.cqust.dao.WaitInductionInfoDao;
+import cn.edu.cqust.service.WaitInductionInfoService;
+import cn.edu.cqust.util.BeanHelper;
+import cn.edu.cqust.util.DateUtil;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+/**
+ * @project: HRMS_SpringbootDemo
+ * @author: F.C.Tang
+ * @date: 2020-08-12 10:51
+ * @desc:
+ **/
+@Service
+public class WaitInductionInfoServiceImpl implements WaitInductionInfoService {
+
+    @Resource
+    private WaitInductionInfoDao waitInductionInfoDao;
+    @Resource
+    private CustomerInfoDao customerInfoDao;
+    @Resource
+    private PhoneCallListDao phoneCallListDao;
+    @Resource
+    private InterviewInfoDao interviewInfoDao;
+
+
+    @Override
+    public List<RoWaitInduction> findByMC1(CustomerInfo customerInfo, Integer pageNumber, String employeePhone) {
+        return waitInductionInfoDao.findByMC1(customerInfo, (pageNumber - 1) * 10, employeePhone);
+    }
+
+    @Override
+    public Integer countByMC1(CustomerInfo customerInfo, String employeePhone) {
+        return waitInductionInfoDao.countByMC1(customerInfo, employeePhone);
+    }
+
+    @Override
+    public Integer updateSignUpInfoAndRelated(QoUpdateWaitInduction qo) {
+        WaitInductionInfo waitInductionInfo = waitInductionInfoDao.findById(qo.getWaitInductionInfoId());
+        if (waitInductionInfo == null) {
+            return -1;
+        }
+        int ciId = waitInductionInfo.getCustomerId();
+        int pclId = waitInductionInfo.getPhoneCallListId();
+        CustomerInfo ci = new CustomerInfo();
+        PhoneCallList pcl = new PhoneCallList();
+        WaitInductionInfo wii = new WaitInductionInfo();
+
+        //set customer_info update param
+        ci.setId(ciId);
+        ci.setName(qo.getName());
+        ci.setIdNumber(qo.getIdNumber());
+        ci.setGender(qo.getGender());
+        ci.setAge(qo.getAge());
+        ci.setPhoneNumber(qo.getPhoneNumber());
+        ci.setEducation(qo.getEducation());
+        ci.setAddedPerson(qo.getAddress());
+        ci.setProfessionalSkills(qo.getProfessionalSkills());
+        ci.setHasCertificate(qo.getHasCertificate());
+        ci.setIsDisability(qo.getIsDisability());
+        //set phone_call_list update param
+        pcl.setId(pclId);
+        pcl.setRecommendEnterprise(qo.getRecommendEnterprise());
+        pcl.setRecommendJob(qo.getRecommendJob());
+        //set wait_induction_info update param
+        wii.setId(qo.getWaitInductionInfoId());
+        wii.setDelayTime(qo.getDelayTime());
+        //declare operationCode
+        int s1 = -1;
+        int s2 = -1;
+        int s3 = -1;
+        //check if all bean's field is empty, and get operationCode
+        if (!BeanHelper.isEmptyBean(ci, "id"))
+            s1 = customerInfoDao.update(ci);
+        if (!BeanHelper.isEmptyBean(pcl, "id"))
+            s2 = phoneCallListDao.update(pcl);
+        if (!BeanHelper.isEmptyBean(wii, "id"))
+            s3 = waitInductionInfoDao.update(wii);
+
+        //return true if update at least 1 table
+        return (s1 == 1 || s2 == 1 || s3 == 1) ? 1 : -1;
+    }
+
+    @Override
+    public Integer addWaitInduction(WaitInductionInfo waitInductionInfo, Integer id) {
+        waitInductionInfo.setInterviewQualifiedTime(DateUtil.getYMD());
+        waitInductionInfo.setState("待入职");
+        waitInductionInfo.setStateOne(0);
+        InterviewInfo interviewInfo = interviewInfoDao.findById(id);
+        interviewInfo.setState(1);
+        interviewInfo.setNote("通过");
+        int s1 = waitInductionInfoDao.insert(waitInductionInfo);
+        int s2 = interviewInfoDao.update(interviewInfo);
+        return (s1 == 1 && s2 == 1) ? 1 : -1;
+    }
+
+
+}
