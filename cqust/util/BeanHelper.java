@@ -1,8 +1,5 @@
 package cn.edu.cqust.util;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
 import org.springframework.util.ObjectUtils;
 import java.lang.reflect.Field;
 
@@ -54,21 +51,4 @@ public class BeanHelper {
         return true;
     }
 
-
-    /*************************************************************
-     *                  运行时间/初始化、销毁(junit5)
-     *************************************************************/
-    private static long sTime;
-    @BeforeAll
-    @DisplayName("开始时间/")
-    public static void start() {
-        sTime = System.currentTimeMillis();
-    }
-
-    @AfterAll
-    @DisplayName("结束时间/")
-    public static void end() {
-        long eTime = System.currentTimeMillis();
-        System.out.println("耗时: " + (eTime - sTime) + "ms");
-    }
 }

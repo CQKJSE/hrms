@@ -32,7 +32,7 @@ public class WaitInductionInfoController {
 
     @ResponseBody
     @GetMapping(path = "/waitInduction")
-    public List<RoWaitInduction> findByMC1(CustomerInfo customerInfo,
+    public List<RoWaitInduction> findByMC1(@RequestBody CustomerInfo customerInfo,
                                            @RequestParam(defaultValue = "1") Integer pageIndex) {
         return waitInductionInfoServiceImpl.findByMC1(customerInfo, pageIndex, phone);
     }
@@ -50,7 +50,7 @@ public class WaitInductionInfoController {
     }
 
     @PostMapping(path = "/addWaitInduction")
-    public String addWaitInduction(WaitInductionInfo waitInductionInfo, Integer id) {
+    public String addWaitInduction(@RequestBody WaitInductionInfo waitInductionInfo, Integer id) {
         return Generator.genJsonStatusCode(
                 waitInductionInfoServiceImpl.addWaitInduction(waitInductionInfo, id)
         );

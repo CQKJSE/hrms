@@ -10,14 +10,14 @@
   >03.需求03 ---> /callListCount  
   >04.需求04 ---> /callAllList  
   >05.需求05 ---> /callAllListCount  
-  >06.需求06 ---> /  
+  >06.需求06 ---> /throughRecord  
   >07.需求07 ---> /addTransaction  
   >08.需求08 ---> /getTransaction  
   >09.需求09 ---> /deleteTransaction  
   >10.需求10 ---> /addPhone  
   ******************************************   
-  >11.需求11 ---> /  
-  >12.需求12 ---> /  
+  >11.需求11 ---> /getPhoneRecord  
+  >12.需求12 ---> /updatePhone  
   >13.需求13 ---> /定时任务1  
   >14.需求14 ---> /takeOutAll  
   >15.需求15 ---> /takeOut    
@@ -49,3 +49,14 @@
   >40.需求40 ---> /定时任务2  
   ******************************************  
   >41.需求41 ---> /定时任务3  
+  >42.需求42 ---> /getPhoneRecordCount  
+  >43.需求43 ---> /getPhoneRecordDept  
+  >44.需求44 ---> /getPhoneRecordDeptCount  
+  >45.需求45 ---> /getPhoneRecordAll  
+  >46.需求46 ---> /getPhoneRecordAllCount  
+  >47.需求47 ---> /addPhoneRecord  
+  >48.需求48 ---> /employee  
+  >49.需求49 ---> /employeeCount  
+  >50.需求50 ---> /addEmployee  
+  ******************************************  
+  >51.需求51 ---> /updateEmployee  

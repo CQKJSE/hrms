@@ -1,15 +1,14 @@
 package cn.edu.cqust.controller;
 
 import cn.edu.cqust.bean.CustomerInfo;
+import cn.edu.cqust.bean.PhoneCallList;
+import cn.edu.cqust.bean.vo.QoPclAndCi;
 import cn.edu.cqust.bean.vo.RoCallList;
+import cn.edu.cqust.service.CustomerInfoService;
 import cn.edu.cqust.service.PhoneCallListService;
 import cn.edu.cqust.util.Generator;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -38,7 +37,7 @@ public class PhoneCallListController {
     @ResponseBody
     @GetMapping(path = "/callList")
     public List<RoCallList> findByMC1(CustomerInfo customerInfo,
-                               @RequestParam(defaultValue = "1") Integer pageNumber) {
+                                      @RequestParam(defaultValue = "1") Integer pageNumber) {
         return phoneCallListService.findByMC1(customerInfo, pageNumber, phone);
     }
 
@@ -63,9 +62,9 @@ public class PhoneCallListController {
      * @return 结果列表
      */
     @ResponseBody
-    @GetMapping(path = "/callAllList")
+    @PostMapping(path = "/callAllList")
     public List<RoCallList> findByMC2(CustomerInfo customerInfo,
-                               @RequestParam(defaultValue = "1") Integer pageNumber) {
+                                      @RequestParam(defaultValue = "1") Integer pageNumber) {
         return phoneCallListService.findByMC2(customerInfo, pageNumber, phone);
     }
 
@@ -92,6 +91,12 @@ public class PhoneCallListController {
     @GetMapping(path = "/backData")
     public String deleteById(Integer id) {
         return Generator.genJsonStatusCode(phoneCallListService.deleteById(id));
+    }
+
+    @ResponseBody
+    @PostMapping(path = "/updatePhone")
+    public String updatePclAndCi(QoPclAndCi qo) {
+        return Generator.genJsonStatusCode(phoneCallListService.updateWithCi(qo));
     }
 
 }

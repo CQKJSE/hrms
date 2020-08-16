@@ -41,7 +41,7 @@ public class SuiAutoTask {
     @Scheduled(cron = "0 0 1 * * ?")
     public void SuiTask1() {
         // TODO: 2020/8/15  解除注释即可装载定时任务
-        List<SignUpInfo> suiList = signUpInfoDao.findByState(0);
+        /*List<SignUpInfo> suiList = signUpInfoDao.findByState(0);
         String currentTime = DateUtil.getYMD();
         for (SignUpInfo tempSui : suiList) {
             if (currentTime.compareTo(tempSui.getInterviewTime()) >= 1) {
@@ -53,7 +53,7 @@ public class SuiAutoTask {
                 signUpInfoDao.update(tempSui);
                 customerInfoDao.update(tempCi);
             }
-        }
+        }*/
     }
 
 }

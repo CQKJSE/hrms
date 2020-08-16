@@ -38,4 +38,26 @@ public interface EmployeeDao {
      */
     Employee findByPhone(String phone);
 
+    /**
+     * @desc 多条件查询 (所有成员变量可选)
+     * @param employee 带查询条件的bean
+     * @return 结果列表
+     */
+    List<Employee> findByMC(@Param("employee") Employee employee,
+                            @Param("pageIndex") Integer pageIndex);
+
+    /**
+     * @desc 添加
+     * @param employee 待添加数据
+     * @return 操作状态
+     */
+    Integer insert(Employee employee);
+
+    /**
+     * @desc 修改
+     * @param employee 需要修改的数据
+     * @return 操作状态
+     */
+    Integer update(Employee employee);
+
 }

@@ -2,6 +2,7 @@ package cn.edu.cqust.service;
 
 import cn.edu.cqust.bean.CustomerInfo;
 import cn.edu.cqust.bean.PhoneCallList;
+import cn.edu.cqust.bean.vo.QoPclAndCi;
 import cn.edu.cqust.bean.vo.RoCallList;
 import org.apache.ibatis.annotations.Param;
 
@@ -63,5 +64,12 @@ public interface PhoneCallListService {
      * @return 操作状态
      */
     Integer deleteById(Integer id);
+
+    /**
+     * @desc 更新pcl以及ci
+     * @param qo pcl+ci请求字段的混合对象
+     * @return 操作状态
+     */
+    Integer updateWithCi(QoPclAndCi qo);
 
 }

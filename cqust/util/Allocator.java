@@ -5,9 +5,6 @@ import cn.edu.cqust.dao.CustomerInfoDao;
 import cn.edu.cqust.dao.EmployeeDao;
 import cn.edu.cqust.dao.PhoneCallListDao;
 import cn.edu.cqust.dao.SystemSettingsDao;
-import cn.edu.cqust.util.DateUtil;
-import cn.edu.cqust.util.Generator;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -126,6 +123,42 @@ public class Allocator {
      * @return void
      */
     public void allocateAll() {
+        if (doAllocation(numPerPerson)) {
+            allocationSuccess = true;
+        }
+    }
+
+    /**
+     * @desc 分配算法: 为当前登录的业务员分配
+     * @param phone 当前登录的人的电话(用于查找对应的id)
+     * @return void
+     */
+    public void allocateOne(String phone) {
+        employees = tempEmployeeToSet(phone);
+        if (doAllocation(1)) {
+            allocationSuccess = true;
+        }
+    }
+
+    /**
+     * @desc 分配算法: 为当前登录的业务员分配, 且分配的customer的addTime在90天内
+     * @param phone 当前登录的人的电话(用于查找对应的id)
+     * @return void
+     */
+    public void allocateOneAfterTimeLimit(String phone) {
+        employees = tempEmployeeToSet(phone);
+        customers = customerAfterTimeLimitToSet();
+        if (doAllocation(1)) {
+            allocationSuccess = true;
+        }
+    }
+
+    /**
+     * @desc 执行分配算法
+     * @return true ---> 成功(执行数据库插入)
+     *         false --> 失败(不执行数据库插入)
+     */
+    private boolean doAllocation(int numPerPerson) {
         for (Integer employeeId : employees) {
             int tempEid = employeeId;
             int count = 0;
@@ -161,114 +194,12 @@ public class Allocator {
                 }
                 if (numOfRuns++ > allocateRoundLimit) {
                     allocationSuccess = false;
-                    return;
+                    return false;
                 }
             }
         }
-        allocationSuccess = true;
+        return true;
     }
-
-
-    /**
-     * @desc 分配算法: 为当前登录的业务员分配
-     * @param phone 当前登录的人的电话(用于查找对应的id)
-     * @return void
-     */
-    public void allocateOne(String phone) {
-        employees = tempEmployeeToSet(phone);
-        for (Integer employeeId : employees) {
-            int tempEid = employeeId;
-            int count = 0;
-            while (count != 1) {
-                int randomCid = Generator.genRandomNumber(customerMaxId);
-
-                //存在该客户
-                boolean isExistCustomer = customers.contains(randomCid);
-                //分配结果中不重复
-                boolean noRepetitionInAdditionalOfCid = !additionalPcl.containsKey(randomCid);
-                //在5天内cid唯一
-                boolean noRepetitionAfterTimeLimitOfCid = !pclAfterTimeLimit.containsKey(randomCid);
-                //在所有数据内两键唯一
-                boolean noRepetitionOfTwoKeys = !pclAll.containsValue(randomCid + "_" + tempEid);
-
-                if (!isExistCustomer) {
-                    notExistCustomer++;
-                }
-                if (!noRepetitionInAdditionalOfCid) {
-                    repetitionInAdditionalOfCid++;
-                }
-                if (!noRepetitionAfterTimeLimitOfCid) {
-                    repetitionAfterTimeLimitOfCid++;
-                }
-                if (!noRepetitionOfTwoKeys) {
-                    repetitionOfTwoKeys++;
-                }
-
-                if (isExistCustomer && noRepetitionInAdditionalOfCid
-                        && noRepetitionAfterTimeLimitOfCid && noRepetitionOfTwoKeys) {
-                    additionalPcl.put(randomCid, tempEid);
-                    count++;
-                }
-                if (numOfRuns++ > allocateRoundLimit) {
-                    allocationSuccess = false;
-                    return;
-                }
-            }
-        }
-        allocationSuccess = true;
-    }
-
-    /**
-     * @desc 分配算法: 为当前登录的业务员分配, 且分配的customer的addTime在90天内
-     * @param phone 当前登录的人的电话(用于查找对应的id)
-     * @return void
-     */
-    public void allocateOneAfterTimeLimit(String phone) {
-        employees = tempEmployeeToSet(phone);
-        customers = customerAfterTimeLimitToSet();
-        for (Integer employeeId : employees) {
-            int tempEid = employeeId;
-            int count = 0;
-            while (count != 1) {
-                int randomCid = Generator.genRandomNumber(customerMaxId);
-
-                //存在该客户
-                boolean isExistCustomer = customers.contains(randomCid);
-                //分配结果中不重复
-                boolean noRepetitionInAdditionalOfCid = !additionalPcl.containsKey(randomCid);
-                //在5天内cid唯一
-                boolean noRepetitionAfterTimeLimitOfCid = !pclAfterTimeLimit.containsKey(randomCid);
-                //在所有数据内两键唯一
-                boolean noRepetitionOfTwoKeys = !pclAll.containsValue(randomCid + "_" + tempEid);
-
-                if (!isExistCustomer) {
-                    notExistCustomer++;
-                }
-                if (!noRepetitionInAdditionalOfCid) {
-                    repetitionInAdditionalOfCid++;
-                }
-                if (!noRepetitionAfterTimeLimitOfCid) {
-                    repetitionAfterTimeLimitOfCid++;
-                }
-                if (!noRepetitionOfTwoKeys) {
-                    repetitionOfTwoKeys++;
-                }
-
-                if (isExistCustomer && noRepetitionInAdditionalOfCid
-                        && noRepetitionAfterTimeLimitOfCid && noRepetitionOfTwoKeys) {
-                    additionalPcl.put(randomCid, tempEid);
-                    count++;
-                }
-                if (numOfRuns++ > allocateRoundLimit) {
-                    allocationSuccess = false;
-                    return;
-                }
-            }
-        }
-        allocationSuccess = true;
-    }
-
-
 
     /**
      * @desc 插入分配结果, 并更新customer_info的state为1

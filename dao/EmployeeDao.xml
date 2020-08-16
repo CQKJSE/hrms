@@ -31,5 +31,68 @@
 		from employee
 		where phone = #{phone};
 	</select>
+	
+	<select id="findByMC" resultMap="employeeRM">
+		select *
+		from employee
+		<where>
+			<if test="employee.idWork != null">
+				and idWork like concat('%', #{employee.idWork}, '%')
+			</if>
+			<if test="employee.name != null">
+				and name like concat('%', #{employee.name}, '%')
+			</if>
+			<if test="employee.idNumber != null">
+				and idNumber like concat('%', #{employee.idNumber}, '%')
+			</if>
+			<if test="employee.gender != null">
+				and gender like concat('%', #{employee.gender}, '%')
+			</if>
+			<if test="employee.phone != null">
+				and phone like concat('%', #{employee.phone}, '%')
+			</if>
+			<if test="employee.inductionTime != null">
+				and inductionTime like concat('%', #{employee.inductionTime}, '%')
+			</if>
+			<if test="employee.deptName != null">
+				and deptName like concat('%', #{employee.deptName}, '%')
+			</if>
+			<if test="employee.password != null">
+				and password like concat('%', #{employee.password}, '%')
+			</if>
+			<if test="employee.position != null">
+				and position like concat('%', #{employee.position}, '%')
+			</if>
+			<if test="employee.state != null">
+				and state like concat('%', #{employee.state}, '%')
+			</if>
+		</where>
+		<if test="pageIndex != null">
+			limit #{pageIndex}, 10
+		</if>
+	</select>
+	
+	<insert id="insert">
+		insert into employee (idWork, name, idNumber, gender, phone, inductionTime,
+		                      deptName, password, position, state)
+		values (#{idWork}, #{name}, #{idNumber}, #{gender}, #{phone}, #{inductionTime},
+		        #{deptName}, #{password}, #{position}, #{state});	
+	</insert>
+	
+	<update id="update">
+		update employee
+		<trim prefix="set" suffixOverrides=",">
+			<if test="idWork != null ">idWork=#{idWork},</if>
+			<if test="name != null ">name=#{name},</if>
+			<if test="idNumber != null ">idNumber=#{idNumber},</if>
+			<if test="phone != null ">phone=#{phone},</if>
+			<if test="inductionTime != null">inductionTime=#{inductionTime},</if>
+			<if test="deptName != null ">deptName=#{deptName},</if>
+			<if test="password != null ">password=#{password},</if>
+			<if test="position != null ">position=#{position},</if>
+			<if test="state != null ">state=#{state},</if>
+		</trim>
+		where idWork = #{idWork};
+	</update>
 
 </mapper>

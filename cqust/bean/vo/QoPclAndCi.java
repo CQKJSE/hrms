@@ -1,15 +1,18 @@
-package cn.edu.cqust.bean;
+package cn.edu.cqust.bean.vo;
+
+import cn.edu.cqust.bean.CustomerInfo;
+import cn.edu.cqust.bean.Employee;
 
 /**
- * @project: HRMS
- * @author: Tang.F.C
- * @date: 2020-08-05 10:52
- * @desc:
- */
+ * @project: HRMS_SpringbootDemo
+ * @author: F.C.Tang
+ * @date: 2020-08-16 21:39
+ * @desc: /updatePhone
+ **/
 @SuppressWarnings("unused")
-public class CustomerInfo {
-
-    private Integer id;
+public class QoPclAndCi {
+    //customer
+    private Integer ciId;
     private String name;
     private String idNumber;
     private String gender;
@@ -22,26 +25,20 @@ public class CustomerInfo {
     private Integer isDisability;
     private String sourceOfData;
     private String note;
-    private String state;
-    private String addedTime;
-    private String addedPerson;
+    //pcl
+    private Integer pclId;
+    private Integer isWechatAdded;
+    private String recommendEnterprise;
+    private String recommendJob;
 
-    public CustomerInfo() {
+
+    public Integer getCiId() {
+        return ciId;
     }
 
-    public CustomerInfo(Integer id, String state) {
-        this.id = id;
-        this.state = state;
+    public void setCiId(Integer ciId) {
+        this.ciId = ciId;
     }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
 
     public String getName() {
         return name;
@@ -51,7 +48,6 @@ public class CustomerInfo {
         this.name = name;
     }
 
-
     public String getIdNumber() {
         return idNumber;
     }
@@ -59,7 +55,6 @@ public class CustomerInfo {
     public void setIdNumber(String idNumber) {
         this.idNumber = idNumber;
     }
-
 
     public String getGender() {
         return gender;
@@ -69,7 +64,6 @@ public class CustomerInfo {
         this.gender = gender;
     }
 
-
     public Integer getAge() {
         return age;
     }
@@ -77,7 +71,6 @@ public class CustomerInfo {
     public void setAge(Integer age) {
         this.age = age;
     }
-
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -87,7 +80,6 @@ public class CustomerInfo {
         this.phoneNumber = phoneNumber;
     }
 
-
     public String getEducation() {
         return education;
     }
@@ -95,7 +87,6 @@ public class CustomerInfo {
     public void setEducation(String education) {
         this.education = education;
     }
-
 
     public String getAddress() {
         return address;
@@ -105,7 +96,6 @@ public class CustomerInfo {
         this.address = address;
     }
 
-
     public String getProfessionalSkills() {
         return professionalSkills;
     }
@@ -113,7 +103,6 @@ public class CustomerInfo {
     public void setProfessionalSkills(String professionalSkills) {
         this.professionalSkills = professionalSkills;
     }
-
 
     public Integer getHasCertificate() {
         return hasCertificate;
@@ -123,7 +112,6 @@ public class CustomerInfo {
         this.hasCertificate = hasCertificate;
     }
 
-
     public Integer getIsDisability() {
         return isDisability;
     }
@@ -131,7 +119,6 @@ public class CustomerInfo {
     public void setIsDisability(Integer isDisability) {
         this.isDisability = isDisability;
     }
-
 
     public String getSourceOfData() {
         return sourceOfData;
@@ -141,7 +128,6 @@ public class CustomerInfo {
         this.sourceOfData = sourceOfData;
     }
 
-
     public String getNote() {
         return note;
     }
@@ -150,40 +136,36 @@ public class CustomerInfo {
         this.note = note;
     }
 
-
-    public String getState() {
-        return state;
+    public Integer getPclId() {
+        return pclId;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setPclId(Integer pclId) {
+        this.pclId = pclId;
     }
 
-    public String getAddedTime() {
-        return addedTime;
+    public Integer getIsWechatAdded() {
+        return isWechatAdded;
     }
 
-    public void setAddedTime(String addedTime) {
-        this.addedTime = addedTime;
+    public void setIsWechatAdded(Integer isWechatAdded) {
+        this.isWechatAdded = isWechatAdded;
     }
 
-    public String getAddedPerson() {
-        return addedPerson;
+    public String getRecommendEnterprise() {
+        return recommendEnterprise;
     }
 
-    public void setAddedPerson(String addedPerson) {
-        this.addedPerson = addedPerson;
+    public void setRecommendEnterprise(String recommendEnterprise) {
+        this.recommendEnterprise = recommendEnterprise;
     }
 
-    @Override
-    public String toString() {
-        return "CustomerInfo{" +
-                "id=" + id +
-                ", name='" + name +
-                ", idNumber='" + idNumber +
-                ", address='" + address +
-                ", note='" + note +
-                ", state='" + state +
-                '}';
+    public String getRecommendJob() {
+        return recommendJob;
     }
+
+    public void setRecommendJob(String recommendJob) {
+        this.recommendJob = recommendJob;
+    }
+
 }

@@ -37,9 +37,9 @@ public class SignUpInfoController {
 
     @ResponseBody
     @GetMapping(path = "/signUpList")
-    public List<RoSignUpList> findByMC1(CustomerInfo customerInfo,
-                                        @RequestParam(defaultValue = "1") Integer pageIndex) {
-        return signUpInfoServiceImpl.findByMC1(customerInfo, pageIndex, phone);
+    public List<RoSignUpList> findByMC1(@RequestBody CustomerInfo customerInfo,
+                                        @RequestParam(defaultValue = "1") Integer pageNumber) {
+        return signUpInfoServiceImpl.findByMC1(customerInfo, pageNumber, phone);
     }
 
     @ResponseBody

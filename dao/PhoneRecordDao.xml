@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.cqust.dao.PhoneRecordDao">
+	
+	<parameterMap id="phoneRecordPM" type="cn.edu.cqust.bean.PhoneRecord"/>
+	<resultMap id="phoneRecordRM" type="cn.edu.cqust.bean.PhoneRecord"/>
+	<resultMap id="roGetPhoneRecordRM" type="cn.edu.cqust.bean.vo.RoGetPhoneRecord"/>
+	<resultMap id="roGetPhoneRecordDeptRM" type="cn.edu.cqust.bean.vo.RoGetPhoneRecordDept"/>
+	<resultMap id="roGetPhoneRecordAllRM" type="cn.edu.cqust.bean.vo.RoGetPhoneRecordAll"/>
+	
+	<select id="findByMC1" resultMap="roGetPhoneRecordRM">
+		select
+		t1.id as phoneRecordId,
+		t2.name,
+		t2.idNumber,
+		t2.phoneNumber,
+		t3.recommendEnterprise,
+		t3.recommendJob,
+		t1.status,
+		t1.duration,
+		t1.ringduration,
+		t1.filepath
+		from phone_record as t1
+		inner join
+		(select *
+		from customer_info
+		<where>
+			<if test="customerInfo.name != null">
+				and name like concat('%', #{customerInfo.name}, '%')
+			</if>
+			<if test="customerInfo.idNumber != null">
+				and idNumber like concat('%', #{customerInfo.idNumber}, '%')
+			</if>
+			<if test="customerInfo.phoneNumber != null">
+				and phoneNumber like concat('%', #{customerInfo.phoneNumber}, '%')
+			</if>
+		</where>
+		) t2
+		on t1.customerId = t2.id
+		inner join
+		phone_call_list t3
+		on t1.phoneCallListId = t3.id
+		inner join
+		(select id
+		from employee
+		where phone = #{employeePhone}) t4
+		on t1.employeeId = t4.id
+		<if test="pageIndex != null">
+			limit #{pageIndex}, 10;
+		</if>
+	</select>
+	
+	<select id="findByMC2" resultMap="roGetPhoneRecordDeptRM">
+		select
+		t1.id as phoneRecordId,
+		t4.name as employeeName,
+		t2.name as customerName,
+		t2.idNumber,
+		t2.phoneNumber,
+		t3.recommendEnterprise,
+		t3.recommendJob,
+		t1.status,
+		t1.duration,
+		t1.ringduration,
+		t1.filepath
+		from phone_record as t1
+		inner join
+		(select *
+		from customer_info
+		<where>
+			<if test="customerInfo.name != null">
+				and name like concat('%', #{customerInfo.name}, '%')
+			</if>
+			<if test="customerInfo.idNumber != null">
+				and idNumber like concat('%', #{customerInfo.idNumber}, '%')
+			</if>
+			<if test="customerInfo.phoneNumber != null">
+				and phoneNumber like concat('%', #{customerInfo.phoneNumber}, '%')
+			</if>
+		</where>
+		) t2
+		on t1.customerId = t2.id
+		inner join
+		phone_call_list t3
+		on t1.phoneCallListId = t3.id
+		inner join
+		(select *
+		from employee
+		<where>
+			<if test="employeeName != null">
+				and name like concat('%', #{employeeName}, '%')
+			</if>
+			<if test="deptName != null">
+				and deptName = #{deptName}
+			</if>
+		</where>
+		) as t4
+		on t1.employeeId = t4.id
+		<if test="pageIndex != null">
+			limit #{pageIndex}, 10;
+		</if>
+	</select>
+	
+	<select id="findByMC3" resultMap="roGetPhoneRecordAllRM">
+		select
+		t1.id as phoneRecordId,
+		t4.name as employeeName,
+		t4.deptName,
+		t2.name as customerName,
+		t2.idNumber,
+		t2.phoneNumber,
+		t3.recommendEnterprise,
+		t3.recommendJob,
+		t1.status,
+		t1.duration,
+		t1.ringduration,
+		t1.filepath
+		from phone_record as t1
+		inner join
+		(select *
+		from customer_info
+		<where>
+			<if test="customerInfo.name != null">
+				and name like concat('%', #{customerInfo.name}, '%')
+			</if>
+			<if test="customerInfo.idNumber != null">
+				and idNumber like concat('%', #{customerInfo.idNumber}, '%')
+			</if>
+			<if test="customerInfo.phoneNumber != null">
+				and phoneNumber like concat('%', #{customerInfo.phoneNumber}, '%')
+			</if>
+		</where>
+		) t2
+		on t1.customerId = t2.id
+		inner join
+		phone_call_list t3
+		on t1.phoneCallListId = t3.id
+		inner join
+		(select *
+		from employee
+		<where>
+			<if test="employeeName != null">
+				and name like concat('%', #{employeeName}, '%')
+			</if>
+			<if test="deptName != null">
+				and deptName like concat('%', #{deptName}, '%')
+			</if>
+		</where>
+		) as t4
+		on t1.employeeId = t4.id
+		order by t1.createtime desc
+		<if test="pageIndex != null">
+			limit #{pageIndex}, 10;
+		</if>
+	</select>
+	
+	
+	<insert id="insert">
+		insert into phone_record (status, duration, ringduration, filepath,
+		                          createtime, customerId, phoneCallListId, employeeId)
+		values (#{status}, #{duration}, #{ringduration}, #{filepath},
+		        #{createtime}, #{customerId}, #{phoneCallListId}, #{employeeId});
+	</insert>
+	
+	<select id="countTodayByStatus" resultType="int">
+		select count(id)
+		from phone_record
+		<where>
+			employeeId = (select id from employee where phone = #{employeePhone})
+			and createtime = curdate()
+			<if test="status != null">
+				and status like concat('%', #{status}, '%')
+			</if>
+		</where>
+	</select>
+
+</mapper>

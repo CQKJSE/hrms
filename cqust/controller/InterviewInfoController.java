@@ -29,7 +29,7 @@ public class InterviewInfoController {
 
     @ResponseBody
     @GetMapping(path = "/interviewList")
-    public List<RoSignUpList> findByMC1(CustomerInfo customerInfo,
+    public List<RoSignUpList> findByMC1(@RequestBody CustomerInfo customerInfo,
                                         @RequestParam(defaultValue = "1") Integer pageIndex) {
         return interviewInfoServiceImpl.findByMC1(customerInfo, pageIndex, phone);
     }
@@ -46,9 +46,10 @@ public class InterviewInfoController {
     }
 
     @PostMapping(path = "/interviewListAll")
-    public List<RoInterviewListAll> findByMC2(CustomerInfo customerInfo, String recommendEnterprise,
-                                              String interviewTime, String deptName,
-                                              String employeeName, @RequestParam(defaultValue = "1") Integer pageNumber) {
+    public List<RoInterviewListAll> findByMC2(@RequestBody CustomerInfo customerInfo,
+                                              String recommendEnterprise, String interviewTime,
+                                              String deptName, String employeeName,
+                                              @RequestParam(defaultValue = "1") Integer pageNumber) {
         return interviewInfoServiceImpl.findByMC2(
                 customerInfo, recommendEnterprise,
                 interviewTime, deptName,
