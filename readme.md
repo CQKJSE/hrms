@@ -1,20 +1,20 @@
 ## repository description ##  
   
 一.说明  
-  1.包含src下所有文件  
-  2.包含项目文档  
+  >1.包含src下所有文件  
+  >2.包含项目文档  
   
 二.已实现需求:  
-  01.需求01 ---> /  
-  02.需求02 ---> /callList  
-  03.需求03 ---> /callListCount  
-  04.需求04 ---> /callAllList  
-  05.需求05 ---> /callAllListCount  
-  06.需求06 ---> /  
-  07.需求07 ---> /addTransaction  
-  08.需求08 ---> /getTransaction  
-  09.需求09 ---> /deleteTransaction  
-  10.需求10 ---> /addPhone  
+  >01.需求01 ---> /  
+  >02.需求02 ---> /callList  
+  >03.需求03 ---> /callListCount  
+  >04.需求04 ---> /callAllList  
+  >05.需求05 ---> /callAllListCount  
+  >06.需求06 ---> /  
+  >07.需求07 ---> /addTransaction  
+  >08.需求08 ---> /getTransaction  
+  >09.需求09 ---> /deleteTransaction  
+  >10.需求10 ---> /addPhone  
   ******************************************  
   11.需求11 ---> /  
   12.需求12 ---> /  
