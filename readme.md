@@ -1,7 +1,7 @@
 ## repository description ##  
   
 一.说明  
-  >1.包含src下的java代码以及sql配置文件
+  >1.包含src下的java代码以及sql配置文件  
   >2.包含项目文档  
   
 二.已实现需求:  
