@@ -20,7 +20,7 @@
   >12.需求12 ---> /updatePhone  
   >13.需求13 ---> /定时任务1  
   >14.需求14 ---> /takeOutAll  
-  >15.需求15 ---> /takeOut    
+  >15.需求15 ---> /takeOut  
   >16.需求16 ---> /backData  
   >17.需求17 ---> /signUp  
   >18.需求18 ---> /signUpList  
@@ -33,9 +33,10 @@
   >24.需求24 ---> /waitInduction  
   >25.需求25 ---> /waitInductionCount  
   >26.需求26 ---> /updateWaitInduction  
-  >27.需求27 ---> /  
-  >28.需求28 ---> /  
-  >30.需求30 ---> /  
+  >27.需求27 ---> /onTheJob  
+  >28.需求28 ---> /onTheJobCount  
+  >29.需求29 ---> /settlement  
+  >30.需求30 ---> /settlementCount  
   ******************************************  
   >31.需求31 ---> /signUpListAll  
   >32.需求32 ---> /signUpListAllCount  
@@ -45,7 +46,7 @@
   >36.需求36 ---> /interviewListAllCount  
   >37.需求37 ---> /addWaitInduction  
   >38.需求38 ---> /backInterview  
-  >39.需求39 ---> /  
+  >39.需求39 ---> /waitInductionAll  
   >40.需求40 ---> /定时任务2  
   ******************************************  
   >41.需求41 ---> /定时任务3  
@@ -60,3 +61,11 @@
   >50.需求50 ---> /addEmployee  
   ******************************************  
   >51.需求51 ---> /updateEmployee  
+  >52.需求52 ---> /waitInductionAllCount  
+  >53.需求53 ---> /addDelay  
+  >54.需求54 ---> /onTheJobAll  
+  >55.需求55 ---> /onTheJobAllCount  
+  >56.需求56 ---> /settlementAll  
+  >57.需求57 ---> /settlementCount  
+  >58.需求58 ---> /addOnTheJob  
+  >59.需求59 ---> /backWaitInduction  

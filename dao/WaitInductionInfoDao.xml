@@ -11,7 +11,7 @@
 	
 	<select id="findByMC1" resultMap="roWaitInductionRM">
 		select
-		t5.id,
+		t1.id,
 		t2.name,
 		t2.idNumber,
 		t2.gender,
@@ -22,13 +22,13 @@
 		t2.professionalSkills,
 		t2.hasCertificate,
 		t2.isDisability,
-		t1.recommendEnterprise,
-		t1.recommendJob,
-		t5.interviewQualifiedTime,
-		t5.state,
-		t5.delayTime,
-		t5.note
-		from phone_call_list as t1
+		t4.recommendEnterprise,
+		t4.recommendJob,
+		t1.interviewQualifiedTime,
+		t1.state,
+		t1.delayTime,
+		t1.note
+		from wait_induction_info as t1
 		inner join
 		(select id,
 		name, #
@@ -58,26 +58,23 @@
 		inner join
 		(select id
 		from employee
-		where phone = #{employeePhone}) as t4
-		on t4.id = t1.employeeId
-		inner join wait_induction_info as t5
-		on t5.customerId = t4.id
-		and t5.employeeId = t4.id
-		and t5.phoneCallListId = t1.id
+		where phone = #{employeePhone}) as t3
+		on t1.employeeId = t3.id
+		inner join phone_call_list as t4
+		on t1.phoneCallListId = t4.id
 		limit #{startIndex}, 10;
 	</select>
 	
 	<select id="countByMC1" resultType="int">
-		select count(t5.id)
-		from phone_call_list as t1
+		select count(t1.id)
+		from wait_induction_info as t1
 		inner join
-		(select
-		id,
-		name,
-		idNumber,
+		(select id,
+		name, #
+		idNumber, #
 		gender,
 		age,
-		phoneNumber,
+		phoneNumber, #
 		education,
 		address,
 		professionalSkills,
@@ -100,12 +97,10 @@
 		inner join
 		(select id
 		from employee
-		where phone = #{employeePhone}) as t4
-		on t4.id = t1.employeeId
-		inner join wait_induction_info as t5
-		on t5.customerId = t4.id
-		and t5.employeeId = t4.id
-		and t5.phoneCallListId = t1.id;
+		where phone = #{employeePhone}) as t3
+		on t1.employeeId = t3.id
+		inner join phone_call_list as t4
+		on t1.phoneCallListId = t4.id;
 	</select>
 	
 	<select id="findById" resultMap="waitInductionInfoRM">
@@ -123,6 +118,9 @@
 			</if>
 			<if test="state != null">
 				state=#{state},
+			</if>
+			<if test="stateOne != null">
+				stateOne=#{stateOne},
 			</if>
 			<if test="medicalQualifiedTime != null">
 				medicalQualifiedTime=#{medicalQualifiedTime},
@@ -145,5 +143,123 @@
 		        #{medicalQualifiedTime}, #{delayTime}, #{note},
 		        #{customerId}, #{phoneCallListId}, #{employeeId}, #{stateOne})
 	</insert>
+	
+	
+	<select id="findByMC2" resultMap="roWaitInductionRM">
+		select
+		t1.id,
+		t2.name,
+		t2.idNumber,
+		t2.gender,
+		t2.age,
+		t2.phoneNumber,
+		t2.education,
+		t2.address,
+		t2.professionalSkills,
+		t2.hasCertificate,
+		t2.isDisability,
+		t4.recommendEnterprise,
+		t4.recommendJob,
+		t1.interviewQualifiedTime,
+		t1.state,
+		t1.delayTime,
+		t1.note
+		from (select *
+		from wait_induction_info
+		<where>
+			<if test="qo.state != null">
+				and state like concat('%', #{qo.state}, '%')
+			</if>
+		</where>
+		) as t1
+		inner join
+		(select id,
+		name, #
+		idNumber, #
+		gender,
+		age,
+		phoneNumber, #
+		education,
+		address,
+		professionalSkills,
+		hasCertificate,
+		isDisability
+		from customer_info
+		<where>
+			<if test="qo.customerName != null">
+				and name like concat('%', #{qo.customerName}, '%')
+			</if>
+			<if test="qo.idNumber != null">
+				and idNumber like concat('%', #{qo.idNumber}, '%')
+			</if>
+			<if test="qo.phoneNumber != null">
+				and phoneNumber like concat('%', #{qo.phoneNumber}, '%')
+			</if>
+		</where>
+		) as t2
+		on t1.customerId = t2.id
+		inner join
+		(select id
+		from employee
+		<where>
+			<if test="qo.employeeName != null">
+				and name like concat('%', #{qo.employeeName}, '%')
+			</if>
+			<if test="qo.deptName != null">
+				and deptName like concat('%', #{qo.deptName}, '%')
+			</if>
+		</where>
+		) as t3
+		on t1.employeeId = t3.id
+		inner join (select *
+		from phone_call_list
+		<where>
+			<if test="qo.recommendEnterprise != null">
+				and recommendEnterprise like concat('%', #{qo.recommendEnterprise}, '%')
+			</if>
+		</where>
+		) as t4
+		on t1.phoneCallListId = t4.id
+		<if test="startIndex != null">
+			limit #{startIndex}, 10;
+		</if>
+	</select>
+	
+	
+	<select id="find" resultMap="waitInductionInfoRM">
+		select * from wait_induction_info
+		<where>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+			<if test="interviewQualifiedTime != null">
+				and interviewQualifiedTime = #{interviewQualifiedTime}
+			</if>
+			<if test="state != null">
+				and state = #{state}
+			</if>
+			<if test="stateOne != null">
+				and stateOne = #{stateOne}
+			</if>
+			<if test="medicalQualifiedTime != null">
+				and medicalQualifiedTime = #{medicalQualifiedTime}
+			</if>
+			<if test="delayTime != null">
+				and delayTime = #{delayTime}
+			</if>
+			<if test="note != null">
+				and note = #{note}
+			</if>
+			<if test="customerId != null">
+				and customerId = #{customerId}
+			</if>
+			<if test="phoneCallListId != null">
+				and phoneCallListId = #{phoneCallListId}
+			</if>
+			<if test="employeeId != null">
+				and employeeId = #{employeeId}
+			</if>
+		</where>
+	</select>
 
 </mapper>

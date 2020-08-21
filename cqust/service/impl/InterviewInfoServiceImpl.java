@@ -5,7 +5,6 @@ import cn.edu.cqust.bean.InterviewInfo;
 import cn.edu.cqust.bean.SignUpInfo;
 import cn.edu.cqust.bean.vo.RoInterviewListAll;
 import cn.edu.cqust.bean.vo.RoSignUpList;
-import cn.edu.cqust.bean.vo.RoSignUpListAll;
 import cn.edu.cqust.dao.CustomerInfoDao;
 import cn.edu.cqust.dao.InterviewInfoDao;
 import cn.edu.cqust.dao.SignUpInfoDao;
@@ -50,6 +49,7 @@ public class InterviewInfoServiceImpl implements InterviewInfoService {
         signUpInfo.setId(interviewInfo.getSignUpId());
         signUpInfo.setState(1);
         signUpInfo.setNote("通过");
+        System.out.println(signUpInfo);
         int s1 = interviewInfoDao.insert(interviewInfo);
         int s2 = signUpInfoDao.update(signUpInfo);
         return (s1 == 1 && s2 == 1) ? 1 : -1;
@@ -87,8 +87,8 @@ public class InterviewInfoServiceImpl implements InterviewInfoService {
         customerInfo.setState("0");
         interviewInfo.setState(1);
         interviewInfo.setNote(preNote);
-        int s1 = interviewInfoDao.update(interviewInfo);
-        int s2 = customerInfoDao.update(customerInfo);
-        return (s1 == 1 && s2 == 1) ? 1 : -1;
+        if (interviewInfoDao.update(interviewInfo) != 1)
+            return -1;
+        return customerInfoDao.update(customerInfo) == 1 ? 1 : -1;
     }
 }

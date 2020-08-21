@@ -7,10 +7,7 @@ import cn.edu.cqust.bean.vo.RoGetPhoneRecordAll;
 import cn.edu.cqust.bean.vo.RoGetPhoneRecordDept;
 import cn.edu.cqust.service.PhoneRecordService;
 import cn.edu.cqust.util.Generator;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -33,14 +30,14 @@ public class PhoneRecordController {
     private String deptName = "网招1部";
 
 
-    @PostMapping(path = "/getPhoneRecord")
+    @GetMapping(path = "/getPhoneRecord")
     public List<RoGetPhoneRecord> findByMC1(CustomerInfo customerInfo,
                                             @RequestParam(defaultValue = "1") Integer pageNumber) {
         return phoneRecordServiceImpl.findByMC1(customerInfo, pageNumber, phone);
     }
 
 
-    @PostMapping(path = "/getPhoneRecordCount")
+    @GetMapping(path = "/getPhoneRecordCount")
     public String countByMC1(CustomerInfo customerInfo) {
         return Generator.genJsonObject(
                 "count",
@@ -49,17 +46,17 @@ public class PhoneRecordController {
     }
 
 
-    @PostMapping(path = "/getPhoneRecordDept")
+    @GetMapping(path = "/getPhoneRecordDept")
     public List<RoGetPhoneRecordDept> findByMC2(CustomerInfo customerInfo,
-                                                @RequestParam(defaultValue = "1") Integer pageNumber,
+                                                @RequestParam(defaultValue = "1") Integer page,
                                                 String employeeName) {
         return phoneRecordServiceImpl.findByMC2(
-                customerInfo, pageNumber, employeeName, deptName
+                customerInfo, page, employeeName, deptName
         );
     }
 
 
-    @PostMapping(path = "/getPhoneRecordDeptCount")
+    @GetMapping(path = "/getPhoneRecordDeptCount")
     public String countByMC2(CustomerInfo customerInfo, String employeeName) {
         return Generator.genJsonObject(
                 "count",
@@ -71,7 +68,7 @@ public class PhoneRecordController {
         );
     }
 
-    @PostMapping(path = "/getPhoneRecordAll")
+    @GetMapping(path = "/getPhoneRecordAll")
     public List<RoGetPhoneRecordAll> findByMC3(CustomerInfo customerInfo,
                                                @RequestParam(defaultValue = "1") Integer pageNumber,
                                                String employeeName,
@@ -84,7 +81,7 @@ public class PhoneRecordController {
         );
     }
 
-    @PostMapping(path = "/getPhoneRecordAllCount")
+    @GetMapping(path = "/getPhoneRecordAllCount")
     public String countByMC3(CustomerInfo customerInfo, String employeeName, String deptName) {
         return Generator.genJsonStatusCode(
                 phoneRecordServiceImpl.countByMC3(
@@ -95,11 +92,12 @@ public class PhoneRecordController {
     }
 
     @PostMapping(path = "/addPhoneRecord")
-    public String addOne(PhoneRecord phoneRecord) {
+    public String addOne(@RequestBody PhoneRecord phoneRecord) {
+        System.out.println(phoneRecord.getCreatetime());
         return Generator.genJsonStatusCode(phoneRecordServiceImpl.insert(phoneRecord));
     }
 
-    @PostMapping(path = "/throughRecord")
+    @GetMapping(path = "/throughRecord")
     private String throughRecord() {
         Integer[] resArr = phoneRecordServiceImpl.countTodayByStatus(phone);
         return Generator.genJsonObject(

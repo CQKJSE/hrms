@@ -5,6 +5,7 @@ import cn.edu.cqust.bean.InterviewInfo;
 import cn.edu.cqust.bean.PhoneCallList;
 import cn.edu.cqust.bean.WaitInductionInfo;
 import cn.edu.cqust.bean.vo.QoUpdateWaitInduction;
+import cn.edu.cqust.bean.vo.QoWaitInductionAll;
 import cn.edu.cqust.bean.vo.RoWaitInduction;
 import cn.edu.cqust.dao.CustomerInfoDao;
 import cn.edu.cqust.dao.InterviewInfoDao;
@@ -105,6 +106,55 @@ public class WaitInductionInfoServiceImpl implements WaitInductionInfoService {
         int s1 = waitInductionInfoDao.insert(waitInductionInfo);
         int s2 = interviewInfoDao.update(interviewInfo);
         return (s1 == 1 && s2 == 1) ? 1 : -1;
+    }
+
+    @Override
+    public List<RoWaitInduction> findByMC2(QoWaitInductionAll qo, Integer pageNumber) {
+        return waitInductionInfoDao.findByMC2(qo, (pageNumber - 1) * 10);
+    }
+
+    @Override
+    public Integer countByMC2(QoWaitInductionAll qo) {
+        return waitInductionInfoDao.findByMC2(qo, null).size();
+    }
+
+    @Override
+    public Integer addDelay(WaitInductionInfo waitInductionInfo) {
+        InterviewInfo ii1 = new InterviewInfo();
+        ii1.setCustomerId(waitInductionInfo.getCustomerId());
+        ii1.setPhoneCallListId(waitInductionInfo.getPhoneCallListId());
+        ii1.setEmployeeId(waitInductionInfo.getEmployeeId());
+        List<InterviewInfo> iiList = interviewInfoDao.find(ii1);
+        if (iiList.size() != 1)
+            //存在多个待更新对象
+            return -1;
+        InterviewInfo ii2 = iiList.get(0);
+        waitInductionInfo.setInterviewQualifiedTime(DateUtil.getYMD());
+        waitInductionInfo.setState("待入职");
+        waitInductionInfo.setStateOne(0);
+        ii2.setState(1);
+        ii2.setNote("通过");
+
+        if (interviewInfoDao.update(ii2) != 1)
+            return -1;
+        return waitInductionInfoDao.insert(waitInductionInfo) == 1 ? 1 : -1;
+    }
+
+
+    @Override
+    public Integer backWaitInduction(WaitInductionInfo waitInductionInfo) {
+        String preNote = waitInductionInfo.getNote();
+        waitInductionInfo = waitInductionInfoDao.findById(waitInductionInfo.getId());
+
+        CustomerInfo customerInfo = new CustomerInfo();
+        customerInfo.setId(waitInductionInfo.getCustomerId());
+        customerInfo.setState("0");
+        waitInductionInfo.setState("1");
+        waitInductionInfo.setNote(preNote);
+
+        if (waitInductionInfoDao.update(waitInductionInfo) != 1)
+            return -1;
+        return customerInfoDao.update(customerInfo) == 1 ? 1 : -1;
     }
 
 

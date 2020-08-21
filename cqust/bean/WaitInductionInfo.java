@@ -134,4 +134,23 @@ public class WaitInductionInfo {
   public void setStateOne(Integer stateOne) {
     this.stateOne = stateOne;
   }
+
+  @Override
+  public String toString() {
+    return "[" +
+            "id=" + id +
+            ", interviewQualifiedTime='" + interviewQualifiedTime + '\'' +
+            ", state='" + state + '\'' +
+            ", stateOne=" + stateOne +
+            ", medicalQualifiedTime='" + medicalQualifiedTime + '\'' +
+            ", delayTime='" + delayTime + '\'' +
+            ", note='" + note + '\'' +
+            ", customerId=" + customerId +
+            ", phoneCallListId=" + phoneCallListId +
+            ", employeeId=" + employeeId +
+            ", customer=" + customer +
+            ", phoneCallList=" + phoneCallList +
+            ", employee=" + employee +
+            ']';
+  }
 }

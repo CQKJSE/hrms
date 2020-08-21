@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.cqust.dao.SettlementInfoDao">
+	
+	<resultMap id="roSettlementRM" type="cn.edu.cqust.bean.vo.RoSettlement"/>
+	
+	<select id="findByMC1" resultMap="roSettlementRM">
+		select
+		t1.id,
+		t3.name,
+		t3.idNumber,
+		t3.gender,
+		t3.age,
+		t3.phoneNumber,
+		t2.recommendEnterprise,
+		t2.recommendJob,
+		t5.inductionTime,
+		t6.state as onTheJobState,
+		t6.contractExpireTime,
+		t6.emergencyContact,
+		t6.emergencyContactPhone,
+		t6.insurance,
+		t6.unit,
+		t1.settlementNumber,
+		t1.settlementStandard,
+		t1.attendanceDays,
+		t1.attendanceHours,
+		t1.standard,
+		t1.price,
+		t1.mark,
+		t1.note,
+		t1.state as settlementState,
+		t1.cycle,
+		t1.settlementTime,
+		t1.credentials
+		from (select *
+		from settlement_info
+		where state = #{settlementState}) as t1
+		inner join
+		phone_call_list as t2
+		on t1.phoneCallListId = t2.id
+		inner join
+		(select *
+		from customer_info
+		<where>
+			<if test="customerInfo.name != null">
+				and name like concat('%', #{customerInfo.name}, '%')
+			</if>
+			<if test="customerInfo.idNumber != null">
+				and idNumber like concat('%', #{customerInfo.idNumber}, '%')
+			</if>
+			<if test="customerInfo.phoneNumber != null">
+				and phoneNumber like concat('%', #{customerInfo.phoneNumber}, '%')
+			</if>
+		</where>
+		) as t3
+		on t1.customerId = t3.id
+		inner join
+		(select *
+		from employee
+		where phone = #{employeePhone}) t5
+		on t1.employeeId = t5.id
+		inner join
+		on_the_job_info as t6
+		on t1.onTheJobId = t6.id
+		inner join wait_induction_info as t7
+		on t5.id = t7.employeeId
+		and t2.id = t7.phoneCallListId
+		<if test="startIndex != null">
+			limit #{startIndex}, 10;
+		</if>
+	</select>
+	
+	<select id="findByMC2" resultMap="roSettlementRM">
+		select
+		t1.id,
+		t3.name,
+		t3.idNumber,
+		t3.gender,
+		t3.age,
+		t3.phoneNumber,
+		t2.recommendEnterprise,
+		t2.recommendJob,
+		t5.inductionTime,
+		t6.state as onTheJobState,
+		t6.contractExpireTime,
+		t6.emergencyContact,
+		t6.emergencyContactPhone,
+		t6.insurance,
+		t6.unit,
+		t1.settlementNumber,
+		t1.settlementStandard,
+		t1.attendanceDays,
+		t1.attendanceHours,
+		t1.standard,
+		t1.price,
+		t1.mark,
+		t1.note,
+		t1.state as settlementState,
+		t1.cycle,
+		t1.settlementTime,
+		t1.credentials
+		from (select *
+		from settlement_info
+		where state = #{settlementState}) as t1
+		inner join
+		phone_call_list as t2
+		on t1.phoneCallListId = t2.id
+		inner join
+		(select *
+		from customer_info
+		<where>
+			<if test="customerInfo.name != null">
+				and name like concat('%', #{customerInfo.name}, '%')
+			</if>
+			<if test="customerInfo.idNumber != null">
+				and idNumber like concat('%', #{customerInfo.idNumber}, '%')
+			</if>
+			<if test="customerInfo.phoneNumber != null">
+				and phoneNumber like concat('%', #{customerInfo.phoneNumber}, '%')
+			</if>
+		</where>
+		) as t3
+		on t1.customerId = t3.id
+		inner join
+		employee as t5
+		on t1.employeeId = t5.id
+		inner join
+		on_the_job_info as t6
+		on t1.onTheJobId = t6.id
+		inner join wait_induction_info as t7
+		on t5.id = t7.employeeId
+		and t2.id = t7.phoneCallListId
+		<if test="startIndex != null">
+			limit #{startIndex}, 10;
+		</if>
+	</select>
+	
+	<insert id="insert">
+		insert into settlement_info(settlementNumber, settlementStandard,
+		                            attendanceDays, attendanceHours, standard,
+		                            price, mark, note, state, cycle, settlementTime, credentials,
+		                            customerId, phoneCallListId, onTheJobId, employeeId)
+		values (#{settlementNumber}, #{settlementStandard},
+		        #{attendanceDays}, #{attendanceHours}, #{standard},
+		        #{price}, #{mark}, #{note}, #{state}, #{cycle}, #{settlementTime}, #{credentials},
+		        #{customerId}, #{phoneCallListId}, #{onTheJobId}, #{employeeId});
+	</insert>
+
+</mapper>

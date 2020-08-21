@@ -100,4 +100,11 @@ public interface InterviewInfoDao {
      */
     List<InterviewInfo> findByState(Integer state);
 
+    /**
+     * @desc 全字段查询
+     * @param interviewInfo 全字段可选
+     * @return 结果列表
+     */
+    List<InterviewInfo> find(InterviewInfo interviewInfo);
+
 }

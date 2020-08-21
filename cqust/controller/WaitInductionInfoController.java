@@ -1,12 +1,10 @@
 package cn.edu.cqust.controller;
 
 import cn.edu.cqust.bean.CustomerInfo;
+import cn.edu.cqust.bean.InterviewInfo;
 import cn.edu.cqust.bean.SignUpInfo;
 import cn.edu.cqust.bean.WaitInductionInfo;
-import cn.edu.cqust.bean.vo.QoUpdateSignUp;
-import cn.edu.cqust.bean.vo.QoUpdateWaitInduction;
-import cn.edu.cqust.bean.vo.RoSignUpList;
-import cn.edu.cqust.bean.vo.RoWaitInduction;
+import cn.edu.cqust.bean.vo.*;
 import cn.edu.cqust.service.SignUpInfoService;
 import cn.edu.cqust.service.WaitInductionInfoService;
 import cn.edu.cqust.util.Generator;
@@ -32,9 +30,9 @@ public class WaitInductionInfoController {
 
     @ResponseBody
     @GetMapping(path = "/waitInduction")
-    public List<RoWaitInduction> findByMC1(@RequestBody CustomerInfo customerInfo,
-                                           @RequestParam(defaultValue = "1") Integer pageIndex) {
-        return waitInductionInfoServiceImpl.findByMC1(customerInfo, pageIndex, phone);
+    public List<RoWaitInduction> findByMC1(CustomerInfo customerInfo,
+                                           @RequestParam(defaultValue = "1") Integer page) {
+        return waitInductionInfoServiceImpl.findByMC1(customerInfo, page, phone);
     }
 
     @ResponseBody
@@ -53,6 +51,30 @@ public class WaitInductionInfoController {
     public String addWaitInduction(@RequestBody WaitInductionInfo waitInductionInfo, Integer id) {
         return Generator.genJsonStatusCode(
                 waitInductionInfoServiceImpl.addWaitInduction(waitInductionInfo, id)
+        );
+    }
+
+
+    @GetMapping(path = "/waitInductionAll")
+    public List<RoWaitInduction> findByMC2(QoWaitInductionAll qo,
+                                           @RequestParam(defaultValue = "1") Integer page) {
+        return waitInductionInfoServiceImpl.findByMC2(qo, page);
+    }
+
+    @GetMapping(path = "/waitInductionAllCount")
+    public String countByMC2(QoWaitInductionAll qo) {
+        return Generator.genJsonObject("count", waitInductionInfoServiceImpl.countByMC2(qo));
+    }
+
+    @GetMapping(path = "/addDelay")
+    public String addDelay(WaitInductionInfo waitInductionInfo) {
+        return Generator.genJsonStatusCode(waitInductionInfoServiceImpl.addDelay(waitInductionInfo));
+    }
+
+    @PostMapping(path = "/backWaitInduction")
+    public String backWaitInduction(WaitInductionInfo waitInductionInfo) {
+        return Generator.genJsonStatusCode(
+                waitInductionInfoServiceImpl.backWaitInduction(waitInductionInfo)
         );
     }
 

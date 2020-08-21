@@ -27,6 +27,11 @@ public class QoUpdateSignUp {
     private String recommendEnterprise;
     private String recommendJob;
 
+    @Override
+    public String toString() {
+        return "QoUpdateSignUp{" + "signUpInfoId=" + signUpInfoId + ", signUpTime='" + signUpTime + '\'' + ", interviewTime='" + interviewTime + '\'' + ", name='" + name + '\'' + ", idNumber='" + idNumber + '\'' + ", gender='" + gender + '\'' + ", age=" + age + ", phoneNumber='" + phoneNumber + '\'' + ", education='" + education + '\'' + ", address='" + address + '\'' + ", professionalSkills='" + professionalSkills + '\'' + ", hasCertificate=" + hasCertificate + ", isDisability=" + isDisability + ", recommendEnterprise='" + recommendEnterprise + '\'' + ", recommendJob='" + recommendJob + '\'' + '}';
+    }
+
     public Integer getSignUpInfoId() {
         return signUpInfoId;
     }

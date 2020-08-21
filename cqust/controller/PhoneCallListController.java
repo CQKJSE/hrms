@@ -30,15 +30,15 @@ public class PhoneCallListController {
 
     /**
      * @desc 多条件查询1(当日业务员的个人名单)
-     * @param pageNumber 开始页码(为空默认1)
+     * @param page 开始页码(为空默认1)
      * @param customerInfo 查询条件(9个成员变量,详见sql语句)
      * @return 结果列表
      */
     @ResponseBody
     @GetMapping(path = "/callList")
     public List<RoCallList> findByMC1(CustomerInfo customerInfo,
-                                      @RequestParam(defaultValue = "1") Integer pageNumber) {
-        return phoneCallListService.findByMC1(customerInfo, pageNumber, phone);
+                                      @RequestParam(defaultValue = "1") Integer page) {
+        return phoneCallListService.findByMC1(customerInfo, page, phone);
     }
 
 
@@ -57,15 +57,15 @@ public class PhoneCallListController {
 
     /**
      * @desc 多条件查询2(总名单)
-     * @param pageNumber 开始页码(为空默认1)
+     * @param page 开始页码(为空默认1)
      * @param customerInfo 查询条件(9个成员变量,详见sql语句)
      * @return 结果列表
      */
     @ResponseBody
-    @PostMapping(path = "/callAllList")
+    @GetMapping(path = "/callAllList")
     public List<RoCallList> findByMC2(CustomerInfo customerInfo,
-                                      @RequestParam(defaultValue = "1") Integer pageNumber) {
-        return phoneCallListService.findByMC2(customerInfo, pageNumber, phone);
+                                      @RequestParam(defaultValue = "1") Integer page) {
+        return phoneCallListService.findByMC2(customerInfo, page, phone);
     }
 
 
@@ -95,7 +95,8 @@ public class PhoneCallListController {
 
     @ResponseBody
     @PostMapping(path = "/updatePhone")
-    public String updatePclAndCi(QoPclAndCi qo) {
+    public String updatePclAndCi(@RequestBody QoPclAndCi qo) {
+        System.out.println(qo.getName());
         return Generator.genJsonStatusCode(phoneCallListService.updateWithCi(qo));
     }
 

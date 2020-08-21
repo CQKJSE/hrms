@@ -2,7 +2,7 @@ package cn.edu.cqust.dao;
 
 import cn.edu.cqust.bean.CustomerInfo;
 import cn.edu.cqust.bean.WaitInductionInfo;
-import cn.edu.cqust.bean.vo.RoSignUpList;
+import cn.edu.cqust.bean.vo.QoWaitInductionAll;
 import cn.edu.cqust.bean.vo.RoWaitInduction;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -63,4 +63,22 @@ public interface WaitInductionInfoDao {
      * @return 操作状态
      */
     Integer update(WaitInductionInfo waitInductionInfo);
+
+    /**
+     * @desc 多条件查询2
+     * @param qo 混合查询对象
+     * @param startIndex 查询的起始位置
+     * @return 结果列表
+     */
+    List<RoWaitInduction> findByMC2(@Param("qo") QoWaitInductionAll qo,
+                                    @Param("startIndex") Integer startIndex);
+
+
+    /**
+     * @desc 全字段查询
+     * @param interviewInfo 全字段可选
+     * @return 结果列表
+     */
+    List<WaitInductionInfo> find(WaitInductionInfo interviewInfo);
+
 }

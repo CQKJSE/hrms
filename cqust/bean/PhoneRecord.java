@@ -10,13 +10,14 @@ package cn.edu.cqust.bean;
 public class PhoneRecord {
 
     private Integer id;
-    private String through;
-    private String audioUrl;
-    private String addedTime;
+    private String status;
+    private String duration;
+    private String ringduration;
+    private String filepath;
     private Integer customerId;
     private Integer phoneCallListId;
     private Integer employeeId;
-
+    private String createtime;
 
     public Integer getId() {
         return id;
@@ -26,33 +27,37 @@ public class PhoneRecord {
         this.id = id;
     }
 
-
-    public String getThrough() {
-        return through;
+    public String getStatus() {
+        return status;
     }
 
-    public void setThrough(String through) {
-        this.through = through;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-
-    public String getAudioUrl() {
-        return audioUrl;
+    public String getDuration() {
+        return duration;
     }
 
-    public void setAudioUrl(String audioUrl) {
-        this.audioUrl = audioUrl;
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 
-
-    public String getAddedTime() {
-        return addedTime;
+    public String getRingduration() {
+        return ringduration;
     }
 
-    public void setAddedTime(String addedTime) {
-        this.addedTime = addedTime;
+    public void setRingduration(String ringduration) {
+        this.ringduration = ringduration;
     }
 
+    public String getFilepath() {
+        return filepath;
+    }
+
+    public void setFilepath(String filepath) {
+        this.filepath = filepath;
+    }
 
     public Integer getCustomerId() {
         return customerId;
@@ -62,7 +67,6 @@ public class PhoneRecord {
         this.customerId = customerId;
     }
 
-
     public Integer getPhoneCallListId() {
         return phoneCallListId;
     }
@@ -70,7 +74,6 @@ public class PhoneRecord {
     public void setPhoneCallListId(Integer phoneCallListId) {
         this.phoneCallListId = phoneCallListId;
     }
-
 
     public Integer getEmployeeId() {
         return employeeId;
@@ -80,4 +83,11 @@ public class PhoneRecord {
         this.employeeId = employeeId;
     }
 
+    public String getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(String createtime) {
+        this.createtime = createtime;
+    }
 }

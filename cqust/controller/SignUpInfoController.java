@@ -1,14 +1,12 @@
 package cn.edu.cqust.controller;
 
 import cn.edu.cqust.bean.CustomerInfo;
-import cn.edu.cqust.bean.PhoneCallList;
 import cn.edu.cqust.bean.SignUpInfo;
 import cn.edu.cqust.bean.vo.QoUpdateSignUp;
 import cn.edu.cqust.bean.vo.RoSignUpList;
 import cn.edu.cqust.bean.vo.RoSignUpListAll;
 import cn.edu.cqust.service.SignUpInfoService;
 import cn.edu.cqust.util.Generator;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -31,15 +29,17 @@ public class SignUpInfoController {
 
 
     @PostMapping(path = "/signUp")
-    public String signUp(SignUpInfo signUpInfo) {
+    public String signUp(@RequestBody SignUpInfo signUpInfo) {
+        System.out.println(signUpInfo.getInterviewTime());
         return Generator.genJsonStatusCode(signUpInfoServiceImpl.signUp(signUpInfo));
     }
 
     @ResponseBody
     @GetMapping(path = "/signUpList")
-    public List<RoSignUpList> findByMC1(@RequestBody CustomerInfo customerInfo,
-                                        @RequestParam(defaultValue = "1") Integer pageNumber) {
-        return signUpInfoServiceImpl.findByMC1(customerInfo, pageNumber, phone);
+    public List<RoSignUpList> findByMC1(CustomerInfo customerInfo,
+                                        @RequestParam(defaultValue = "1") Integer page) {
+        System.out.println(page);
+        return signUpInfoServiceImpl.findByMC1(customerInfo, page, phone);
     }
 
     @ResponseBody
@@ -52,13 +52,16 @@ public class SignUpInfoController {
     @RequestMapping(path = "updateSignUp", method = RequestMethod.POST,produces = "application/json; charset=utf-8")
     public String updateSignUpInfoAndRelated(@RequestBody QoUpdateSignUp qo) {
         System.out.println(qo.getName());
+        System.out.println(qo.getIdNumber());
         return Generator.genJsonStatusCode(signUpInfoServiceImpl.updateSignUpInfoAndRelated(qo));
     }
 
     @GetMapping(path = "/signUpListAll")
     public List<RoSignUpListAll> findByMC2(CustomerInfo customerInfo,
-                                           @RequestParam(defaultValue = "1") Integer pageNumber) {
-        return signUpInfoServiceImpl.findByMC2(customerInfo, pageNumber);
+                                           @RequestParam(defaultValue = "1") Integer page) {
+        System.out.println(customerInfo.getName());
+        System.out.println(signUpInfoServiceImpl.findByMC2(customerInfo, page));
+        return signUpInfoServiceImpl.findByMC2(customerInfo, page);
     }
 
     @GetMapping(path = "/signUpListAllCount")
@@ -67,7 +70,8 @@ public class SignUpInfoController {
     }
 
     @PostMapping(path = "/backSignUp")
-    public String backSignUp(SignUpInfo signUpInfo) {
+    public String backSignUp(@RequestBody SignUpInfo signUpInfo) {
+        System.out.println(signUpInfo.getId());
         return Generator.genJsonStatusCode(signUpInfoServiceImpl.backSignUp(signUpInfo));
     }
 

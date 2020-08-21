@@ -4,6 +4,7 @@ import cn.edu.cqust.bean.CustomerInfo;
 import cn.edu.cqust.service.CustomerInfoService;
 import cn.edu.cqust.util.Generator;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,7 +27,8 @@ public class CustomerInfoController {
     private String phone = "15998984122";
 
     @PostMapping(path = "/addPhone")
-    public String addOne(CustomerInfo customerInfo) {
+    public String addOne(@RequestBody CustomerInfo customerInfo) {
+        System.out.println(customerInfo.getName());
         return Generator.genJsonStatusCode(
                 customerInfoServiceImpl.addOne(customerInfo, name, phone)
         );

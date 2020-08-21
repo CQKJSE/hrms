@@ -4,43 +4,36 @@
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.edu.cqust.dao.InterviewInfoDao">
-	
+
 	<parameterMap id="interviewInfoPM" type="cn.edu.cqust.bean.InterviewInfo"/>
 	<resultMap id="roSignUpListRM" type="cn.edu.cqust.bean.vo.RoSignUpList"/>
 	<resultMap id="roInterviewListAllRM" type="cn.edu.cqust.bean.vo.RoInterviewListAll"/>
 	<resultMap id="interviewInfoRM" type="cn.edu.cqust.bean.InterviewInfo"/>
-	
+
 	<select id="findByMC1" resultMap="roSignUpListRM">
 		select
-		t5.id,
-		t2.name,
-		t2.idNumber,
-		t2.gender,
-		t2.age,
-		t2.phoneNumber,
-		t2.education,
-		t2.address,
-		t2.professionalSkills,
-		t2.hasCertificate,
-		t2.isDisability,
-		t1.recommendEnterprise,
-		t1.recommendJob,
-		t3.signUpTime,
-		t3.interviewTime,
-		t5.note
-		from phone_call_list as t1
+		t1.id,
+		t3.name,
+		t3.idNumber,
+		t3.gender,
+		t3.age,
+		t3.phoneNumber,
+		t3.education,
+		t3.addedTime,
+		t3.professionalSkills,
+		t3.hasCertificate,
+		t3.isDisability,
+		t2.recommendEnterprise,
+		t2.recommendJob,
+		t4.signUpTime,
+		t4.interviewTime,
+		t1.note
+		from interview_info as t1
 		inner join
-		(select id,
-		name, #
-		idNumber, #
-		gender,
-		age,
-		phoneNumber, #
-		education,
-		address,
-		professionalSkills,
-		hasCertificate,
-		isDisability
+		phone_call_list as t2
+		on t1.phoneCallListId = t2.id
+		inner join
+		(select *
 		from customer_info
 		<where>
 			<if test="customerInfo.name != null">
@@ -52,39 +45,28 @@
 			<if test="customerInfo.phoneNumber != null">
 				and phoneNumber like concat('%', #{customerInfo.phoneNumber}, '%')
 			</if>
-		</where>
-		) as t2
-		on t1.customerId = t2.id
-		inner join sign_up_info as t3
-		on t1.customerId = t3.customerId and
-		t1.employeeId = t3.employeeId and
-		t1.id = t3.phoneCallListId
+		</where>) as t3
+		on t1.customerId = t3.id
+		inner join
+		sign_up_info t4
+		on t1.signUpId = t4.id
 		inner join
 		(select id
 		from employee
-		where phone = #{employeePhone}) as t4
-		on t4.id = t3.id
-		inner join interview_info as t5
-		on t5.customerId = t4.id
+		where phone = #{employeePhone}) t5
+		on t1.employeeId = t5.id
 		limit #{startIndex}, 10;
 	</select>
-	
+
 	<select id="countByMC1" resultType="int">
-		select count(t5.id)
-		from phone_call_list as t1
+		select
+		count(t1.id)
+		from interview_info as t1
 		inner join
-		(select
-		id,
-		name,
-		idNumber,
-		gender,
-		age,
-		phoneNumber,
-		education,
-		address,
-		professionalSkills,
-		hasCertificate,
-		isDisability
+		phone_call_list as t2
+		on t1.phoneCallListId = t2.id
+		inner join
+		(select *
 		from customer_info
 		<where>
 			<if test="customerInfo.name != null">
@@ -96,31 +78,26 @@
 			<if test="customerInfo.phoneNumber != null">
 				and phoneNumber like concat('%', #{customerInfo.phoneNumber}, '%')
 			</if>
-		</where>
-		) as t2
-		on t1.customerId = t2.id
+		</where>) as t3
+		on t1.customerId = t3.id
 		inner join
-		sign_up_info as t3
-		on t1.customerId = t3.customerId and
-		t1.employeeId = t3.employeeId and
-		t1.id = t3.phoneCallListId
+		sign_up_info t4
+		on t1.signUpId = t4.id
 		inner join
 		(select id
 		from employee
-		where phone = #{employeePhone}) as t4
-		on t4.id = t3.id
-		inner join interview_info as t5
-		on t5.customerId = t4.id;
+		where phone = #{employeePhone}) t5
+		on t1.employeeId = t5.id;
 	</select>
-	
+
 	<insert id="insert">
 		insert into interview_info (note, customerId, phoneCallListId,
 		                            signUpId, employeeId, state)
 		values (#{note}, #{customerId}, #{phoneCallListId},
 		        #{signUpId}, #{employeeId}, #{state});
 	</insert>
-	
-	
+
+
 	<select id="findByMC2" resultMap="roInterviewListAllRM">
 		select t3.id as interviewInfoId,
 		t2.name as customerName,
@@ -202,7 +179,7 @@
 		on t5.id = t3.signUpId
 		limit 0, 10;
 	</select>
-	
+
 	<select id="countByMC2" resultType="int">
 		select count(t3.id)
 		from (select *
@@ -264,8 +241,8 @@
 		) as t5
 		on t5.id = t3.signUpId;
 	</select>
-	
-	
+
+
 	<update id="update">
 		update hrms.interview_info
 		<trim prefix="set" suffixOverrides=",">
@@ -278,17 +255,45 @@
 		</trim>
 		where id = #{id};
 	</update>
-	
+
 	<select id="findById" resultMap="interviewInfoRM">
 		select * from interview_info
 		where id = #{id};
 	</select>
-	
-	
+
+
 	<select id="findByState" resultMap="interviewInfoRM">
 		select *
 		from interview_info
 		where state = #{state}
 	</select>
 	
+
+	<select id="find" resultMap="interviewInfoRM">
+		select * from interview_info
+		<where>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+			<if test="note != null">
+				and note = #{note}
+			</if>
+			<if test="state != null">
+				and state = #{state}
+			</if>
+			<if test="customerId != null">
+				and customerId = #{customerId}
+			</if>
+			<if test="phoneCallListId != null">
+				and phoneCallListId = #{phoneCallListId}
+			</if>
+			<if test="signUpId != null">
+				and signUpId = #{signUpId}
+			</if>
+			<if test="employeeId != null">
+				and employeeId = #{employeeId}
+			</if>
+		</where>
+	</select>
+
 </mapper>

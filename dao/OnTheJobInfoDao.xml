@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.cqust.dao.OnTheJobInfoDao">
+	
+	<parameterMap id="onTheJobInfoPM" type="cn.edu.cqust.bean.OnTheJobInfo"/>
+	<resultMap id="onTheJobInfoRM" type="cn.edu.cqust.bean.OnTheJobInfo"/>
+	<resultMap id="roOnTheJobRM" type="cn.edu.cqust.bean.vo.RoOnTheJob"/>
+	<resultMap id="roOnTheJobAllRM" type="cn.edu.cqust.bean.vo.RoOnTheJobAll"/>
+	
+	<select id="findByMC1" resultMap="roOnTheJobRM">
+		select t1.id,
+		t3.name,
+		t3.idNumber,
+		t3.gender,
+		t3.age,
+		t3.phoneNumber,
+		t2.recommendEnterprise,
+		t2.recommendJob,
+		t1.inductionTime,
+		t1.state,
+		t1.departureTime
+		from
+		on_the_job_info as t1
+		inner join
+		phone_call_list as t2
+		on t1.phoneCallListId = t2.id
+		inner join
+		(select *
+		from customer_info
+		<where>
+			<if test="customerInfo.name != null">
+				and name like concat('%', #{customerInfo.name}, '%')
+			</if>
+			<if test="customerInfo.idNumber != null">
+				and idNumber like concat('%', #{customerInfo.idNumber}, '%')
+			</if>
+			<if test="customerInfo.phoneNumber != null">
+				and phoneNumber like concat('%', #{customerInfo.phoneNumber}, '%')
+			</if>
+		</where>
+		) as t3
+		on t1.customerId = t3.id
+		inner join
+		(select id
+		from employee
+		where phone = #{employeePhone}) t5
+		on t1.employeeId = t5.id
+		<if test="startIndex != null">
+			limit #{startIndex}, 10;
+		</if>
+	</select>
+	
+	<select id="findByMC2" resultMap="roOnTheJobAllRM">
+		select
+		t1.id,
+		t3.name,
+		t3.idNumber,
+		t3.gender,
+		t3.age,
+		t3.phoneNumber,
+		t2.recommendEnterprise,
+		t2.recommendJob,
+		t1.inductionTime,
+		t1.state,
+		t1.contractExpireTime,
+		t1.emergencyContact,
+		t1.emergencyContactPhone,
+		t1.insurance,
+		t1.unit,
+		t1.departureTime
+		from
+		(select *
+		from on_the_job_info
+		<where>
+			<if test="qo.state != null">
+				and state like concat('%', #{qo.state}, '%')
+			</if>
+		</where>
+		) as t1
+		inner join
+		(select *
+		from phone_call_list
+		<where>
+			<if test="qo.recommendEnterprise != null">
+				and recommendEnterprise like concat('%', #{qo.recommendEnterprise}, '%')
+			</if>
+		</where>
+		) as t2
+		on t1.phoneCallListId = t2.id
+		inner join
+		(select *
+		from customer_info
+		<where>
+			<if test="qo.name != null">
+				and name like concat('%', #{qo.name}, '%')
+			</if>
+			<if test="qo.idNumber != null">
+				and idNumber like concat('%', #{qo.idNumber}, '%')
+			</if>
+			<if test="qo.phoneNumber != null">
+				and phoneNumber like concat('%', #{qo.phoneNumber}, '%')
+			</if>
+		</where>
+		) as t3
+		on t1.customerId = t3.id
+		<if test="startIndex != null">
+			limit #{startIndex}, 10;
+		</if>
+	</select>
+	
+	
+	<insert id="insert">
+		insert into on_the_job_info (contractExpireTime, emergencyContact,
+		                             emergencyContactPhone, insurance, unit,
+		                             inductionTime, state, departureTime,
+		                             customerId, phoneCallListId, employeeId)
+		values (#{contractExpireTime}, #{emergencyContact},
+		        #{emergencyContactPhone}, #{insurance}, #{unit},
+		        #{inductionTime}, #{state}, #{departureTime},
+		        #{customerId}, #{phoneCallListId}, #{employeeId});
+	</insert>
+	
+	
+	<select id="findMaxId" resultType="int">
+		select max(id)
+		from on_the_job_info;
+	</select>
+	
+</mapper>

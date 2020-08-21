@@ -29,31 +29,35 @@ public class InterviewInfoController {
 
     @ResponseBody
     @GetMapping(path = "/interviewList")
-    public List<RoSignUpList> findByMC1(@RequestBody CustomerInfo customerInfo,
-                                        @RequestParam(defaultValue = "1") Integer pageIndex) {
-        return interviewInfoServiceImpl.findByMC1(customerInfo, pageIndex, phone);
+    public List<RoSignUpList> findByMC1(CustomerInfo customerInfo,
+                                        @RequestParam(defaultValue = "1") Integer page) {
+        return interviewInfoServiceImpl.findByMC1(customerInfo, page, phone);
     }
 
     @ResponseBody
     @GetMapping(path = "/interviewListCount")
     public String countByMC1(CustomerInfo customerInfo) {
+        System.out.println(customerInfo.getName());
         return Generator.genJsonObject("count", interviewInfoServiceImpl.countByMC1(customerInfo, phone));
     }
 
     @PostMapping(path = "/addInterview")
-    public String addInterview(InterviewInfo interviewInfo) {
+    public String addInterview(@RequestBody InterviewInfo interviewInfo) {
+        System.out.println(interviewInfo.getId());
         return Generator.genJsonStatusCode(interviewInfoServiceImpl.addInterview(interviewInfo));
     }
 
-    @PostMapping(path = "/interviewListAll")
-    public List<RoInterviewListAll> findByMC2(@RequestBody CustomerInfo customerInfo,
-                                              String recommendEnterprise, String interviewTime,
-                                              String deptName, String employeeName,
-                                              @RequestParam(defaultValue = "1") Integer pageNumber) {
+    @GetMapping(path = "/interviewListAll")
+    public List<RoInterviewListAll> findByMC2(CustomerInfo customerInfo,
+                                              @RequestParam(defaultValue = "") String recommendEnterprise,
+                                              @RequestParam(defaultValue = "") String interviewTime,
+                                              @RequestParam(defaultValue = "") String deptName,
+                                              @RequestParam(defaultValue = "") String employeeName,
+                                              @RequestParam(defaultValue = "1") Integer page) {
         return interviewInfoServiceImpl.findByMC2(
                 customerInfo, recommendEnterprise,
                 interviewTime, deptName,
-                employeeName, pageNumber
+                employeeName, page
         );
     }
 
