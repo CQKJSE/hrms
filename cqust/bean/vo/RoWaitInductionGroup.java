@@ -3,16 +3,15 @@ package cn.edu.cqust.bean.vo;
 /**
  * @project: HRMS_SpringbootDemo
  * @author: F.C.Tang
- * @date: 2020-08-12 10:48
+ * @date: 2020-08-22 15:22
  * @desc:
  **/
-public class QoUpdateWaitInduction {
-
-    //wait_induction_info
+@SuppressWarnings("unused")
+public class RoWaitInductionGroup {
+    //wait_induction_info.id
     private Integer id;
-    private String delayTime;
     //customer_info
-    private String name;
+    private String customerName;
     private String idNumber;
     private String gender;
     private Integer age;
@@ -25,6 +24,12 @@ public class QoUpdateWaitInduction {
     //phone_call_list
     private String recommendEnterprise;
     private String recommendJob;
+    //wait_induction_info
+    private String interviewQualifiedTime;
+    private String state;
+    private String delayTime;
+    private String note;
+    private String employeeName;
 
     public Integer getId() {
         return id;
@@ -34,20 +39,12 @@ public class QoUpdateWaitInduction {
         this.id = id;
     }
 
-    public String getDelayTime() {
-        return delayTime;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setDelayTime(String delayTime) {
-        this.delayTime = delayTime;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
     public String getIdNumber() {
@@ -136,5 +133,45 @@ public class QoUpdateWaitInduction {
 
     public void setRecommendJob(String recommendJob) {
         this.recommendJob = recommendJob;
+    }
+
+    public String getInterviewQualifiedTime() {
+        return interviewQualifiedTime;
+    }
+
+    public void setInterviewQualifiedTime(String interviewQualifiedTime) {
+        this.interviewQualifiedTime = interviewQualifiedTime;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getDelayTime() {
+        return delayTime;
+    }
+
+    public void setDelayTime(String delayTime) {
+        this.delayTime = delayTime;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
     }
 }

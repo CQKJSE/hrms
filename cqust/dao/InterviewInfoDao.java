@@ -2,8 +2,10 @@ package cn.edu.cqust.dao;
 
 import cn.edu.cqust.bean.CustomerInfo;
 import cn.edu.cqust.bean.InterviewInfo;
+import cn.edu.cqust.bean.vo.RoInterviewList;
 import cn.edu.cqust.bean.vo.RoInterviewListAll;
 import cn.edu.cqust.bean.vo.RoSignUpList;
+import cn.edu.cqust.bean.vo.RoSignUpListGroup;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -106,5 +108,19 @@ public interface InterviewInfoDao {
      * @return 结果列表
      */
     List<InterviewInfo> find(InterviewInfo interviewInfo);
+
+    /**
+     * @desc 多条件查询3
+     * @param customerInfo 三个字段:name, idNumber, phoneNumber
+     * @param employeeName 查询参数
+     * @param startIndex 查询的起始位置
+     * @param deptName session中的部门名
+     * @return 结果列表
+     */
+    List<RoInterviewList> findByMC3(@Param("customerInfo") CustomerInfo customerInfo,
+                                    @Param("startIndex") Integer startIndex,
+                                    @Param("deptName") String deptName,
+                                    @Param("employeeName") String employeeName);
+
 
 }

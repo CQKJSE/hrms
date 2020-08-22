@@ -55,4 +55,18 @@ public interface OnTheJobInfoDao {
      */
     Integer findMaxId();
 
+    /**
+     * @desc 修改
+     * @param onTheJobInfo 需要更新的数据
+     * @return 操作状态
+     */
+    Integer update(OnTheJobInfo onTheJobInfo);
+
+    /**
+     * @desc 根据id查找
+     * @param id id
+     * @return 目标对象
+     */
+    OnTheJobInfo findById(Integer id);
+
 }

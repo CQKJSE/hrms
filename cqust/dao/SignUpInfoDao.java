@@ -4,6 +4,7 @@ import cn.edu.cqust.bean.CustomerInfo;
 import cn.edu.cqust.bean.SignUpInfo;
 import cn.edu.cqust.bean.vo.RoSignUpList;
 import cn.edu.cqust.bean.vo.RoSignUpListAll;
+import cn.edu.cqust.bean.vo.RoSignUpListGroup;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -87,5 +88,19 @@ public interface SignUpInfoDao {
      * @return 结果列表
      */
     List<SignUpInfo> findByState(Integer state);
+
+
+    /**
+     * @desc 多条件查询3
+     * @param customerInfo 三个字段:name, idNumber, phoneNumber
+     * @param employeeName 查询参数
+     * @param startIndex 查询的起始位置
+     * @param deptName session中的部门名
+     * @return 结果列表
+     */
+    List<RoSignUpListGroup> findByMC3(@Param("customerInfo") CustomerInfo customerInfo,
+                                      @Param("startIndex") Integer startIndex,
+                                      @Param("deptName") String deptName,
+                                      @Param("employeeName") String employeeName);
 
 }

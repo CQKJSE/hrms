@@ -2,10 +2,7 @@ package cn.edu.cqust.controller;
 
 import cn.edu.cqust.bean.CustomerInfo;
 import cn.edu.cqust.bean.OnTheJobInfo;
-import cn.edu.cqust.bean.vo.QoOnTheJobAll;
-import cn.edu.cqust.bean.vo.RoGetPhoneRecord;
-import cn.edu.cqust.bean.vo.RoOnTheJob;
-import cn.edu.cqust.bean.vo.RoOnTheJobAll;
+import cn.edu.cqust.bean.vo.*;
 import cn.edu.cqust.service.OnTheJobInfoService;
 import cn.edu.cqust.util.Generator;
 import org.springframework.web.bind.annotation.*;
@@ -60,6 +57,11 @@ public class OnTheJobInfoController {
     @PostMapping(path = "/addOnTheJob")
     public String addOnTheJob(OnTheJobInfo onTheJobInfo) {
         return Generator.genJsonStatusCode(onTheJobInfoServiceImpl.addOnTheJob(onTheJobInfo));
+    }
+
+    @PostMapping(path = "/updateOnTheJob")
+    public String addOnTheJob(QoUpdateOnTheJob qo) {
+        return Generator.genJsonStatusCode(onTheJobInfoServiceImpl.updateAndRelated1(qo));
     }
 
 }

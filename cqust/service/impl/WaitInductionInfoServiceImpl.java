@@ -4,9 +4,7 @@ import cn.edu.cqust.bean.CustomerInfo;
 import cn.edu.cqust.bean.InterviewInfo;
 import cn.edu.cqust.bean.PhoneCallList;
 import cn.edu.cqust.bean.WaitInductionInfo;
-import cn.edu.cqust.bean.vo.QoUpdateWaitInduction;
-import cn.edu.cqust.bean.vo.QoWaitInductionAll;
-import cn.edu.cqust.bean.vo.RoWaitInduction;
+import cn.edu.cqust.bean.vo.*;
 import cn.edu.cqust.dao.CustomerInfoDao;
 import cn.edu.cqust.dao.InterviewInfoDao;
 import cn.edu.cqust.dao.PhoneCallListDao;
@@ -49,8 +47,8 @@ public class WaitInductionInfoServiceImpl implements WaitInductionInfoService {
     }
 
     @Override
-    public Integer updateSignUpInfoAndRelated(QoUpdateWaitInduction qo) {
-        WaitInductionInfo waitInductionInfo = waitInductionInfoDao.findById(qo.getWaitInductionInfoId());
+    public Integer updateAndRelated1(QoUpdateWaitInduction qo) {
+        WaitInductionInfo waitInductionInfo = waitInductionInfoDao.findById(qo.getId());
         if (waitInductionInfo == null) {
             return -1;
         }
@@ -77,7 +75,7 @@ public class WaitInductionInfoServiceImpl implements WaitInductionInfoService {
         pcl.setRecommendEnterprise(qo.getRecommendEnterprise());
         pcl.setRecommendJob(qo.getRecommendJob());
         //set wait_induction_info update param
-        wii.setId(qo.getWaitInductionInfoId());
+        wii.setId(qo.getId());
         wii.setDelayTime(qo.getDelayTime());
         //declare operationCode
         int s1 = -1;
@@ -155,6 +153,57 @@ public class WaitInductionInfoServiceImpl implements WaitInductionInfoService {
         if (waitInductionInfoDao.update(waitInductionInfo) != 1)
             return -1;
         return customerInfoDao.update(customerInfo) == 1 ? 1 : -1;
+    }
+
+    @Override
+    public Integer updateAndRelated2(QoUpdateWaitInductionGroup qo) {
+        WaitInductionInfo wii = waitInductionInfoDao.findById(qo.getId());
+        wii.setState(qo.getState());
+        wii.setMedicalQualifiedTime(qo.getMedicalQualifiedTime());
+        wii.setDelayTime(qo.getDelayTime());
+        CustomerInfo ci = new CustomerInfo();
+        ci.setId(wii.getCustomerId());
+        ci.setName(qo.getName());
+        ci.setIdNumber(qo.getIdNumber());
+        ci.setGender(qo.getGender());
+        ci.setAge(qo.getAge());
+        ci.setPhoneNumber(qo.getPhoneNumber());
+        ci.setEducation(qo.getEducation());
+        ci.setAddress(qo.getAddress());
+        ci.setProfessionalSkills(qo.getProfessionalSkills());
+        ci.setHasCertificate(qo.getHasCertificate());
+        ci.setIsDisability(qo.getIsDisability());
+        PhoneCallList pcl = new PhoneCallList();
+        pcl.setId(wii.getPhoneCallListId());
+        pcl.setRecommendEnterprise(qo.getRecommendEnterprise());
+        pcl.setRecommendJob(qo.getRecommendJob());
+
+        int s1 = -1;
+        int s2 = -1;
+        int s3 = -1;
+        if (!BeanHelper.isEmptyBean(ci, "id"))
+            s1 = customerInfoDao.update(ci);
+        if (!BeanHelper.isEmptyBean(pcl, "id"))
+            s2 = phoneCallListDao.update(pcl);
+        if (!BeanHelper.isEmptyBean(wii, "id"))
+            s3 = waitInductionInfoDao.update(wii);
+        return (s1 == 1 || s2 == 1 || s3 == 1) ? 1 : -1;
+    }
+
+    @Override
+    public List<RoWaitInductionGroup> findByMC3(CustomerInfo customerInfo, Integer pageNumber, String deptName, String employeeName) {
+        return waitInductionInfoDao.findByMC3(
+                customerInfo, (pageNumber - 1) * 10,
+                deptName, employeeName
+        );
+    }
+
+    @Override
+    public Integer countByMC3(CustomerInfo customerInfo, String deptName, String employeeName) {
+        return waitInductionInfoDao.findByMC3(
+                customerInfo, null,
+                deptName, employeeName
+        ).size();
     }
 
 

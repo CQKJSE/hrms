@@ -5,7 +5,7 @@ import cn.edu.cqust.bean.SignUpInfo;
 import cn.edu.cqust.bean.vo.QoUpdateSignUp;
 import cn.edu.cqust.bean.vo.RoSignUpList;
 import cn.edu.cqust.bean.vo.RoSignUpListAll;
-import org.apache.ibatis.annotations.Param;
+import cn.edu.cqust.bean.vo.RoSignUpListGroup;
 
 import java.util.List;
 
@@ -76,5 +76,28 @@ public interface SignUpInfoService {
      */
     Integer backSignUp(SignUpInfo signUpInfo);
 
+    /**
+     * @desc 多条件查询3
+     * @param customerInfo 3个字段:name, idNumber, phoneNumber
+     * @param pageNumber 查询的起始页码
+     * @param employeeName 查询参数
+     * @param deptName session中的部门名
+     * @return 结果列表
+     */
+    List<RoSignUpListGroup> findByMC3(CustomerInfo customerInfo,
+                                      Integer pageNumber,
+                                      String deptName,
+                                      String employeeName);
+
+    /**
+     * @desc 多条件查询3, 统计结果条数
+     * @param customerInfo 3个字段:name, idNumber, phoneNumber
+     * @param employeeName 查询参数
+     * @param deptName session中的部门名
+     * @return 结果数量
+     */
+    Integer countByMC3(CustomerInfo customerInfo,
+                       String deptName,
+                       String employeeName);
 
 }

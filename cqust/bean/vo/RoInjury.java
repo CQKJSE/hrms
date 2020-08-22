@@ -3,13 +3,13 @@ package cn.edu.cqust.bean.vo;
 /**
  * @project: HRMS_SpringbootDemo
  * @author: F.C.Tang
- * @date: 2020-08-21 11:02
+ * @date: 2020-08-22 09:47
  * @desc:
  **/
 @SuppressWarnings("unused")
-public class RoOnTheJobAll {
+public class RoInjury {
     private Integer id;
-    private String customerName;
+    private String name;
     private String idNumber;
     private String gender;
     private Integer age;
@@ -17,19 +17,23 @@ public class RoOnTheJobAll {
     private String recommendEnterprise;
     private String recommendJob;
     private String inductionTime;
-    private String state;
     private String contractExpireTime;
     private String emergencyContact;
     private String emergencyContactPhone;
     private String insurance;
     private String unit;
-    private String departureTime;
-
-    private String customerId;
-    private String phoneCallListId;
-    private String employeeId;
-    private String deptName;
-    private String employeeName;
+    private String outOfTime;
+    private String hospital;
+    private String dischargeTime;
+    private String cost;
+    private String reportTime;
+    private String submitIdentifiedTime;
+    private String identifiedResults;
+    private String submitIdentificationTime;
+    private String identificationResults;
+    private String claimsResults;
+    private String payAmount;
+    private String note;
 
     public Integer getId() {
         return id;
@@ -39,12 +43,12 @@ public class RoOnTheJobAll {
         this.id = id;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public String getName() {
+        return name;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getIdNumber() {
@@ -103,14 +107,6 @@ public class RoOnTheJobAll {
         this.inductionTime = inductionTime;
     }
 
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
     public String getContractExpireTime() {
         return contractExpireTime;
     }
@@ -151,51 +147,99 @@ public class RoOnTheJobAll {
         this.unit = unit;
     }
 
-    public String getDepartureTime() {
-        return departureTime;
+    public String getOutOfTime() {
+        return outOfTime;
     }
 
-    public void setDepartureTime(String departureTime) {
-        this.departureTime = departureTime;
+    public void setOutOfTime(String outOfTime) {
+        this.outOfTime = outOfTime;
     }
 
-    public String getCustomerId() {
-        return customerId;
+    public String getHospital() {
+        return hospital;
     }
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
+    public void setHospital(String hospital) {
+        this.hospital = hospital;
     }
 
-    public String getPhoneCallListId() {
-        return phoneCallListId;
+    public String getDischargeTime() {
+        return dischargeTime;
     }
 
-    public void setPhoneCallListId(String phoneCallListId) {
-        this.phoneCallListId = phoneCallListId;
+    public void setDischargeTime(String dischargeTime) {
+        this.dischargeTime = dischargeTime;
     }
 
-    public String getEmployeeId() {
-        return employeeId;
+    public String getCost() {
+        return cost;
     }
 
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId;
+    public void setCost(String cost) {
+        this.cost = cost;
     }
 
-    public String getDeptName() {
-        return deptName;
+    public String getReportTime() {
+        return reportTime;
     }
 
-    public void setDeptName(String deptName) {
-        this.deptName = deptName;
+    public void setReportTime(String reportTime) {
+        this.reportTime = reportTime;
     }
 
-    public String getEmployeeName() {
-        return employeeName;
+    public String getSubmitIdentifiedTime() {
+        return submitIdentifiedTime;
     }
 
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
+    public void setSubmitIdentifiedTime(String submitIdentifiedTime) {
+        this.submitIdentifiedTime = submitIdentifiedTime;
+    }
+
+    public String getIdentifiedResults() {
+        return identifiedResults;
+    }
+
+    public void setIdentifiedResults(String identifiedResults) {
+        this.identifiedResults = identifiedResults;
+    }
+
+    public String getSubmitIdentificationTime() {
+        return submitIdentificationTime;
+    }
+
+    public void setSubmitIdentificationTime(String submitIdentificationTime) {
+        this.submitIdentificationTime = submitIdentificationTime;
+    }
+
+    public String getIdentificationResults() {
+        return identificationResults;
+    }
+
+    public void setIdentificationResults(String identificationResults) {
+        this.identificationResults = identificationResults;
+    }
+
+    public String getClaimsResults() {
+        return claimsResults;
+    }
+
+    public void setClaimsResults(String claimsResults) {
+        this.claimsResults = claimsResults;
+    }
+
+    public String getPayAmount() {
+        return payAmount;
+    }
+
+    public void setPayAmount(String payAmount) {
+        this.payAmount = payAmount;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }

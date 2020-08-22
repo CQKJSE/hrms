@@ -3,7 +3,7 @@ package cn.edu.cqust.bean;
 /**
  * @project: HRMS
  * @author: Tang.F.C
- * @date: 2020-08-011 15:52
+ * @date: 2020-08-11 15:52
  * @desc:
  */
 @SuppressWarnings("unused")

@@ -6,6 +6,7 @@
 <mapper namespace="cn.edu.cqust.dao.WaitInductionInfoDao">
 	
 	<resultMap id="roWaitInductionRM" type="cn.edu.cqust.bean.vo.RoWaitInduction"/>
+	<resultMap id="roWaitInductionGroupRM" type="cn.edu.cqust.bean.vo.RoWaitInductionGroup"/>
 	<parameterMap id="waitInductionInfoPM" type="cn.edu.cqust.bean.WaitInductionInfo"/>
 	<resultMap id="waitInductionInfoRM" type="cn.edu.cqust.bean.WaitInductionInfo"/>
 	
@@ -260,6 +261,62 @@
 				and employeeId = #{employeeId}
 			</if>
 		</where>
+	</select>
+	
+	<select id="findByMC3" resultMap="roWaitInductionGroupRM">
+		select
+		t1.id,
+		t2.name as customerName,
+		t2.idNumber,
+		t2.gender,
+		t2.age,
+		t2.phoneNumber,
+		t2.education,
+		t2.address,
+		t2.professionalSkills,
+		t2.hasCertificate,
+		t2.isDisability,
+		t4.recommendEnterprise,
+		t4.recommendJob,
+		t1.interviewQualifiedTime,
+		t1.state,
+		t1.delayTime,
+		t1.note,
+		t3.name as employeeName
+		from wait_induction_info as t1
+		inner join
+		(select *
+		from customer_info
+		<where>
+			<if test="customerInfo.name != null">
+				and name like concat('%', #{customerInfo.name}, '%')
+			</if>
+			<if test="customerInfo.idNumber != null">
+				and idNumber like concat('%', #{customerInfo.idNumber}, '%')
+			</if>
+			<if test="customerInfo.phoneNumber != null">
+				and phoneNumber like concat('%', #{customerInfo.phoneNumber}, '%')
+			</if>
+		</where>
+		) as t2
+		on t1.customerId = t2.id
+		inner join
+		(select *
+		from employee
+		<where>
+			deptName = #{deptName}
+			<if test="employeeName != null">
+				and name like concat('%', #{employeeName}, '%')
+			</if>
+		</where>
+		) as t3
+		on t1.employeeId = t3.id
+		inner join
+		phone_call_list as t4
+		on t1.phoneCallListId = t4.id
+		<if test="startIndex != null">
+			limit #{startIndex}, 10;
+		</if>
 	</select>
 
 </mapper>

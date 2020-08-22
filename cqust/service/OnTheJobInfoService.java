@@ -2,11 +2,7 @@ package cn.edu.cqust.service;
 
 import cn.edu.cqust.bean.CustomerInfo;
 import cn.edu.cqust.bean.OnTheJobInfo;
-import cn.edu.cqust.bean.vo.QoOnTheJobAll;
-import cn.edu.cqust.bean.vo.RoOnTheJob;
-import cn.edu.cqust.bean.vo.RoOnTheJobAll;
-import org.apache.ibatis.annotations.Param;
-
+import cn.edu.cqust.bean.vo.*;
 import java.util.List;
 
 /**
@@ -65,6 +61,11 @@ public interface OnTheJobInfoService {
     Integer addOnTheJob(OnTheJobInfo onTheJobInfo);
 
 
-
+    /**
+     * @desc 修改, 及外键关联对象
+     * @param qo 混合字段对象
+     * @return 操作状态
+     */
+    Integer updateAndRelated1(QoUpdateOnTheJob qo);
 
 }

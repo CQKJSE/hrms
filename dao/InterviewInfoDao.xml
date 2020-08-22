@@ -4,12 +4,13 @@
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.edu.cqust.dao.InterviewInfoDao">
-
+	
 	<parameterMap id="interviewInfoPM" type="cn.edu.cqust.bean.InterviewInfo"/>
 	<resultMap id="roSignUpListRM" type="cn.edu.cqust.bean.vo.RoSignUpList"/>
 	<resultMap id="roInterviewListAllRM" type="cn.edu.cqust.bean.vo.RoInterviewListAll"/>
+	<resultMap id="roInterviewListRM" type="cn.edu.cqust.bean.vo.RoInterviewList"/>
 	<resultMap id="interviewInfoRM" type="cn.edu.cqust.bean.InterviewInfo"/>
-
+	
 	<select id="findByMC1" resultMap="roSignUpListRM">
 		select
 		t1.id,
@@ -45,7 +46,8 @@
 			<if test="customerInfo.phoneNumber != null">
 				and phoneNumber like concat('%', #{customerInfo.phoneNumber}, '%')
 			</if>
-		</where>) as t3
+		</where>
+		) as t3
 		on t1.customerId = t3.id
 		inner join
 		sign_up_info t4
@@ -57,7 +59,7 @@
 		on t1.employeeId = t5.id
 		limit #{startIndex}, 10;
 	</select>
-
+	
 	<select id="countByMC1" resultType="int">
 		select
 		count(t1.id)
@@ -78,7 +80,8 @@
 			<if test="customerInfo.phoneNumber != null">
 				and phoneNumber like concat('%', #{customerInfo.phoneNumber}, '%')
 			</if>
-		</where>) as t3
+		</where>
+		) as t3
 		on t1.customerId = t3.id
 		inner join
 		sign_up_info t4
@@ -89,15 +92,15 @@
 		where phone = #{employeePhone}) t5
 		on t1.employeeId = t5.id;
 	</select>
-
+	
 	<insert id="insert">
 		insert into interview_info (note, customerId, phoneCallListId,
 		                            signUpId, employeeId, state)
 		values (#{note}, #{customerId}, #{phoneCallListId},
 		        #{signUpId}, #{employeeId}, #{state});
 	</insert>
-
-
+	
+	
 	<select id="findByMC2" resultMap="roInterviewListAllRM">
 		select t3.id as interviewInfoId,
 		t2.name as customerName,
@@ -179,7 +182,7 @@
 		on t5.id = t3.signUpId
 		limit 0, 10;
 	</select>
-
+	
 	<select id="countByMC2" resultType="int">
 		select count(t3.id)
 		from (select *
@@ -241,34 +244,35 @@
 		) as t5
 		on t5.id = t3.signUpId;
 	</select>
-
-
+	
+	
 	<update id="update">
 		update hrms.interview_info
 		<trim prefix="set" suffixOverrides=",">
-			<if test="note != null "              >note=#{note},</if>
-			<if test="state != null "             >state=#{state},</if>
-			<if test="customerId != null "        >customerId=#{customerId},</if>
-			<if test="phoneCallListId != null "   >phoneCallListId=#{phoneCallListId},</if>
-			<if test="signUpId != null "          >signUpId=#{signUpId},</if>
-			<if test="employeeId != null"         >employeeId=#{employeeId},</if>
+			<if test="note != null ">note=#{note},</if>
+			<if test="state != null ">state=#{state},</if>
+			<if test="customerId != null ">customerId=#{customerId},</if>
+			<if test="phoneCallListId != null ">phoneCallListId=#{phoneCallListId},</if>
+			<if test="signUpId != null ">signUpId=#{signUpId},</if>
+			<if test="employeeId != null">employeeId=#{employeeId},</if>
 		</trim>
 		where id = #{id};
 	</update>
-
+	
 	<select id="findById" resultMap="interviewInfoRM">
-		select * from interview_info
+		select *
+		from interview_info
 		where id = #{id};
 	</select>
-
-
+	
+	
 	<select id="findByState" resultMap="interviewInfoRM">
 		select *
 		from interview_info
 		where state = #{state}
 	</select>
 	
-
+	
 	<select id="find" resultMap="interviewInfoRM">
 		select * from interview_info
 		<where>
@@ -294,6 +298,64 @@
 				and employeeId = #{employeeId}
 			</if>
 		</where>
+	</select>
+	
+	
+	<select id="findByMC3" resultMap="roInterviewListRM">
+		select t1.id,
+		t2.name as customerName,
+		t2.idNumber,
+		t2.gender,
+		t2.age,
+		t2.phoneNumber,
+		t2.education,
+		t2.address,
+		t2.professionalSkills,
+		t2.hasCertificate,
+		t2.isDisability,
+		t3.recommendEnterprise,
+		t3.recommendJob,
+		t5.signUpTime,
+		t5.interviewTime,
+		t1.note,
+		t4.name as employeeName
+		from interview_info as t1
+		inner join
+		(select *
+		from customer_info
+		<where>
+			<if test="customerInfo.name != null">
+				and name like concat('%', #{customerInfo.name}, '%')
+			</if>
+			<if test="customerInfo.idNumber != null">
+				and idNumber like concat('%', #{customerInfo.idNumber}, '%')
+			</if>
+			<if test="customerInfo.phoneNumber != null">
+				and phoneNumber like concat('%', #{customerInfo.phoneNumber}, '%')
+			</if>
+		</where>
+		) as t2
+		on t1.customerId = t2.id
+		inner join
+		phone_call_list as t3
+		on t1.phoneCallListId = t3.id
+		inner join
+		(select *
+		from employee
+		<where>
+			deptName = #{deptName}
+			<if test="employeeName != null">
+				and name like concat('%', #{employeeName}, '%')
+			</if>
+		</where>
+		) as t4
+		on t1.employeeId = t4.id
+		inner join
+		sign_up_info as t5
+		on t1.signUpId = t5.id
+		<if test="startIndex != null">
+			limit #{startIndex}, 10;
+		</if>
 	</select>
 
 </mapper>

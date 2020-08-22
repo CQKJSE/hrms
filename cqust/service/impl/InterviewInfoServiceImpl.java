@@ -3,6 +3,7 @@ package cn.edu.cqust.service.impl;
 import cn.edu.cqust.bean.CustomerInfo;
 import cn.edu.cqust.bean.InterviewInfo;
 import cn.edu.cqust.bean.SignUpInfo;
+import cn.edu.cqust.bean.vo.RoInterviewList;
 import cn.edu.cqust.bean.vo.RoInterviewListAll;
 import cn.edu.cqust.bean.vo.RoSignUpList;
 import cn.edu.cqust.dao.CustomerInfoDao;
@@ -90,5 +91,21 @@ public class InterviewInfoServiceImpl implements InterviewInfoService {
         if (interviewInfoDao.update(interviewInfo) != 1)
             return -1;
         return customerInfoDao.update(customerInfo) == 1 ? 1 : -1;
+    }
+
+    @Override
+    public List<RoInterviewList> findByMC3(CustomerInfo customerInfo, Integer pageNumber, String deptName, String employeeName) {
+        return interviewInfoDao.findByMC3(
+                customerInfo, (pageNumber - 1) * 10,
+                deptName, employeeName
+        );
+    }
+
+    @Override
+    public Integer countByMC3(CustomerInfo customerInfo, String deptName, String employeeName) {
+        return interviewInfoDao.findByMC3(
+                customerInfo, null,
+                deptName, employeeName
+        ).size();
     }
 }

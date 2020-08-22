@@ -1,14 +1,10 @@
 package cn.edu.cqust.service;
 
 import cn.edu.cqust.bean.CustomerInfo;
-import cn.edu.cqust.bean.PhoneCallList;
 import cn.edu.cqust.bean.vo.QoPclAndCi;
 import cn.edu.cqust.bean.vo.RoCallList;
-import org.apache.ibatis.annotations.Param;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @project: HRMS

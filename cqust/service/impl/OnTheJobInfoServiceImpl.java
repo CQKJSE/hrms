@@ -1,17 +1,13 @@
 package cn.edu.cqust.service.impl;
 
-import cn.edu.cqust.bean.CustomerInfo;
-import cn.edu.cqust.bean.OnTheJobInfo;
-import cn.edu.cqust.bean.SettlementInfo;
-import cn.edu.cqust.bean.WaitInductionInfo;
+import cn.edu.cqust.bean.*;
 import cn.edu.cqust.bean.vo.QoOnTheJobAll;
+import cn.edu.cqust.bean.vo.QoUpdateOnTheJob;
 import cn.edu.cqust.bean.vo.RoOnTheJob;
 import cn.edu.cqust.bean.vo.RoOnTheJobAll;
-import cn.edu.cqust.dao.OnTheJobInfoDao;
-import cn.edu.cqust.dao.SettlementInfoDao;
-import cn.edu.cqust.dao.TableInfoDao;
-import cn.edu.cqust.dao.WaitInductionInfoDao;
+import cn.edu.cqust.dao.*;
 import cn.edu.cqust.service.OnTheJobInfoService;
+import cn.edu.cqust.util.BeanHelper;
 import cn.edu.cqust.util.DateUtil;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +29,10 @@ public class OnTheJobInfoServiceImpl implements OnTheJobInfoService {
     private WaitInductionInfoDao waitInductionInfoDao;
     @Resource
     private SettlementInfoDao settlementInfoDao;
+    @Resource
+    private CustomerInfoDao customerInfoDao;
+    @Resource
+    private PhoneCallListDao phoneCallListDao;
 
     @Override
     public List<RoOnTheJob> findByMC1(CustomerInfo customerInfo, String employeePhone, Integer page) {
@@ -99,5 +99,42 @@ public class OnTheJobInfoServiceImpl implements OnTheJobInfoService {
         /*return waitInductionInfoDao.update(wii2) == 1 ?
                 (onTheJobInfoDao.insert(onTheJobInfo) == 1 ?
                         (settlementInfoDao.insert(si) == 1 ? 1 : -1) : -1) : -1;*/
+    }
+
+    @Override
+    public Integer updateAndRelated1(QoUpdateOnTheJob qo) {
+        OnTheJobInfo otji = onTheJobInfoDao.findById(qo.getId());
+        otji.setInductionTime(qo.getInductionTime());
+        otji.setState(qo.getState());
+        otji.setContractExpireTime(qo.getContractExpireTime());
+        otji.setEmergencyContact(qo.getEmergencyContact());
+        otji.setEmergencyContactPhone(qo.getEmergencyContactPhone());
+        otji.setInsurance(qo.getInsurance());
+        otji.setUnit(qo.getUnit());
+        otji.setDepartureTime(qo.getDepartureTime());
+
+        CustomerInfo ci = new CustomerInfo();
+        ci.setId(otji.getCustomerId());
+        ci.setName(qo.getName());
+        ci.setIdNumber(qo.getIdNumber());
+        ci.setGender(qo.getGender());
+        ci.setAge(qo.getAge());
+        ci.setPhoneNumber(qo.getPhoneNumber());
+
+        PhoneCallList pcl = new PhoneCallList();
+        pcl.setId(otji.getPhoneCallListId());
+        pcl.setRecommendEnterprise(qo.getRecommendEnterprise());
+        pcl.setRecommendJob(qo.getRecommendJob());
+
+        int s1 = -1;
+        int s2 = -1;
+        int s3 = -1;
+        if (!BeanHelper.isEmptyBean(ci, "id"))
+            s1 = customerInfoDao.update(ci);
+        if (!BeanHelper.isEmptyBean(pcl, "id"))
+            s2 = phoneCallListDao.update(pcl);
+        if (!BeanHelper.isEmptyBean(otji, "id"))
+            s3 = onTheJobInfoDao.update(otji);
+        return (s1 == 1 || s2 == 1 || s3 == 1) ? 1 : -1;
     }
 }

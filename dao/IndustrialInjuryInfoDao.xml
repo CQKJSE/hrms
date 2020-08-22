@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.cqust.dao.IndustrialInjuryInfoDao">
+	
+	<resultMap id="industrialInjuryInfoRM" type="cn.edu.cqust.bean.IndustrialInjuryInfo"/>
+	<resultMap id="roInjuryRM" type="cn.edu.cqust.bean.vo.RoInjury"/>
+	
+	<insert id="insert">
+		insert into industrial_injury_info
+		(outOfTime, hospital, dischargeTime, cost, reportTime,
+		 submitIdentifiedTime, identifiedResults, submitIdentificationTime,
+		 identificationResults, claimsResults, payAmount, note,
+		 customerId, phoneCallListId, onTheJobId)
+		values (#{outOfTime}, #{hospital}, #{dischargeTime}, #{cost}, #{reportTime},
+		        #{submitIdentifiedTime}, #{identifiedResults}, #{submitIdentificationTime},
+		        #{identificationResults}, #{claimsResults}, #{payAmount}, #{note},
+		        #{customerId}, #{phoneCallListId}, #{onTheJobId});
+	</insert>
+	
+	<select id="findByMC1" resultMap="roInjuryRM">
+		select
+		t1.id,
+		t3.name,
+		t3.idNumber,
+		t3.gender,
+		t3.age,
+		t3.phoneNumber,
+		t2.recommendEnterprise,
+		t2.recommendJob,
+		t6.inductionTime,
+		t4.contractExpireTime,
+		t4.emergencyContact,
+		t4.emergencyContactPhone,
+		t4.insurance,
+		t4.unit,
+		t1.outOfTime,
+		t1.hospital,
+		t1.dischargeTime,
+		t1.cost,
+		t1.reportTime,
+		t1.submitIdentifiedTime,
+		t1.identifiedResults,
+		t1.submitIdentificationTime,
+		t1.identificationResults,
+		t1.claimsResults,
+		t1.payAmount,
+		t1.note
+		from industrial_injury_info as t1
+		inner join
+		phone_call_list as t2
+		on t1.phoneCallListId = t2.id
+		inner join
+		(select *
+		from customer_info
+		<where>
+			<if test="customerInfo.name != null">
+				and name like concat('%', #{customerInfo.name}, '%')
+			</if>
+			<if test="customerInfo.idNumber != null">
+				and idNumber like concat('%', #{customerInfo.idNumber}, '%')
+			</if>
+			<if test="customerInfo.phoneNumber != null">
+				and phoneNumber like concat('%', #{customerInfo.phoneNumber}, '%')
+			</if>
+		</where>
+		) as t3
+		on t1.customerId = t3.id
+		inner join
+		on_the_job_info as t4
+		on t1.onTheJobId = t4.id
+		inner join
+		wait_induction_info as t5
+		on t2.id = t5.phoneCallListId
+		inner join
+		employee as t6
+		on t5.employeeId = t6.id
+		<if test="startIndex != null">
+			limit #{startIndex}, 10;
+		</if>
+	</select>
+	
+	<update id="update">
+		update industrial_injury_info
+		<trim prefix="set" suffixOverrides=",">
+			<if test="outOfTime != null ">outOfTime=#{outOfTime},</if>
+			<if test="hospital != null ">hospital=#{hospital},</if>
+			<if test="dischargeTime != null ">dischargeTime=#{dischargeTime},</if>
+			<if test="cost != null ">cost=#{cost},</if>
+			<if test="reportTime != null">reportTime=#{reportTime},</if>
+			<if test="submitIdentifiedTime != null ">submitIdentifiedTime=#{submitIdentifiedTime},</if>
+			<if test="identificationResults != null ">identificationResults=#{identificationResults},</if>
+			<if test="identifiedResults != null ">identifiedResults=#{identifiedResults},</if>
+			<if test="submitIdentificationTime != null ">submitIdentificationTime=#{submitIdentificationTime},</if>
+			<if test="identificationResults != null ">identificationResults=#{identificationResults},</if>
+			<if test="claimsResults != null ">claimsResults=#{claimsResults},</if>
+			<if test="payAmount != null ">payAmount=#{payAmount},</if>
+			<if test="note != null ">note=#{note},</if>
+		</trim>
+		where id = #{id};
+	</update>
+
+</mapper>

@@ -10,6 +10,7 @@
 	<resultMap id="signUpInfoRM" type="cn.edu.cqust.bean.SignUpInfo"/>
 	<resultMap id="roSignUpListRM" type="cn.edu.cqust.bean.vo.RoSignUpList"/>
 	<resultMap id="roSignUpListAllRM" type="cn.edu.cqust.bean.vo.RoSignUpListAll"/>
+	<resultMap id="roSignUpListGroupRM" type="cn.edu.cqust.bean.vo.RoSignUpListGroup"/>
 	
 	<select id="findByMC1" resultMap="roSignUpListRM">
 		select
@@ -262,6 +263,60 @@
 		select *
 		from sign_up_info
 		where state = #{state}
+	</select>
+	
+	<select id="findByMC3" resultMap="roSignUpListGroupRM">
+		select t1.id,
+		t2.name as customerName,
+		t2.idNumber,
+		t2.gender,
+		t2.age,
+		t2.phoneNumber,
+		t2.education,
+		t2.address,
+		t2.professionalSkills,
+		t2.hasCertificate,
+		t2.isDisability,
+		t3.recommendEnterprise,
+		t3.recommendJob,
+		t1.signUpTime,
+		t1.interviewTime,
+		t1.note,
+		t4.name as employeeName
+		from sign_up_info as t1
+		inner join
+		(select *
+		from customer_info
+		<where>
+			<if test="customerInfo.name != null">
+				and name like concat('%', #{customerInfo.name}, '%')
+			</if>
+			<if test="customerInfo.idNumber != null">
+				and idNumber like concat('%', #{customerInfo.idNumber}, '%')
+			</if>
+			<if test="customerInfo.phoneNumber != null">
+				and phoneNumber like concat('%', #{customerInfo.phoneNumber}, '%')
+			</if>
+		</where>
+		) as t2
+		on t1.customerId = t2.id
+		inner join
+		phone_call_list as t3
+		on t1.phoneCallListId = t3.id
+		inner join
+		(select *
+		from employee
+		<where>
+			deptName = #{deptName}
+			<if test="employeeName != null">
+				and name like concat('%', #{employeeName}, '%')
+			</if>
+		</where>
+		) as t4
+		on t1.employeeId = t4.id
+		<if test="startIndex != null">
+			limit #{startIndex}, 10;
+		</if>
 	</select>
 
 </mapper>

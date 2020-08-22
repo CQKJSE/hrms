@@ -2,10 +2,10 @@ package cn.edu.cqust.controller;
 
 import cn.edu.cqust.bean.CustomerInfo;
 import cn.edu.cqust.bean.InterviewInfo;
+import cn.edu.cqust.bean.vo.RoInterviewList;
 import cn.edu.cqust.bean.vo.RoInterviewListAll;
 import cn.edu.cqust.bean.vo.RoSignUpList;
 import cn.edu.cqust.service.InterviewInfoService;
-import cn.edu.cqust.service.impl.InterviewInfoServiceImpl;
 import cn.edu.cqust.util.Generator;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +26,8 @@ public class InterviewInfoController {
     private InterviewInfoService interviewInfoServiceImpl;
     // TODO: 2020/8/6 session域中获取号码
     private String phone = "15998984122";
+    // TODO: 2020/8/6 session域中获取的部门
+    private String deptName = "网招2部";
 
     @ResponseBody
     @GetMapping(path = "/interviewList")
@@ -79,5 +81,23 @@ public class InterviewInfoController {
         );
     }
 
+    @GetMapping(path = "/interviewListGroup")
+    public List<RoInterviewList> findByMC3(CustomerInfo customerInfo,
+                                           @RequestParam(defaultValue = "1") Integer page,
+                                           String employeeName) {
+        return interviewInfoServiceImpl.findByMC3(
+                customerInfo, page, deptName, employeeName
+        );
+    }
+
+    @GetMapping(path = "/interviewListGroupCount")
+    public String countByMC3(CustomerInfo customerInfo, String employeeName) {
+        return Generator.genJsonObject(
+                "count",
+                interviewInfoServiceImpl.countByMC3(
+                        customerInfo, deptName, employeeName
+                )
+        );
+    }
 
 }

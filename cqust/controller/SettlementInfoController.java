@@ -1,13 +1,11 @@
 package cn.edu.cqust.controller;
 
 import cn.edu.cqust.bean.CustomerInfo;
+import cn.edu.cqust.bean.SettlementInfo;
 import cn.edu.cqust.bean.vo.RoSettlement;
 import cn.edu.cqust.service.SettlementInfoService;
 import cn.edu.cqust.util.Generator;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -57,6 +55,13 @@ public class SettlementInfoController {
         return Generator.genJsonObject(
                 "count",
                 settlementInfoServiceImpl.countByMC2(customerInfo, state)
+        );
+    }
+
+    @PostMapping(path = "/updateSettlement")
+    public String update(SettlementInfo settlementInfo) {
+        return Generator.genJsonStatusCode(
+                settlementInfoServiceImpl.update(settlementInfo)
         );
     }
 

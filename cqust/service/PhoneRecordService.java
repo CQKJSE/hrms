@@ -5,7 +5,6 @@ import cn.edu.cqust.bean.PhoneRecord;
 import cn.edu.cqust.bean.vo.RoGetPhoneRecord;
 import cn.edu.cqust.bean.vo.RoGetPhoneRecordAll;
 import cn.edu.cqust.bean.vo.RoGetPhoneRecordDept;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

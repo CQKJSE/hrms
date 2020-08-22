@@ -56,7 +56,7 @@
 	<select id="findByMC2" resultMap="roOnTheJobAllRM">
 		select
 		t1.id,
-		t3.name,
+		t3.name as customerName,
 		t3.idNumber,
 		t3.gender,
 		t3.age,
@@ -70,7 +70,12 @@
 		t1.emergencyContactPhone,
 		t1.insurance,
 		t1.unit,
-		t1.departureTime
+		t1.departureTime,
+		t1.customerId,
+		t1.phoneCallListId,
+		t1.employeeId,
+		t4.deptName,
+		t4.name as employeeName
 		from
 		(select *
 		from on_the_job_info
@@ -106,6 +111,9 @@
 		</where>
 		) as t3
 		on t1.customerId = t3.id
+		inner join
+		employee as t4
+		on t1.employeeId = t4.id
 		<if test="startIndex != null">
 			limit #{startIndex}, 10;
 		</if>
@@ -129,4 +137,26 @@
 		from on_the_job_info;
 	</select>
 	
+	
+	<update id="update">
+		update on_the_job_info
+		<trim prefix="set" suffixOverrides=",">
+			<if test="contractExpireTime != null ">contractExpireTime=#{contractExpireTime},</if>
+			<if test="emergencyContact != null ">emergencyContact=#{emergencyContact},</if>
+			<if test="emergencyContactPhone != null ">emergencyContactPhone=#{emergencyContactPhone},</if>
+			<if test="insurance != null ">insurance=#{insurance},</if>
+			<if test="unit != null">unit=#{unit},</if>
+			<if test="state != null ">state=#{state},</if>
+			<if test="departureTime != null ">departureTime=#{departureTime},</if>
+		</trim>
+		where id = #{id};
+	</update>
+	
+	
+	<select id="findById" resultMap="onTheJobInfoRM">
+		select *
+		from on_the_job_info
+		where id = #{id};
+	</select>
+
 </mapper>

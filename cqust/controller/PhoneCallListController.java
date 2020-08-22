@@ -1,14 +1,13 @@
 package cn.edu.cqust.controller;
 
 import cn.edu.cqust.bean.CustomerInfo;
-import cn.edu.cqust.bean.PhoneCallList;
 import cn.edu.cqust.bean.vo.QoPclAndCi;
 import cn.edu.cqust.bean.vo.RoCallList;
-import cn.edu.cqust.service.CustomerInfoService;
 import cn.edu.cqust.service.PhoneCallListService;
 import cn.edu.cqust.util.Generator;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.Resource;
 import java.util.List;
 

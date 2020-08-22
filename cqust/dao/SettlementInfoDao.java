@@ -53,4 +53,11 @@ public interface SettlementInfoDao {
      */
     Integer insert(SettlementInfo settlementInfo);
 
+    /**
+     * @desc 修改
+     * @param settlementInfo 需要更新的数据
+     * @return 操作状态
+     */
+    Integer update(SettlementInfo settlementInfo);
+
 }

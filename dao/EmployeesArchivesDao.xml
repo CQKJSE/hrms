@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.cqust.dao.EmployeesArchivesDao">
+	
+	<resultMap id="employeesArchivesRM" type="cn.edu.cqust.bean.EmployeesArchives"/>
+	<resultMap id="roEmployeeArchivesRM" type="cn.edu.cqust.bean.vo.RoEmployeeArchives"/>
+	
+	<insert id="insert">
+		insert into employees_archives(birthday, category, dueToTime, education,
+		                               address, addressNow, emergencyContact, relation,
+		                               emergencyContactPhone, departureTime, ginsengTime,
+		                               stopTime, note, employeeId)
+		values (#{birthday}, #{category}, #{dueToTime}, #{education},
+		        #{address}, #{addressNow}, #{emergencyContact}, #{relation},
+		        #{emergencyContactPhone}, #{departureTime}, #{ginsengTime},
+		        #{stopTime}, #{note}, #{employeeId})
+	</insert>
+	
+	<select id="findByMC1" resultMap="roEmployeeArchivesRM">
+
+		select t1.id as employeeArchivesId,
+		
+		t2.idWork,
+		name,
+		idNumber,
+		gender,
+		inductionTime,
+		deptName,
+		position,
+		
+		t1.birthday,
+		category,
+		dueToTime,
+		education,
+		address,
+		addressNow,
+		emergencyContact,
+		relation,
+		emergencyContactPhone,
+		departureTime,
+		ginsengTime,
+		stopTime,
+		note,
+		employeeId
+		from employees_archives as t1
+		inner join
+		(select *
+		from employee
+		<where>
+			<if test="employee.name != null">
+				and name like concat('%', #{employee.name}, '%')
+			</if>
+			<if test="employee.deptName != null">
+				and deptName like concat('%', #{employee.deptName}, '%')
+			</if>
+			<if test="employee.state != null">
+				and state like concat('%', #{employee.state}, '%')
+			</if>
+			<if test="employee.idWork != null">
+				and idWork like concat('%', #{employee.idWork}, '%')
+			</if>
+		</where>
+		) as t2
+		on t1.employeeId = t2.id
+		<if test="startIndex != null">
+			limit #{startIndex}, 10;
+		</if>
+	</select>
+	
+	<update id="update">
+		update employees_archives
+		<trim prefix="set" suffixOverrides=",">
+			<if test="birthday != null ">birthday=#{birthday},</if>
+			<if test="category != null ">category=#{category},</if>
+			<if test="dueToTime != null ">dueToTime=#{dueToTime},</if>
+			<if test="education != null ">education=#{education},</if>
+			<if test="address != null ">address=#{address},</if>
+			<if test="addressNow != null">addressNow=#{addressNow},</if>
+			<if test="emergencyContact != null ">emergencyContact=#{emergencyContactdeptName},</if>
+			<if test="relation != null ">relation=#{relation},</if>
+			<if test="emergencyContactPhone != null ">emergencyContactPhone=#{emergencyContactPhone},</if>
+			<if test="departureTime != null ">departureTime=#{departureTime},</if>
+			<if test="ginsengTime != null ">ginsengTime=#{ginsengTime},</if>
+			<if test="stopTime != null ">stopTime=#{stopTime},</if>
+			<if test="note != null ">note=#{note},</if>
+		</trim>
+		where id = #{id};
+	</update>
+
+
+</mapper>

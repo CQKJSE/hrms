@@ -1,7 +1,6 @@
 package cn.edu.cqust.service;
 
 import cn.edu.cqust.bean.CustomerInfo;
-import cn.edu.cqust.bean.SignUpInfo;
 import cn.edu.cqust.bean.WaitInductionInfo;
 import cn.edu.cqust.bean.vo.*;
 
@@ -40,7 +39,7 @@ public interface WaitInductionInfoService {
      * @param qoUpdateWaitInduction 封装的查询对象
      * @return 操作状态
      */
-    Integer updateSignUpInfoAndRelated(QoUpdateWaitInduction qoUpdateWaitInduction);
+    Integer updateAndRelated1(QoUpdateWaitInduction qoUpdateWaitInduction);
 
 
     /**
@@ -87,5 +86,36 @@ public interface WaitInductionInfoService {
      * @return 操作状态
      */
     Integer backWaitInduction(WaitInductionInfo waitInductionInfo);
+
+    /**
+     * @desc 修改, 及外键关联对象
+     * @param qo 混合字段对象
+     * @return 操作状态
+     */
+    Integer updateAndRelated2(QoUpdateWaitInductionGroup qo);
+
+    /**
+     * @desc 多条件查询3
+     * @param customerInfo 3个字段:name, idNumber, phoneNumber
+     * @param pageNumber 查询的起始页码
+     * @param employeeName 查询参数
+     * @param deptName session中的部门名
+     * @return 结果列表
+     */
+    List<RoWaitInductionGroup> findByMC3(CustomerInfo customerInfo,
+                                         Integer pageNumber,
+                                         String deptName,
+                                         String employeeName);
+
+    /**
+     * @desc 多条件查询3, 统计结果条数
+     * @param customerInfo 3个字段:name, idNumber, phoneNumber
+     * @param employeeName 查询参数
+     * @param deptName session中的部门名
+     * @return 结果数量
+     */
+    Integer countByMC3(CustomerInfo customerInfo,
+                       String deptName,
+                       String employeeName);
 
 }

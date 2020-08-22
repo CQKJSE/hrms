@@ -1,11 +1,8 @@
 package cn.edu.cqust.controller;
 
 import cn.edu.cqust.bean.CustomerInfo;
-import cn.edu.cqust.bean.InterviewInfo;
-import cn.edu.cqust.bean.SignUpInfo;
 import cn.edu.cqust.bean.WaitInductionInfo;
 import cn.edu.cqust.bean.vo.*;
-import cn.edu.cqust.service.SignUpInfoService;
 import cn.edu.cqust.service.WaitInductionInfoService;
 import cn.edu.cqust.util.Generator;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +24,8 @@ public class WaitInductionInfoController {
     private WaitInductionInfoService waitInductionInfoServiceImpl;
     // TODO: 2020/8/6 session域中获取号码
     private String phone = "15998984122";
+    // TODO: 2020/8/6 session域中获取的部门
+    private String deptName = "网招2部";
 
     @ResponseBody
     @GetMapping(path = "/waitInduction")
@@ -42,9 +41,9 @@ public class WaitInductionInfoController {
     }
 
     @ResponseBody
-    @RequestMapping(path = "updateWaitInduction", method = RequestMethod.POST,produces = "application/json; charset=utf-8")
+    @RequestMapping(path = "/updateWaitInduction", method = RequestMethod.POST,produces = "application/json; charset=utf-8")
     public String updateSignUpInfoAndRelated(QoUpdateWaitInduction qo) {
-        return Generator.genJsonStatusCode(waitInductionInfoServiceImpl.updateSignUpInfoAndRelated(qo));
+        return Generator.genJsonStatusCode(waitInductionInfoServiceImpl.updateAndRelated1(qo));
     }
 
     @PostMapping(path = "/addWaitInduction")
@@ -75,6 +74,30 @@ public class WaitInductionInfoController {
     public String backWaitInduction(WaitInductionInfo waitInductionInfo) {
         return Generator.genJsonStatusCode(
                 waitInductionInfoServiceImpl.backWaitInduction(waitInductionInfo)
+        );
+    }
+
+    @PostMapping(path = "/updateWaitInductionGroup")
+    public String updateSignUpInfoAndRelated(QoUpdateWaitInductionGroup qo) {
+        return Generator.genJsonStatusCode(waitInductionInfoServiceImpl.updateAndRelated2(qo));
+    }
+
+    @GetMapping(path = "/waitInductionGroup")
+    public List<RoWaitInductionGroup> findByMC3(CustomerInfo customerInfo,
+                                             @RequestParam(defaultValue = "1") Integer page,
+                                             String employeeName) {
+        return waitInductionInfoServiceImpl.findByMC3(
+                customerInfo, page, deptName, employeeName
+        );
+    }
+
+    @GetMapping(path = "/waitInductionGroupCount")
+    public String countByMC3(CustomerInfo customerInfo, String employeeName) {
+        return Generator.genJsonObject(
+                "count",
+                waitInductionInfoServiceImpl.countByMC3(
+                        customerInfo, deptName, employeeName
+                )
         );
     }
 

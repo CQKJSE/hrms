@@ -3,16 +3,14 @@ package cn.edu.cqust.bean.vo;
 /**
  * @project: HRMS_SpringbootDemo
  * @author: F.C.Tang
- * @date: 2020-08-12 10:48
+ * @date: 2020-08-22 14:36
  * @desc:
  **/
-public class QoUpdateWaitInduction {
-
-    //wait_induction_info
+public class RoSignUpListGroup {
+    //sign_up_info.id
     private Integer id;
-    private String delayTime;
     //customer_info
-    private String name;
+    private String customerName;
     private String idNumber;
     private String gender;
     private Integer age;
@@ -25,6 +23,11 @@ public class QoUpdateWaitInduction {
     //phone_call_list
     private String recommendEnterprise;
     private String recommendJob;
+    //sign_up_info
+    private String signUpTime;
+    private String interviewTime;
+    private String note;
+    private String employeeName;
 
     public Integer getId() {
         return id;
@@ -34,20 +37,12 @@ public class QoUpdateWaitInduction {
         this.id = id;
     }
 
-    public String getDelayTime() {
-        return delayTime;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setDelayTime(String delayTime) {
-        this.delayTime = delayTime;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
     public String getIdNumber() {
@@ -136,5 +131,37 @@ public class QoUpdateWaitInduction {
 
     public void setRecommendJob(String recommendJob) {
         this.recommendJob = recommendJob;
+    }
+
+    public String getSignUpTime() {
+        return signUpTime;
+    }
+
+    public void setSignUpTime(String signUpTime) {
+        this.signUpTime = signUpTime;
+    }
+
+    public String getInterviewTime() {
+        return interviewTime;
+    }
+
+    public void setInterviewTime(String interviewTime) {
+        this.interviewTime = interviewTime;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
     }
 }

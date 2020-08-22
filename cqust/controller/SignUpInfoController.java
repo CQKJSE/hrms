@@ -5,6 +5,7 @@ import cn.edu.cqust.bean.SignUpInfo;
 import cn.edu.cqust.bean.vo.QoUpdateSignUp;
 import cn.edu.cqust.bean.vo.RoSignUpList;
 import cn.edu.cqust.bean.vo.RoSignUpListAll;
+import cn.edu.cqust.bean.vo.RoSignUpListGroup;
 import cn.edu.cqust.service.SignUpInfoService;
 import cn.edu.cqust.util.Generator;
 import org.springframework.web.bind.annotation.*;
@@ -21,16 +22,16 @@ import java.util.List;
 @RestController
 @RequestMapping(produces = "application/json; charset=utf-8")
 public class SignUpInfoController {
-    
+
     @Resource
     private SignUpInfoService signUpInfoServiceImpl;
     // TODO: 2020/8/6 session域中获取号码
     private String phone = "15998984122";
-
+    // TODO: 2020/8/6 session域中获取的部门
+    private String deptName = "网招2部";
 
     @PostMapping(path = "/signUp")
     public String signUp(@RequestBody SignUpInfo signUpInfo) {
-        System.out.println(signUpInfo.getInterviewTime());
         return Generator.genJsonStatusCode(signUpInfoServiceImpl.signUp(signUpInfo));
     }
 
@@ -38,7 +39,6 @@ public class SignUpInfoController {
     @GetMapping(path = "/signUpList")
     public List<RoSignUpList> findByMC1(CustomerInfo customerInfo,
                                         @RequestParam(defaultValue = "1") Integer page) {
-        System.out.println(page);
         return signUpInfoServiceImpl.findByMC1(customerInfo, page, phone);
     }
 
@@ -49,18 +49,14 @@ public class SignUpInfoController {
     }
 
     @ResponseBody
-    @RequestMapping(path = "updateSignUp", method = RequestMethod.POST,produces = "application/json; charset=utf-8")
+    @RequestMapping(path = "updateSignUp", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     public String updateSignUpInfoAndRelated(@RequestBody QoUpdateSignUp qo) {
-        System.out.println(qo.getName());
-        System.out.println(qo.getIdNumber());
         return Generator.genJsonStatusCode(signUpInfoServiceImpl.updateSignUpInfoAndRelated(qo));
     }
 
     @GetMapping(path = "/signUpListAll")
     public List<RoSignUpListAll> findByMC2(CustomerInfo customerInfo,
                                            @RequestParam(defaultValue = "1") Integer page) {
-        System.out.println(customerInfo.getName());
-        System.out.println(signUpInfoServiceImpl.findByMC2(customerInfo, page));
         return signUpInfoServiceImpl.findByMC2(customerInfo, page);
     }
 
@@ -71,8 +67,25 @@ public class SignUpInfoController {
 
     @PostMapping(path = "/backSignUp")
     public String backSignUp(@RequestBody SignUpInfo signUpInfo) {
-        System.out.println(signUpInfo.getId());
         return Generator.genJsonStatusCode(signUpInfoServiceImpl.backSignUp(signUpInfo));
+    }
+
+
+    @GetMapping(path = "/signUpListGroup")
+    public List<RoSignUpListGroup> findByMC3(CustomerInfo customerInfo,
+                                             @RequestParam(defaultValue = "1") Integer page,
+                                             String employeeName) {
+        return signUpInfoServiceImpl.findByMC3(
+                customerInfo, page, deptName, employeeName
+        );
+    }
+
+    @GetMapping(path = "/signUpListGroupCount")
+    public String countByMC3(CustomerInfo customerInfo, String employeeName) {
+        return Generator.genJsonObject(
+                "count",
+                signUpInfoServiceImpl.countByMC3(customerInfo, deptName, employeeName)
+        );
     }
 
 }

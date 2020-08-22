@@ -15,57 +15,74 @@
   >08.需求08 ---> /getTransaction  
   >09.需求09 ---> /deleteTransaction  
   >10.需求10 ---> /addPhone  
-  ******************************************   
+  ******************************************  
   >11.需求11 ---> /getPhoneRecord  
-  >12.需求12 ---> /updatePhone  
-  >13.需求13 ---> /定时任务1  
-  >14.需求14 ---> /takeOutAll  
-  >15.需求15 ---> /takeOut  
-  >16.需求16 ---> /backData  
-  >17.需求17 ---> /signUp  
-  >18.需求18 ---> /signUpList  
-  >19.需求19 ---> /signUpListCount  
-  >20.需求20 ---> /updateSignUp  
-  ****************************************** 
-  >21.需求21 ---> /interviewList  
-  >22.需求22 ---> /interviewListCount  
-  >23.需求23 ---> /updateInterview = /updateSignUp  
-  >24.需求24 ---> /waitInduction  
-  >25.需求25 ---> /waitInductionCount  
-  >26.需求26 ---> /updateWaitInduction  
-  >27.需求27 ---> /onTheJob  
-  >28.需求28 ---> /onTheJobCount  
-  >29.需求29 ---> /settlement  
-  >30.需求30 ---> /settlementCount  
+  >12.需求12 ---> /getPhoneRecordCount  
+  >13.需求13 ---> /updatePhone  
+  >14.需求14 ---> /backData  
+  >15.需求15 ---> /signUp  
+  >16.需求16 ---> /signUpList  
+  >17.需求17 ---> /signUpListCount  
+  >18.需求18 ---> /updateSignUp  
+  >19.需求19 ---> /interviewList  
+  >20.需求20 ---> /interviewListCount  
   ******************************************  
-  >31.需求31 ---> /signUpListAll  
-  >32.需求32 ---> /signUpListAllCount  
-  >33.需求33 ---> /addInterview  
-  >34.需求34 ---> /backSignUp  
-  >35.需求35 ---> /interviewListAll  
-  >36.需求36 ---> /interviewListAllCount  
-  >37.需求37 ---> /addWaitInduction  
-  >38.需求38 ---> /backInterview  
-  >39.需求39 ---> /waitInductionAll  
-  >40.需求40 ---> /定时任务2  
+  >21.需求21 ---> /waitInduction  
+  >22.需求22 ---> /waitInductionCount  
+  >23.需求23 ---> /updateWaitInduction  
+  >24.需求24 ---> /onTheJob  
+  >25.需求25 ---> /onTheJobCount  
+  >26.需求26 ---> /settlement  
+  >27.需求27 ---> /settlementCount  
+  >28.需求28 ---> /signUpListAll  
+  >29.需求29 ---> /signUpListAllCount  
+  >30.需求30 ---> /addInterview  
   ******************************************  
-  >41.需求41 ---> /定时任务3  
-  >42.需求42 ---> /getPhoneRecordCount  
-  >43.需求43 ---> /getPhoneRecordDept  
-  >44.需求44 ---> /getPhoneRecordDeptCount  
-  >45.需求45 ---> /getPhoneRecordAll  
-  >46.需求46 ---> /getPhoneRecordAllCount  
-  >47.需求47 ---> /addPhoneRecord  
-  >48.需求48 ---> /employee  
-  >49.需求49 ---> /employeeCount  
-  >50.需求50 ---> /addEmployee  
+  >31.需求31 ---> /backSignUp  
+  >32.需求32 ---> /interviewListAll  
+  >33.需求33 ---> /interviewListAllCount  
+  >34.需求34 ---> /addWaitInduction  
+  >35.需求35 ---> /backInterview  
+  >36.需求36 ---> /addDelay  
+  >37.需求37 ---> /waitInductionAll  
+  >38.需求38 ---> /waitInductionAllCount  
+  >39.需求39 ---> /addOnTheJob  
+  >40.需求40 ---> /backWaitInduction  
   ******************************************  
-  >51.需求51 ---> /updateEmployee  
-  >52.需求52 ---> /waitInductionAllCount  
-  >53.需求53 ---> /addDelay  
-  >54.需求54 ---> /onTheJobAll  
-  >55.需求55 ---> /onTheJobAllCount  
-  >56.需求56 ---> /settlementAll  
-  >57.需求57 ---> /settlementCount  
-  >58.需求58 ---> /addOnTheJob  
-  >59.需求59 ---> /backWaitInduction  
+  >41.需求41 ---> /updateWaitInductionGroup  
+  >42.需求42 ---> /onTheJobAll  
+  >43.需求43 ---> /onTheJobAllCount  
+  >44.需求44 ---> /updateOnTheJob  
+  >45.需求45 ---> /applyInjury  
+  >46.需求46 ---> /injury  
+  >47.需求47 ---> /injuryCount  
+  >48.需求48 ---> /updateInjury  
+  >49.需求49 ---> /settlementAll  
+  >50.需求50 ---> /settlementCount  
+  ******************************************  
+  >51.需求51 ---> /updateSettlement  
+  >52.需求52 ---> /getPhoneRecordDept  
+  >53.需求53 ---> /getPhoneRecordDeptCount  
+  >54.需求54 ---> /signUpListGroup  
+  >55.需求55 ---> /signUpListGroupCount  
+  >56.需求56 ---> /interviewListGroup  
+  >57.需求57 ---> /interviewListGroupCount  
+  >58.需求58 ---> /waitInductionGroup  
+  >59.需求59 ---> /waitInductionGroupCount  
+  >60.需求60 ---> /getPhoneRecordAll  
+  ******************************************  
+  >61.需求61 ---> /getPhoneRecordAllCount  
+  >62.需求62 ---> /employee  
+  >63.需求63 ---> /employeeCount  
+  >64.需求64 ---> /addEmployee  
+  >65.需求65 ---> /updateEmployee  
+  >66.需求66 ---> /addArchives  
+  >67.需求67 ---> /employeesArchives  
+  >68.需求68 ---> /employeesArchivesCount  
+  >69.需求69 ---> /updateEmployeesArchives  
+  >70.需求70 ---> /addDeparture  
+  ******************************************  
+  >71.需求71 ---> /departure  
+  >72.需求72 ---> /departureCount  
+  >73.需求73 ---> /updateDeparture  
+

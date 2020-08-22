@@ -1,6 +1,7 @@
 package cn.edu.cqust.service.impl;
 
 import cn.edu.cqust.bean.CustomerInfo;
+import cn.edu.cqust.bean.SettlementInfo;
 import cn.edu.cqust.bean.vo.RoOnTheJob;
 import cn.edu.cqust.bean.vo.RoSettlement;
 import cn.edu.cqust.dao.SettlementInfoDao;
@@ -61,5 +62,10 @@ public class SettlementInfoServiceImpl implements SettlementInfoService {
                 settlementState,
                 null
         ).size();
+    }
+
+    @Override
+    public Integer update(SettlementInfo settlementInfo) {
+        return settlementInfoDao.update(settlementInfo);
     }
 }

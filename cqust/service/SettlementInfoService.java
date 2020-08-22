@@ -1,9 +1,8 @@
 package cn.edu.cqust.service;
 
 import cn.edu.cqust.bean.CustomerInfo;
-import cn.edu.cqust.bean.vo.RoOnTheJob;
+import cn.edu.cqust.bean.SettlementInfo;
 import cn.edu.cqust.bean.vo.RoSettlement;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -59,6 +58,13 @@ public interface SettlementInfoService {
      */
     Integer countByMC2(CustomerInfo customerInfo,
                        String settlementState);
+
+    /**
+     * @desc 更新
+     * @param settlementInfo 待更新对象
+     * @return 操作状态
+     */
+    Integer update(SettlementInfo settlementInfo);
 
 
 }

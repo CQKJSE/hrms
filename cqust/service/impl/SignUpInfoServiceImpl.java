@@ -6,6 +6,7 @@ import cn.edu.cqust.bean.SignUpInfo;
 import cn.edu.cqust.bean.vo.QoUpdateSignUp;
 import cn.edu.cqust.bean.vo.RoSignUpList;
 import cn.edu.cqust.bean.vo.RoSignUpListAll;
+import cn.edu.cqust.bean.vo.RoSignUpListGroup;
 import cn.edu.cqust.dao.CustomerInfoDao;
 import cn.edu.cqust.dao.PhoneCallListDao;
 import cn.edu.cqust.dao.SignUpInfoDao;
@@ -130,5 +131,21 @@ public class SignUpInfoServiceImpl implements SignUpInfoService {
         int s1 = signUpInfoDao.update(signUpInfo);
         int s2 = customerInfoDao.update(customerInfo);
         return (s1 == 1 && s2 == 1) ? 1 : -1;
+    }
+
+    @Override
+    public List<RoSignUpListGroup> findByMC3(CustomerInfo customerInfo, Integer pageNumber, String deptName, String employeeName) {
+        return signUpInfoDao.findByMC3(
+                customerInfo, (pageNumber - 1) * 10,
+                deptName, employeeName
+        );
+    }
+
+    @Override
+    public Integer countByMC3(CustomerInfo customerInfo, String deptName, String employeeName) {
+        return signUpInfoDao.findByMC3(
+                customerInfo, null,
+                deptName, employeeName
+        ).size();
     }
 }

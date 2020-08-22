@@ -2,9 +2,7 @@ package cn.edu.cqust.service;
 
 import cn.edu.cqust.bean.CustomerInfo;
 import cn.edu.cqust.bean.InterviewInfo;
-import cn.edu.cqust.bean.vo.RoInterviewListAll;
-import cn.edu.cqust.bean.vo.RoSignUpList;
-import cn.edu.cqust.bean.vo.RoSignUpListAll;
+import cn.edu.cqust.bean.vo.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -74,11 +72,38 @@ public interface InterviewInfoService {
                        String employeeName);
 
     /**
-     * @desc
-     * @param
-     * @return
+     * @desc 将interview_info表中的这条id（报名名单标识id）数据的state
+     *       （状态）改为1，将前端请求数据note（备注）填入这条id（报名名单标识	id）
+     *       数据中的note（备注），同时将customer_info表中的state	（状态）改为0
+     * @param interviewInfo 2字段: id, note
+     * @return 操作状态
      */
     Integer backInterview(InterviewInfo interviewInfo);
+
+
+    /**
+     * @desc 多条件查询3
+     * @param customerInfo 3个字段:name, idNumber, phoneNumber
+     * @param pageNumber 查询的起始页码
+     * @param employeeName 查询参数
+     * @param deptName session中的部门名
+     * @return 结果列表
+     */
+    List<RoInterviewList> findByMC3(CustomerInfo customerInfo,
+                                    Integer pageNumber,
+                                    String deptName,
+                                    String employeeName);
+
+    /**
+     * @desc 多条件查询3, 统计结果条数
+     * @param customerInfo 3个字段:name, idNumber, phoneNumber
+     * @param employeeName 查询参数
+     * @param deptName session中的部门名
+     * @return 结果数量
+     */
+    Integer countByMC3(CustomerInfo customerInfo,
+                       String deptName,
+                       String employeeName);
 
 
 }

@@ -3,14 +3,17 @@ package cn.edu.cqust.bean.vo;
 /**
  * @project: HRMS_SpringbootDemo
  * @author: F.C.Tang
- * @date: 2020-08-12 10:48
+ * @date: 2020-08-22 11:04
  * @desc:
  **/
-public class QoUpdateWaitInduction {
+public class QoUpdateWaitInductionGroup {
 
     //wait_induction_info
     private Integer id;
+    private String state;
+    private String medicalQualifiedTime;
     private String delayTime;
+
     //customer_info
     private String name;
     private String idNumber;
@@ -22,6 +25,7 @@ public class QoUpdateWaitInduction {
     private String professionalSkills;
     private Integer hasCertificate;
     private Integer isDisability;
+
     //phone_call_list
     private String recommendEnterprise;
     private String recommendJob;
@@ -32,6 +36,22 @@ public class QoUpdateWaitInduction {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getMedicalQualifiedTime() {
+        return medicalQualifiedTime;
+    }
+
+    public void setMedicalQualifiedTime(String medicalQualifiedTime) {
+        this.medicalQualifiedTime = medicalQualifiedTime;
     }
 
     public String getDelayTime() {
