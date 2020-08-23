@@ -4,10 +4,9 @@ package cn.edu.cqust.bean.vo;
  * @project: HRMS_SpringbootDemo
  * @author: F.C.Tang
  * @date: 2020-08-13 11:06
- * @desc: /signUpListAll
+ * @desc:
  **/
-@SuppressWarnings("unused")
-public class RoSignUpListAll {
+@SuppressWarnings("unused")public class RoSignUpListAll {
     private Integer signUpId;
     private String customerName;
     private String idNumber;

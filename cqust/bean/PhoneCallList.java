@@ -8,6 +8,7 @@ package cn.edu.cqust.bean;
  */
 @SuppressWarnings("unused")
 public class PhoneCallList {
+
     private Integer id;
     private Integer isWechatAdded;
     private String recommendEnterprise;

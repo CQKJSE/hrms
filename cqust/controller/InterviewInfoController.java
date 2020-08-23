@@ -45,8 +45,8 @@ public class InterviewInfoController {
 
     @PostMapping(path = "/addInterview")
     public String addInterview(@RequestBody InterviewInfo interviewInfo) {
-        System.out.println(interviewInfo.getId());
-        return Generator.genJsonStatusCode(interviewInfoServiceImpl.addAndUpdateSui(interviewInfo));
+        System.out.println(interviewInfo);
+        return Generator.genJsonStatusCode(interviewInfoServiceImpl.addInterview(interviewInfo));
     }
 
     @GetMapping(path = "/interviewListAll")
@@ -56,6 +56,7 @@ public class InterviewInfoController {
                                               @RequestParam(defaultValue = "") String deptName,
                                               @RequestParam(defaultValue = "") String employeeName,
                                               @RequestParam(defaultValue = "1") Integer page) {
+        System.out.println(employeeName);
         return interviewInfoServiceImpl.findByMC2(
                 customerInfo, recommendEnterprise,
                 interviewTime, deptName,
@@ -66,16 +67,17 @@ public class InterviewInfoController {
     @GetMapping(path = "/interviewListAllCount")
     public String countByMC2(CustomerInfo customerInfo, String recommendEnterprise,
                              String interviewTime, String deptName, String employeeName) {
-        return Generator.genJsonStatusCode(
-                interviewInfoServiceImpl.countByMC2(
-                        customerInfo, recommendEnterprise,
-                        interviewTime, deptName, employeeName
-                )
+
+        return Generator.genJsonObject("count", interviewInfoServiceImpl.countByMC2(
+                customerInfo, recommendEnterprise,
+                interviewTime, deptName, employeeName)
         );
     }
 
     @PostMapping(path = "/backInterview")
-    public String backInterview(InterviewInfo interviewInfo) {
+    public String backInterview(@RequestBody InterviewInfo interviewInfo) {
+        System.out.println(interviewInfo.getId());
+        System.out.println(interviewInfo.getNote());
         return Generator.genJsonStatusCode(
                 interviewInfoServiceImpl.backInterview(interviewInfo)
         );

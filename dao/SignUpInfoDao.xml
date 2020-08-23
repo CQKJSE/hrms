@@ -187,7 +187,14 @@
 		t2.id as customerId,
 		t1.id as phoneCallListId,
 		t4.id as employeeId
-		from phone_call_list as t1
+		from (select *
+		from phone_call_list
+		<where>
+			<if test="recommendEnterprise != null">
+				and recommendEnterprise like concat('%', #{recommendEnterprise}, '%')
+			</if>
+		</where>
+		) as t1
 		inner join
 		(select *
 		from customer_info
@@ -210,14 +217,34 @@
 		</where>
 		) as t2
 		on t1.customerId = t2.id
-		inner join
-		(select *
+		inner join (select *
 		from sign_up_info
-		where state = #{state}) as t3
+		<where>
+			<if test="signUpTime != null">
+				and signUpTime like concat('%', #{signUpTime}, '%')
+			</if>
+			<if test="interviewTime != null">
+				and interviewTime like concat('%', #{interviewTime}, '%')
+			</if>
+			<if test="state != null">
+				and state like concat('%', #{state}, '%')
+			</if>
+		</where>
+		) as t3
 		on t1.customerId = t3.customerId and
 		t1.employeeId = t3.employeeId and
 		t1.id = t3.phoneCallListId
-		inner join employee as t4
+		inner join (select *
+		from employee
+		<where>
+			<if test="deptName != null">
+				and deptName like concat('%', #{deptName}, '%')
+			</if>
+			<if test="employeeName != null">
+				and name like concat('%', #{employeeName}, '%')
+			</if>
+		</where>
+		) as t4
 		on t1.employeeId = t4.id
 		limit #{startIndex}, 10;
 	</select>
@@ -225,7 +252,14 @@
 	
 	<select id="countByMC2" resultType="int">
 		select count(t3.id)
-		from phone_call_list as t1
+		from (select *
+		from phone_call_list
+		<where>
+			<if test="recommendEnterprise != null">
+				and recommendEnterprise like concat('%', #{recommendEnterprise}, '%')
+			</if>
+		</where>
+		) as t1
 		inner join
 		(select *
 		from customer_info
@@ -251,11 +285,33 @@
 		inner join
 		(select *
 		from sign_up_info
-		where state = #{state}) as t3
+		<where>
+			<if test="signUpTime != null">
+				and signUpTime like concat('%', #{signUpTime}, '%')
+			</if>
+			<if test="interviewTime != null">
+				and interviewTime like concat('%', #{interviewTime}, '%')
+			</if>
+			<if test="state != null">
+				and state like concat('%', #{state}, '%')
+			</if>
+		</where>
+		) as t3
 		on t1.customerId = t3.customerId and
 		t1.employeeId = t3.employeeId and
 		t1.id = t3.phoneCallListId
-		inner join employee as t4
+		inner join
+		(select *
+		from employee
+		<where>
+			<if test="deptName != null">
+				and deptName like concat('%', #{deptName}, '%')
+			</if>
+			<if test="employeeName != null">
+				and name like concat('%', #{employeeName}, '%')
+			</if>
+		</where>
+		) as t4
 		on t1.employeeId = t4.id;
 	</select>
 	

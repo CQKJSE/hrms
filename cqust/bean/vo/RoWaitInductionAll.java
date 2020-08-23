@@ -3,15 +3,15 @@ package cn.edu.cqust.bean.vo;
 /**
  * @project: HRMS_SpringbootDemo
  * @author: F.C.Tang
- * @date: 2020-08-22 15:22
+ * @date: 2020-08-12 09:33
  * @desc:
  **/
 @SuppressWarnings("unused")
-public class RoWaitInductionGroup {
+public class RoWaitInductionAll {
     //wait_induction_info.id
     private Integer id;
     //customer_info
-    private String customerName;
+    private String name;
     private String idNumber;
     private String gender;
     private Integer age;
@@ -26,10 +26,56 @@ public class RoWaitInductionGroup {
     private String recommendJob;
     //wait_induction_info
     private String interviewQualifiedTime;
+    private String medicalQualifiedTime;
     private String state;
     private String delayTime;
     private String note;
+    private Integer employeeId;
+    private Integer customerId;
+    private Integer phoneCallListId;
+    //employee
+    private String deptName;
     private String employeeName;
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    public Integer getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(Integer employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
+
+    public Integer getPhoneCallListId() {
+        return phoneCallListId;
+    }
+
+    public void setPhoneCallListId(Integer phoneCallListId) {
+        this.phoneCallListId = phoneCallListId;
+    }
 
     public Integer getId() {
         return id;
@@ -39,12 +85,12 @@ public class RoWaitInductionGroup {
         this.id = id;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public String getName() {
+        return name;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getIdNumber() {
@@ -167,11 +213,31 @@ public class RoWaitInductionGroup {
         this.note = note;
     }
 
-    public String getEmployeeName() {
-        return employeeName;
-    }
-
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
+    @Override
+    public String toString() {
+        return "RoWaitInduction{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", idNumber='" + idNumber + '\'' +
+                ", gender='" + gender + '\'' +
+                ", age=" + age +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", education='" + education + '\'' +
+                ", address='" + address + '\'' +
+                ", professionalSkills='" + professionalSkills + '\'' +
+                ", hasCertificate=" + hasCertificate +
+                ", isDisability=" + isDisability +
+                ", employeeId=" + employeeId +
+                ", customerId=" + customerId +
+                ", phoneCallListId=" + phoneCallListId +
+                ", recommendEnterprise='" + recommendEnterprise + '\'' +
+                ", recommendJob='" + recommendJob + '\'' +
+                ", employeeName='" + employeeName + '\'' +
+                ", deptName='" + deptName + '\'' +
+                ", interviewQualifiedTime='" + interviewQualifiedTime + '\'' +
+                ", state='" + state + '\'' +
+                ", delayTime='" + delayTime + '\'' +
+                ", note='" + note + '\'' +
+                '}';
     }
 }

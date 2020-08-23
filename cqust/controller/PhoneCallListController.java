@@ -96,7 +96,7 @@ public class PhoneCallListController {
     @PostMapping(path = "/updatePhone")
     public String updatePclAndCi(@RequestBody QoPclAndCi qo) {
         System.out.println(qo.getName());
-        return Generator.genJsonStatusCode(phoneCallListService.updateAndCi(qo));
+        return Generator.genJsonStatusCode(phoneCallListService.updateWithCi(qo));
     }
 
 }

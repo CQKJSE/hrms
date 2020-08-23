@@ -33,8 +33,7 @@
 		from (select * from phone_call_list
 		where employeeId =
 		(select employee.id from employee
-		where phone = #{employeePhone})
-		  and addedTime = (select DATE_SUB(curdate(), interval 0 day))) as t2
+		where phone = #{employeePhone}) and addedTime = (select DATE_SUB(curdate(), interval 0 day))) as t2
 		inner join
 		(select * from customer_info
 		<where>

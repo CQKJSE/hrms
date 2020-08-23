@@ -44,13 +44,14 @@ public class InterviewInfoServiceImpl implements InterviewInfoService {
     }
 
     @Override
-    public Integer addAndUpdateSui(InterviewInfo interviewInfo) {
+    public Integer addInterview(InterviewInfo interviewInfo) {
         interviewInfo.setState(0);
         SignUpInfo signUpInfo = new SignUpInfo();
         signUpInfo.setId(interviewInfo.getSignUpId());
         signUpInfo.setState(1);
         signUpInfo.setNote("通过");
         System.out.println(signUpInfo);
+        System.out.println(interviewInfo);
         int s1 = interviewInfoDao.insert(interviewInfo);
         int s2 = signUpInfoDao.update(signUpInfo);
         return (s1 == 1 && s2 == 1) ? 1 : -1;

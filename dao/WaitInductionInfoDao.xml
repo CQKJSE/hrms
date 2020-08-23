@@ -6,6 +6,7 @@
 <mapper namespace="cn.edu.cqust.dao.WaitInductionInfoDao">
 	
 	<resultMap id="roWaitInductionRM" type="cn.edu.cqust.bean.vo.RoWaitInduction"/>
+	<resultMap id="roWaitInductionAllRM" type="cn.edu.cqust.bean.vo.RoWaitInductionAll"/>
 	<resultMap id="roWaitInductionGroupRM" type="cn.edu.cqust.bean.vo.RoWaitInductionGroup"/>
 	<parameterMap id="waitInductionInfoPM" type="cn.edu.cqust.bean.WaitInductionInfo"/>
 	<resultMap id="waitInductionInfoRM" type="cn.edu.cqust.bean.WaitInductionInfo"/>
@@ -146,7 +147,7 @@
 	</insert>
 	
 	
-	<select id="findByMC2" resultMap="roWaitInductionRM">
+	<select id="findByMC2" resultMap="roWaitInductionAllRM">
 		select
 		t1.id,
 		t2.name,
@@ -161,10 +162,16 @@
 		t2.isDisability,
 		t4.recommendEnterprise,
 		t4.recommendJob,
+		t3.name as employeeName,
+		t3.deptName,
+		t3.id as employeeId,
 		t1.interviewQualifiedTime,
 		t1.state,
 		t1.delayTime,
-		t1.note
+		t1.medicalQualifiedTime,
+		t1.note,
+		t2.id as customerId,
+		t4.id as phoneCallListId
 		from (select *
 		from wait_induction_info
 		<where>
@@ -200,7 +207,7 @@
 		) as t2
 		on t1.customerId = t2.id
 		inner join
-		(select id
+		(select id,name,deptName
 		from employee
 		<where>
 			<if test="qo.employeeName != null">

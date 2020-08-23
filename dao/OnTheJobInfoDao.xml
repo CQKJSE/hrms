@@ -11,8 +11,7 @@
 	<resultMap id="roOnTheJobAllRM" type="cn.edu.cqust.bean.vo.RoOnTheJobAll"/>
 	
 	<select id="findByMC1" resultMap="roOnTheJobRM">
-		select
-		t1.id,
+		select t1.id,
 		t3.name,
 		t3.idNumber,
 		t3.gender,

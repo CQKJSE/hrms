@@ -37,11 +37,11 @@ public interface InterviewInfoService {
 
 
     /**
-     * @desc 插入数据将state=0, 并更新sign_up_info的state=1、note=0,
+     * @desc 插入数据state=0, 并将关联sign_up_info的state=1、note=0,
      * @param interviewInfo 待插入对象
      * @return 操作状态
      */
-    Integer addAndUpdateSui(InterviewInfo interviewInfo);
+    Integer addInterview(InterviewInfo interviewInfo);
 
 
 

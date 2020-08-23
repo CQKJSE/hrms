@@ -4,7 +4,7 @@ package cn.edu.cqust.bean.vo;
  * @project: HRMS_SpringbootDemo
  * @author: F.C.Tang
  * @date: 2020-08-20 11:25
- * @desc: /settlement
+ * @desc:
  **/
 @SuppressWarnings("unused")
 public class RoSettlement {

@@ -4,7 +4,7 @@ package cn.edu.cqust.bean.vo;
  * @project: HRMS_SpringbootDemo
  * @author: F.C.Tang
  * @date: 2020-08-22 14:59
- * @desc: /interviewList
+ * @desc:
  **/
 public class RoInterviewList {
     private Integer id;

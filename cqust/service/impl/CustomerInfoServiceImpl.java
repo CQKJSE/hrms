@@ -29,7 +29,7 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
     private EmployeeDao employeeDao;
 
     @Override
-    public Integer addOneAndAllocate(CustomerInfo customerInfo, String employeeName, String employeePhone) {
+    public Integer addOne(CustomerInfo customerInfo, String employeeName, String employeePhone) {
         String addedTime = DateUtil.getYMD();
         customerInfo.setAddedPerson(employeeName);
         customerInfo.setAddedTime(addedTime);

@@ -36,7 +36,7 @@ public class SignUpInfoServiceImpl implements SignUpInfoService {
     private PhoneCallListDao phoneCallListDao;
 
     @Override
-    public Integer insertAndUpdateCiSui(SignUpInfo signUpInfo) {
+    public Integer signUp(SignUpInfo signUpInfo) {
         signUpInfo.setSignUpTime(DateUtil.getYMD());
         signUpInfo.setState(0);
         int s1 = signUpInfoDao.insert(signUpInfo);
@@ -61,7 +61,7 @@ public class SignUpInfoServiceImpl implements SignUpInfoService {
     }
 
     @Override
-    public Integer updateAndRelated(QoUpdateSignUp qo) {
+    public Integer updateSignUpInfoAndRelated(QoUpdateSignUp qo) {
         SignUpInfo signUpInfo = signUpInfoDao.findById(qo.getSignUpInfoId());
         if (signUpInfo == null) {
             return -1;
@@ -109,16 +109,26 @@ public class SignUpInfoServiceImpl implements SignUpInfoService {
     }
 
     @Override
-    public List<RoSignUpListAll> findByMC2(CustomerInfo customerInfo, Integer pageNumber) {
-        return signUpInfoDao.findByMC2(customerInfo, pageNumber, 0)
+    public List<RoSignUpListAll> findByMC2(CustomerInfo customerInfo,
+                                           String recommendEnterprise,
+                                           String signUpTime,
+                                           String interviewTime,
+                                           String deptName,
+                                           String employeeName,
+                                           Integer pageNumber) {
+        return signUpInfoDao.findByMC2(customerInfo,recommendEnterprise,signUpTime,interviewTime,deptName,employeeName,(pageNumber-1)*10, 0)
                 .stream()
                 .sorted(Comparator.comparing(RoSignUpListAll::getSignUpTime).reversed())
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Integer countByMC2(CustomerInfo customerInfo) {
-        return signUpInfoDao.countByMC2(customerInfo, 0);
+    public Integer countByMC2(CustomerInfo customerInfo,String recommendEnterprise,
+                              String signUpTime,
+                              String interviewTime,
+                              String deptName,
+                              String employeeName) {
+        return signUpInfoDao.countByMC2(customerInfo,recommendEnterprise,signUpTime,interviewTime,deptName,employeeName, 0);
     }
 
     @Override

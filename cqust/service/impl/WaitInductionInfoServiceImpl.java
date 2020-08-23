@@ -94,11 +94,11 @@ public class WaitInductionInfoServiceImpl implements WaitInductionInfoService {
     }
 
     @Override
-    public Integer addWaitInduction(WaitInductionInfo waitInductionInfo, Integer id) {
+    public Integer addWaitInduction(WaitInductionInfo waitInductionInfo) {
         waitInductionInfo.setInterviewQualifiedTime(DateUtil.getYMD());
         waitInductionInfo.setState("待入职");
         waitInductionInfo.setStateOne(0);
-        InterviewInfo interviewInfo = interviewInfoDao.findById(id);
+        InterviewInfo interviewInfo = interviewInfoDao.findById(waitInductionInfo.getInterviewId());
         interviewInfo.setState(1);
         interviewInfo.setNote("通过");
         int s1 = waitInductionInfoDao.insert(waitInductionInfo);
@@ -147,7 +147,7 @@ public class WaitInductionInfoServiceImpl implements WaitInductionInfoService {
         CustomerInfo customerInfo = new CustomerInfo();
         customerInfo.setId(waitInductionInfo.getCustomerId());
         customerInfo.setState("0");
-        waitInductionInfo.setState("1");
+        waitInductionInfo.setStateOne(1);
         waitInductionInfo.setNote(preNote);
 
         if (waitInductionInfoDao.update(waitInductionInfo) != 1)

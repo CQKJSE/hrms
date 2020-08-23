@@ -4,7 +4,7 @@ package cn.edu.cqust.bean.vo;
  * @project: HRMS_SpringbootDemo
  * @author: F.C.Tang
  * @date: 2020-08-12 09:33
- * @desc: /waitInduction
+ * @desc:
  **/
 @SuppressWarnings("unused")
 public class RoWaitInduction {
@@ -29,6 +29,33 @@ public class RoWaitInduction {
     private String state;
     private String delayTime;
     private String note;
+    private Integer employeeId;
+    private Integer customerId;
+    private Integer phoneCallListId;
+
+    public Integer getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(Integer employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
+
+    public Integer getPhoneCallListId() {
+        return phoneCallListId;
+    }
+
+    public void setPhoneCallListId(Integer phoneCallListId) {
+        this.phoneCallListId = phoneCallListId;
+    }
 
     public Integer getId() {
         return id;
@@ -180,6 +207,9 @@ public class RoWaitInduction {
                 ", professionalSkills='" + professionalSkills + '\'' +
                 ", hasCertificate=" + hasCertificate +
                 ", isDisability=" + isDisability +
+                ", employeeId=" + employeeId +
+                ", customerId=" + customerId +
+                ", phoneCallListId=" + phoneCallListId +
                 ", recommendEnterprise='" + recommendEnterprise + '\'' +
                 ", recommendJob='" + recommendJob + '\'' +
                 ", interviewQualifiedTime='" + interviewQualifiedTime + '\'' +

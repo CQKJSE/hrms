@@ -28,33 +28,34 @@ public class SettlementInfoController {
 
     @GetMapping(path = "/settlement")
     public List<RoSettlement> findByMC1(CustomerInfo customerInfo,
-                                        @RequestParam(defaultValue = "0") String state,
+                                        String settlementState,
                                         @RequestParam(defaultValue = "1") Integer page) {
-        return settlementInfoServiceImpl.findByMC1(customerInfo, phone, state, page);
+        return settlementInfoServiceImpl.findByMC1(customerInfo, phone, settlementState, page);
     }
 
     @GetMapping(path = "/settlementCount")
     public String countByMC1(CustomerInfo customerInfo,
-                             @RequestParam(defaultValue = "0") String state) {
+                             String settlementState) {
         return Generator.genJsonObject(
                 "count",
-                settlementInfoServiceImpl.countByMC1(customerInfo, phone, state)
+                settlementInfoServiceImpl.countByMC1(customerInfo, phone, settlementState)
         );
     }
 
     @GetMapping(path = "/settlementAll")
     public List<RoSettlement> findByMC2(CustomerInfo customerInfo,
-                                        @RequestParam(defaultValue = "0") String state,
+                                        String settlementState,
                                         @RequestParam(defaultValue = "1") Integer page) {
-        return settlementInfoServiceImpl.findByMC2(customerInfo,  state, page);
+        System.out.println(customerInfo.getIdNumber());
+        return settlementInfoServiceImpl.findByMC2(customerInfo,  settlementState, page);
     }
 
     @GetMapping(path = "/settlementAllCount")
     public String countByMC2(CustomerInfo customerInfo,
-                             @RequestParam(defaultValue = "0") String state) {
+                             String settlementState) {
         return Generator.genJsonObject(
                 "count",
-                settlementInfoServiceImpl.countByMC2(customerInfo, state)
+                settlementInfoServiceImpl.countByMC2(customerInfo, settlementState)
         );
     }
 

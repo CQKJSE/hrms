@@ -55,13 +55,14 @@ public class OnTheJobInfoController {
     }
 
     @PostMapping(path = "/addOnTheJob")
-    public String addOnTheJob(OnTheJobInfo onTheJobInfo) {
+    public String addOnTheJob(@RequestBody OnTheJobInfo onTheJobInfo) {
+        System.out.println(onTheJobInfo.getCustomerId());
         return Generator.genJsonStatusCode(onTheJobInfoServiceImpl.addOnTheJob(onTheJobInfo));
     }
 
     @PostMapping(path = "/updateOnTheJob")
     public String addOnTheJob(QoUpdateOnTheJob qo) {
-        return Generator.genJsonStatusCode(onTheJobInfoServiceImpl.updateAndRelated(qo));
+        return Generator.genJsonStatusCode(onTheJobInfoServiceImpl.updateAndRelated1(qo));
     }
 
 }

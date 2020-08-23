@@ -46,10 +46,9 @@ public interface WaitInductionInfoService {
      * @desc 插入; 同时interview_info.state=1, note=通过;
      *       wait_induction_info.state=0, interviewQualifiedTime = getYMD, state = '入职'
      * @param waitInductionInfo 插入对象(customerId, phoneCallListId, employeeId)
-     * @param id interviewInfo的id
      * @return 操作状态
      */
-    Integer addWaitInduction(WaitInductionInfo waitInductionInfo, Integer id);
+    Integer addWaitInduction(WaitInductionInfo waitInductionInfo);
 
     /**
      * @desc 多条件查询2
@@ -88,7 +87,7 @@ public interface WaitInductionInfoService {
     Integer backWaitInduction(WaitInductionInfo waitInductionInfo);
 
     /**
-     * @desc 修改, 及外键关联对象(组长)
+     * @desc 修改, 及外键关联对象
      * @param qo 混合字段对象
      * @return 操作状态
      */

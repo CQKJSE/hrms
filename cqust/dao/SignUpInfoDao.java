@@ -71,6 +71,11 @@ public interface SignUpInfoDao {
      * @return 结果列表
      */
     List<RoSignUpListAll> findByMC2(@Param("customerInfo") CustomerInfo customerInfo,
+                                    @Param("recommendEnterprise")String recommendEnterprise,
+                                    @Param("signUpTime")String signUpTime,
+                                    @Param("interviewTime")String interviewTime,
+                                    @Param("deptName")String deptName,
+                                    @Param("employeeName")String employeeName,
                                     @Param("startIndex") Integer startIndex,
                                     @Param("state") Integer state);
 
@@ -80,6 +85,11 @@ public interface SignUpInfoDao {
      * @return 结果数量
      */
     Integer countByMC2(@Param("customerInfo") CustomerInfo customerInfo,
+                       @Param("recommendEnterprise")String recommendEnterprise,
+                       @Param("signUpTime")String signUpTime,
+                       @Param("interviewTime")String interviewTime,
+                       @Param("deptName")String deptName,
+                       @Param("employeeName")String employeeName,
                        @Param("state") Integer state);
 
     /**

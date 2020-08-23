@@ -8,6 +8,7 @@ package cn.edu.cqust.bean;
  */
 @SuppressWarnings("unused")
 public class CustomerInfo {
+
     private Integer id;
     private String name;
     private String idNumber;

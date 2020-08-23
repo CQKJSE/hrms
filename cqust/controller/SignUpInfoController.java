@@ -32,7 +32,7 @@ public class SignUpInfoController {
 
     @PostMapping(path = "/signUp")
     public String signUp(@RequestBody SignUpInfo signUpInfo) {
-        return Generator.genJsonStatusCode(signUpInfoServiceImpl.insertAndUpdateCiSui(signUpInfo));
+        return Generator.genJsonStatusCode(signUpInfoServiceImpl.signUp(signUpInfo));
     }
 
     @ResponseBody
@@ -51,18 +51,31 @@ public class SignUpInfoController {
     @ResponseBody
     @RequestMapping(path = "updateSignUp", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     public String updateSignUpInfoAndRelated(@RequestBody QoUpdateSignUp qo) {
-        return Generator.genJsonStatusCode(signUpInfoServiceImpl.updateAndRelated(qo));
+        return Generator.genJsonStatusCode(signUpInfoServiceImpl.updateSignUpInfoAndRelated(qo));
     }
 
     @GetMapping(path = "/signUpListAll")
     public List<RoSignUpListAll> findByMC2(CustomerInfo customerInfo,
+                                           String recommendEnterprise,
+                                           String signUpTime,
+                                           String interviewTime,
+                                           String deptName,
+                                           String employeeName,
                                            @RequestParam(defaultValue = "1") Integer page) {
-        return signUpInfoServiceImpl.findByMC2(customerInfo, page);
+        System.out.println(customerInfo.getName());
+        System.out.println(deptName);
+        System.out.println(employeeName);
+        return signUpInfoServiceImpl.findByMC2(customerInfo,recommendEnterprise,signUpTime,interviewTime,deptName,employeeName,page);
     }
 
     @GetMapping(path = "/signUpListAllCount")
-    public String countByMC2(CustomerInfo customerInfo) {
-        return Generator.genJsonObject("count", signUpInfoServiceImpl.countByMC2(customerInfo));
+    public String countByMC2(CustomerInfo customerInfo,String recommendEnterprise,
+                             String signUpTime,
+                             String interviewTime,
+                             String deptName,
+                             String employeeName) {
+        return Generator.genJsonObject("count", signUpInfoServiceImpl.countByMC2(customerInfo,recommendEnterprise,signUpTime,
+                interviewTime,deptName,employeeName));
     }
 
     @PostMapping(path = "/backSignUp")

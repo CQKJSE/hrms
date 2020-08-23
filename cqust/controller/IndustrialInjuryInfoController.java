@@ -5,10 +5,7 @@ import cn.edu.cqust.bean.IndustrialInjuryInfo;
 import cn.edu.cqust.bean.vo.RoInjury;
 import cn.edu.cqust.service.IndustrialInjuryInfoService;
 import cn.edu.cqust.util.Generator;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -26,7 +23,7 @@ public class IndustrialInjuryInfoController {
     private IndustrialInjuryInfoService industrialInjuryInfoServiceImpl;
 
     @PostMapping(path = "/applyInjury")
-    public String addOne(IndustrialInjuryInfo industrialInjuryInfo) {
+    public String addOne(@RequestBody IndustrialInjuryInfo industrialInjuryInfo) {
         return Generator.genJsonStatusCode(industrialInjuryInfoServiceImpl.insert(industrialInjuryInfo));
     }
 

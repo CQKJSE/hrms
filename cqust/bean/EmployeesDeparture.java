@@ -8,75 +8,76 @@ package cn.edu.cqust.bean;
  */
 @SuppressWarnings("unused")
 public class EmployeesDeparture {
-    private Integer id;
-    private String leavingReason;
-    private String tool;
-    private String confirm;
-    private String handover;
-    private String note;
-    private Integer employeeId;
+
+  private Integer id;
+  private String leavingReason;
+  private String tool;
+  private String confirm;
+  private String handover;
+  private String note;
+  private Integer employeeId;
 
 
-    public Integer getId() {
-        return id;
-    }
+  public Integer getId() {
+    return id;
+  }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-
-    public String getLeavingReason() {
-        return leavingReason;
-    }
-
-    public void setLeavingReason(String leavingReason) {
-        this.leavingReason = leavingReason;
-    }
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
 
-    public String getTool() {
-        return tool;
-    }
+  public String getLeavingReason() {
+    return leavingReason;
+  }
 
-    public void setTool(String tool) {
-        this.tool = tool;
-    }
-
-
-    public String getConfirm() {
-        return confirm;
-    }
-
-    public void setConfirm(String confirm) {
-        this.confirm = confirm;
-    }
+  public void setLeavingReason(String leavingReason) {
+    this.leavingReason = leavingReason;
+  }
 
 
-    public String getHandover() {
-        return handover;
-    }
+  public String getTool() {
+    return tool;
+  }
 
-    public void setHandover(String handover) {
-        this.handover = handover;
-    }
-
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
+  public void setTool(String tool) {
+    this.tool = tool;
+  }
 
 
-    public Integer getEmployeeId() {
-        return employeeId;
-    }
+  public String getConfirm() {
+    return confirm;
+  }
 
-    public void setEmployeeId(Integer employeeId) {
-        this.employeeId = employeeId;
-    }
+  public void setConfirm(String confirm) {
+    this.confirm = confirm;
+  }
+
+
+  public String getHandover() {
+    return handover;
+  }
+
+  public void setHandover(String handover) {
+    this.handover = handover;
+  }
+
+
+  public String getNote() {
+    return note;
+  }
+
+  public void setNote(String note) {
+    this.note = note;
+  }
+
+
+  public Integer getEmployeeId() {
+    return employeeId;
+  }
+
+  public void setEmployeeId(Integer employeeId) {
+    this.employeeId = employeeId;
+  }
 
 }

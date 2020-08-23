@@ -62,10 +62,10 @@ public interface OnTheJobInfoService {
 
 
     /**
-     * @desc 修改, 以及修改外键关联的pcl和ci
+     * @desc 修改, 及外键关联对象
      * @param qo 混合字段对象
      * @return 操作状态
      */
-    Integer updateAndRelated(QoUpdateOnTheJob qo);
+    Integer updateAndRelated1(QoUpdateOnTheJob qo);
 
 }

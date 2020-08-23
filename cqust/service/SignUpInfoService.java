@@ -22,7 +22,7 @@ public interface SignUpInfoService {
      * @param signUpInfo 需要插入的数据
      * @return 操作状态
      */
-    Integer insertAndUpdateCiSui(SignUpInfo signUpInfo);
+    Integer signUp(SignUpInfo signUpInfo);
 
     /**
      * @desc 多条件查询1
@@ -49,7 +49,7 @@ public interface SignUpInfoService {
      * @param qoUpdateSignUp 封装的查询对象
      * @return 操作状态
      */
-    Integer updateAndRelated(QoUpdateSignUp qoUpdateSignUp);
+    Integer updateSignUpInfoAndRelated(QoUpdateSignUp qoUpdateSignUp);
 
 
     /**
@@ -59,6 +59,11 @@ public interface SignUpInfoService {
      * @return 结果列表
      */
     List<RoSignUpListAll> findByMC2(CustomerInfo customerInfo,
+                                    String recommendEnterprise,
+                                    String signUpTime,
+                                    String interviewTime,
+                                    String deptName,
+                                    String employeeName,
                                     Integer pageNumber);
 
     /**
@@ -66,7 +71,11 @@ public interface SignUpInfoService {
      * @param customerInfo 5个字段:name, idNumber, phoneNumber, gender, address
      * @return 结果数量
      */
-    Integer countByMC2(CustomerInfo customerInfo);
+    Integer countByMC2(CustomerInfo customerInfo,String recommendEnterprise,
+                       String signUpTime,
+                       String interviewTime,
+                       String deptName,
+                       String employeeName);
 
 
     /**

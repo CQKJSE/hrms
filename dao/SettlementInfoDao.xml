@@ -38,7 +38,11 @@
 		t1.credentials
 		from (select *
 		from settlement_info
-		where state = #{settlementState}) as t1
+		<where>
+			<if test="settlementState != null">
+				and state like concat('%', #{settlementState}, '%')
+			</if>
+		</where>) as t1
 		inner join
 		phone_call_list as t2
 		on t1.phoneCallListId = t2.id
@@ -105,7 +109,11 @@
 		t1.credentials
 		from (select *
 		from settlement_info
-		where state = #{settlementState}) as t1
+		<where>
+			<if test="settlementState != null">
+				and state like concat('%', #{settlementState}, '%')
+			</if>
+		</where>) as t1
 		inner join
 		phone_call_list as t2
 		on t1.phoneCallListId = t2.id

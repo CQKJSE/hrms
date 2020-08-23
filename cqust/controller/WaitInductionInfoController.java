@@ -47,9 +47,13 @@ public class WaitInductionInfoController {
     }
 
     @PostMapping(path = "/addWaitInduction")
-    public String addWaitInduction(@RequestBody WaitInductionInfo waitInductionInfo, Integer id) {
+    public String addWaitInduction(@RequestBody WaitInductionInfo waitInductionInfo) {
+        System.out.println(waitInductionInfo.getInterviewId());
+        System.out.println(waitInductionInfo.getCustomerId());
+        System.out.println(waitInductionInfo.getPhoneCallListId());
+        System.out.println(waitInductionInfo.getEmployeeId());
         return Generator.genJsonStatusCode(
-                waitInductionInfoServiceImpl.addWaitInduction(waitInductionInfo, id)
+                waitInductionInfoServiceImpl.addWaitInduction(waitInductionInfo)
         );
     }
 
@@ -71,7 +75,8 @@ public class WaitInductionInfoController {
     }
 
     @PostMapping(path = "/backWaitInduction")
-    public String backWaitInduction(WaitInductionInfo waitInductionInfo) {
+    public String backWaitInduction(@RequestBody WaitInductionInfo waitInductionInfo) {
+        System.out.println(waitInductionInfo.getId());
         return Generator.genJsonStatusCode(
                 waitInductionInfoServiceImpl.backWaitInduction(waitInductionInfo)
         );
