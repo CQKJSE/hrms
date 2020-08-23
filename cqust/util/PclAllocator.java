@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
  *
  **/
 @Component
-public class Allocator {
+public class PclAllocator {
     //每个业务员分配的数量
     private static int numPerPerson;
     //需分配的employee总数
