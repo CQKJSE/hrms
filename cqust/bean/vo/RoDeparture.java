@@ -4,7 +4,7 @@ package cn.edu.cqust.bean.vo;
  * @project: HRMS_SpringbootDemo
  * @author: F.C.Tang
  * @date: 2020-08-22 17:34
- * @desc:
+ * @desc: /departure
  **/
 @SuppressWarnings("unused")
 public class RoDeparture {

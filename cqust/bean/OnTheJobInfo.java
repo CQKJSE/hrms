@@ -8,7 +8,6 @@ package cn.edu.cqust.bean;
  */
 @SuppressWarnings("unused")
 public class OnTheJobInfo {
-
     private Integer id;
     private String contractExpireTime;
     private String emergencyContact;

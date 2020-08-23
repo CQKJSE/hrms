@@ -8,7 +8,6 @@ package cn.edu.cqust.bean;
  */
 @SuppressWarnings("unused")
 public class InterviewInfo {
-
     private Integer id;
     private String note;
     private Integer state;

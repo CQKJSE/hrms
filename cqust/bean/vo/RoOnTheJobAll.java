@@ -4,7 +4,7 @@ package cn.edu.cqust.bean.vo;
  * @project: HRMS_SpringbootDemo
  * @author: F.C.Tang
  * @date: 2020-08-21 11:02
- * @desc:
+ * @desc: /onTheJobAll
  **/
 @SuppressWarnings("unused")
 public class RoOnTheJobAll {

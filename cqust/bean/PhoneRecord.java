@@ -8,7 +8,6 @@ package cn.edu.cqust.bean;
  */
 @SuppressWarnings("unused")
 public class PhoneRecord {
-
     private Integer id;
     private String status;
     private String duration;

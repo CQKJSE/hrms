@@ -8,7 +8,6 @@ package cn.edu.cqust.bean;
  */
 @SuppressWarnings("unused")
 public class TransactionManagement {
-
     private Integer id;
     private String content;
     private String time;

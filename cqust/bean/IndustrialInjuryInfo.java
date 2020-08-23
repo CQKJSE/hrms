@@ -8,166 +8,165 @@ package cn.edu.cqust.bean;
  */
 @SuppressWarnings("unused")
 public class IndustrialInjuryInfo {
-
-  private Integer id;
-  private String outOfTime;
-  private String hospital;
-  private String dischargeTime;
-  private String cost;
-  private String reportTime;
-  private String submitIdentifiedTime;
-  private String identifiedResults;
-  private String submitIdentificationTime;
-  private String identificationResults;
-  private String claimsResults;
-  private String payAmount;
-  private String note;
-  private Integer customerId;
-  private Integer phoneCallListId;
-  private Integer onTheJobId;
-
-
-  public Integer getId() {
-    return id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
-  }
+    private Integer id;
+    private String outOfTime;
+    private String hospital;
+    private String dischargeTime;
+    private String cost;
+    private String reportTime;
+    private String submitIdentifiedTime;
+    private String identifiedResults;
+    private String submitIdentificationTime;
+    private String identificationResults;
+    private String claimsResults;
+    private String payAmount;
+    private String note;
+    private Integer customerId;
+    private Integer phoneCallListId;
+    private Integer onTheJobId;
 
 
-  public String getOutOfTime() {
-    return outOfTime;
-  }
+    public Integer getId() {
+        return id;
+    }
 
-  public void setOutOfTime(String outOfTime) {
-    this.outOfTime = outOfTime;
-  }
-
-
-  public String getHospital() {
-    return hospital;
-  }
-
-  public void setHospital(String hospital) {
-    this.hospital = hospital;
-  }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
 
-  public String getDischargeTime() {
-    return dischargeTime;
-  }
+    public String getOutOfTime() {
+        return outOfTime;
+    }
 
-  public void setDischargeTime(String dischargeTime) {
-    this.dischargeTime = dischargeTime;
-  }
-
-
-  public String getCost() {
-    return cost;
-  }
-
-  public void setCost(String cost) {
-    this.cost = cost;
-  }
+    public void setOutOfTime(String outOfTime) {
+        this.outOfTime = outOfTime;
+    }
 
 
-  public String getReportTime() {
-    return reportTime;
-  }
+    public String getHospital() {
+        return hospital;
+    }
 
-  public void setReportTime(String reportTime) {
-    this.reportTime = reportTime;
-  }
-
-
-  public String getSubmitIdentifiedTime() {
-    return submitIdentifiedTime;
-  }
-
-  public void setSubmitIdentifiedTime(String submitIdentifiedTime) {
-    this.submitIdentifiedTime = submitIdentifiedTime;
-  }
+    public void setHospital(String hospital) {
+        this.hospital = hospital;
+    }
 
 
-  public String getIdentifiedResults() {
-    return identifiedResults;
-  }
+    public String getDischargeTime() {
+        return dischargeTime;
+    }
 
-  public void setIdentifiedResults(String identifiedResults) {
-    this.identifiedResults = identifiedResults;
-  }
-
-
-  public String getSubmitIdentificationTime() {
-    return submitIdentificationTime;
-  }
-
-  public void setSubmitIdentificationTime(String submitIdentificationTime) {
-    this.submitIdentificationTime = submitIdentificationTime;
-  }
+    public void setDischargeTime(String dischargeTime) {
+        this.dischargeTime = dischargeTime;
+    }
 
 
-  public String getIdentificationResults() {
-    return identificationResults;
-  }
+    public String getCost() {
+        return cost;
+    }
 
-  public void setIdentificationResults(String identificationResults) {
-    this.identificationResults = identificationResults;
-  }
-
-
-  public String getClaimsResults() {
-    return claimsResults;
-  }
-
-  public void setClaimsResults(String claimsResults) {
-    this.claimsResults = claimsResults;
-  }
+    public void setCost(String cost) {
+        this.cost = cost;
+    }
 
 
-  public String getPayAmount() {
-    return payAmount;
-  }
+    public String getReportTime() {
+        return reportTime;
+    }
 
-  public void setPayAmount(String payAmount) {
-    this.payAmount = payAmount;
-  }
-
-
-  public String getNote() {
-    return note;
-  }
-
-  public void setNote(String note) {
-    this.note = note;
-  }
+    public void setReportTime(String reportTime) {
+        this.reportTime = reportTime;
+    }
 
 
-  public Integer getCustomerId() {
-    return customerId;
-  }
+    public String getSubmitIdentifiedTime() {
+        return submitIdentifiedTime;
+    }
 
-  public void setCustomerId(Integer customerId) {
-    this.customerId = customerId;
-  }
-
-
-  public Integer getPhoneCallListId() {
-    return phoneCallListId;
-  }
-
-  public void setPhoneCallListId(Integer phoneCallListId) {
-    this.phoneCallListId = phoneCallListId;
-  }
+    public void setSubmitIdentifiedTime(String submitIdentifiedTime) {
+        this.submitIdentifiedTime = submitIdentifiedTime;
+    }
 
 
-  public Integer getOnTheJobId() {
-    return onTheJobId;
-  }
+    public String getIdentifiedResults() {
+        return identifiedResults;
+    }
 
-  public void setOnTheJobId(Integer onTheJobId) {
-    this.onTheJobId = onTheJobId;
-  }
+    public void setIdentifiedResults(String identifiedResults) {
+        this.identifiedResults = identifiedResults;
+    }
+
+
+    public String getSubmitIdentificationTime() {
+        return submitIdentificationTime;
+    }
+
+    public void setSubmitIdentificationTime(String submitIdentificationTime) {
+        this.submitIdentificationTime = submitIdentificationTime;
+    }
+
+
+    public String getIdentificationResults() {
+        return identificationResults;
+    }
+
+    public void setIdentificationResults(String identificationResults) {
+        this.identificationResults = identificationResults;
+    }
+
+
+    public String getClaimsResults() {
+        return claimsResults;
+    }
+
+    public void setClaimsResults(String claimsResults) {
+        this.claimsResults = claimsResults;
+    }
+
+
+    public String getPayAmount() {
+        return payAmount;
+    }
+
+    public void setPayAmount(String payAmount) {
+        this.payAmount = payAmount;
+    }
+
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
+
+
+    public Integer getPhoneCallListId() {
+        return phoneCallListId;
+    }
+
+    public void setPhoneCallListId(Integer phoneCallListId) {
+        this.phoneCallListId = phoneCallListId;
+    }
+
+
+    public Integer getOnTheJobId() {
+        return onTheJobId;
+    }
+
+    public void setOnTheJobId(Integer onTheJobId) {
+        this.onTheJobId = onTheJobId;
+    }
 
 }

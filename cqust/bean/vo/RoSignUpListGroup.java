@@ -4,7 +4,7 @@ package cn.edu.cqust.bean.vo;
  * @project: HRMS_SpringbootDemo
  * @author: F.C.Tang
  * @date: 2020-08-22 14:36
- * @desc:
+ * @desc: /signUpListGroup
  **/
 public class RoSignUpListGroup {
     //sign_up_info.id

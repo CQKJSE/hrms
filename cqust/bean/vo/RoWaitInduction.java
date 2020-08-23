@@ -4,7 +4,7 @@ package cn.edu.cqust.bean.vo;
  * @project: HRMS_SpringbootDemo
  * @author: F.C.Tang
  * @date: 2020-08-12 09:33
- * @desc:
+ * @desc: /waitInduction
  **/
 @SuppressWarnings("unused")
 public class RoWaitInduction {

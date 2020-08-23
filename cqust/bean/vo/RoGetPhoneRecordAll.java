@@ -4,7 +4,7 @@ package cn.edu.cqust.bean.vo;
  * @project: HRMS_SpringbootDemo
  * @author: F.C.Tang
  * @date: 2020-08-16 20:34
- * @desc:
+ * @desc: /getPhoneRecordAll
  **/
 @SuppressWarnings("unused")
 public class RoGetPhoneRecordAll {
