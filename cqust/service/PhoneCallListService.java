@@ -66,6 +66,6 @@ public interface PhoneCallListService {
      * @param qo pcl+ci请求字段的混合对象
      * @return 操作状态
      */
-    Integer updateWithCi(QoPclAndCi qo);
+    Integer updateAndCi(QoPclAndCi qo);
 
 }

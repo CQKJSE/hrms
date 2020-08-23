@@ -46,7 +46,7 @@ public class InterviewInfoController {
     @PostMapping(path = "/addInterview")
     public String addInterview(@RequestBody InterviewInfo interviewInfo) {
         System.out.println(interviewInfo.getId());
-        return Generator.genJsonStatusCode(interviewInfoServiceImpl.addInterview(interviewInfo));
+        return Generator.genJsonStatusCode(interviewInfoServiceImpl.addAndUpdateSui(interviewInfo));
     }
 
     @GetMapping(path = "/interviewListAll")

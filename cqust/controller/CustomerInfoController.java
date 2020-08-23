@@ -26,11 +26,12 @@ public class CustomerInfoController {
     private String name = "唐封成";
     private String phone = "15998984122";
 
+
     @PostMapping(path = "/addPhone")
     public String addOne(@RequestBody CustomerInfo customerInfo) {
         System.out.println(customerInfo.getName());
         return Generator.genJsonStatusCode(
-                customerInfoServiceImpl.addOne(customerInfo, name, phone)
+                customerInfoServiceImpl.addOneAndAllocate(customerInfo, name, phone)
         );
     }
 }

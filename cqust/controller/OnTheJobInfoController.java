@@ -61,7 +61,7 @@ public class OnTheJobInfoController {
 
     @PostMapping(path = "/updateOnTheJob")
     public String addOnTheJob(QoUpdateOnTheJob qo) {
-        return Generator.genJsonStatusCode(onTheJobInfoServiceImpl.updateAndRelated1(qo));
+        return Generator.genJsonStatusCode(onTheJobInfoServiceImpl.updateAndRelated(qo));
     }
 
 }

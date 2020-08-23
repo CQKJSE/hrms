@@ -102,7 +102,7 @@ public class OnTheJobInfoServiceImpl implements OnTheJobInfoService {
     }
 
     @Override
-    public Integer updateAndRelated1(QoUpdateOnTheJob qo) {
+    public Integer updateAndRelated(QoUpdateOnTheJob qo) {
         OnTheJobInfo otji = onTheJobInfoDao.findById(qo.getId());
         otji.setInductionTime(qo.getInductionTime());
         otji.setState(qo.getState());

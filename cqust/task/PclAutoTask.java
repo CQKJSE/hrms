@@ -1,6 +1,6 @@
 package cn.edu.cqust.task;
 
-import cn.edu.cqust.util.Allocator;
+import cn.edu.cqust.util.PclAllocator;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 public class PclAutoTask {
 
     @Resource
-    private Allocator allocator;
+    private PclAllocator pclAllocator;
 
     /**
      * @desc 给每一个业务员+组长分配,

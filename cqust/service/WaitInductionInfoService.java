@@ -88,7 +88,7 @@ public interface WaitInductionInfoService {
     Integer backWaitInduction(WaitInductionInfo waitInductionInfo);
 
     /**
-     * @desc 修改, 及外键关联对象
+     * @desc 修改, 及外键关联对象(组长)
      * @param qo 混合字段对象
      * @return 操作状态
      */

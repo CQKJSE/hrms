@@ -32,7 +32,7 @@ public class SignUpInfoController {
 
     @PostMapping(path = "/signUp")
     public String signUp(@RequestBody SignUpInfo signUpInfo) {
-        return Generator.genJsonStatusCode(signUpInfoServiceImpl.signUp(signUpInfo));
+        return Generator.genJsonStatusCode(signUpInfoServiceImpl.insertAndUpdateCiSui(signUpInfo));
     }
 
     @ResponseBody
@@ -51,7 +51,7 @@ public class SignUpInfoController {
     @ResponseBody
     @RequestMapping(path = "updateSignUp", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     public String updateSignUpInfoAndRelated(@RequestBody QoUpdateSignUp qo) {
-        return Generator.genJsonStatusCode(signUpInfoServiceImpl.updateSignUpInfoAndRelated(qo));
+        return Generator.genJsonStatusCode(signUpInfoServiceImpl.updateAndRelated(qo));
     }
 
     @GetMapping(path = "/signUpListAll")

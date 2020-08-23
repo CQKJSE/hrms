@@ -22,7 +22,7 @@ public interface SignUpInfoService {
      * @param signUpInfo 需要插入的数据
      * @return 操作状态
      */
-    Integer signUp(SignUpInfo signUpInfo);
+    Integer insertAndUpdateCiSui(SignUpInfo signUpInfo);
 
     /**
      * @desc 多条件查询1
@@ -49,7 +49,7 @@ public interface SignUpInfoService {
      * @param qoUpdateSignUp 封装的查询对象
      * @return 操作状态
      */
-    Integer updateSignUpInfoAndRelated(QoUpdateSignUp qoUpdateSignUp);
+    Integer updateAndRelated(QoUpdateSignUp qoUpdateSignUp);
 
 
     /**

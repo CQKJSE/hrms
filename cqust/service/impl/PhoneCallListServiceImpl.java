@@ -60,7 +60,7 @@ public class PhoneCallListServiceImpl implements PhoneCallListService {
     }
 
     @Override
-    public Integer updateWithCi(QoPclAndCi qo) {
+    public Integer updateAndCi(QoPclAndCi qo) {
         PhoneCallList pcl = new PhoneCallList();
         CustomerInfo ci = new CustomerInfo();
         ci.setId(qo.getCiId());

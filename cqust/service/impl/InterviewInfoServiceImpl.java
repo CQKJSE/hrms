@@ -44,7 +44,7 @@ public class InterviewInfoServiceImpl implements InterviewInfoService {
     }
 
     @Override
-    public Integer addInterview(InterviewInfo interviewInfo) {
+    public Integer addAndUpdateSui(InterviewInfo interviewInfo) {
         interviewInfo.setState(0);
         SignUpInfo signUpInfo = new SignUpInfo();
         signUpInfo.setId(interviewInfo.getSignUpId());

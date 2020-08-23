@@ -36,7 +36,7 @@ public class SignUpInfoServiceImpl implements SignUpInfoService {
     private PhoneCallListDao phoneCallListDao;
 
     @Override
-    public Integer signUp(SignUpInfo signUpInfo) {
+    public Integer insertAndUpdateCiSui(SignUpInfo signUpInfo) {
         signUpInfo.setSignUpTime(DateUtil.getYMD());
         signUpInfo.setState(0);
         int s1 = signUpInfoDao.insert(signUpInfo);
@@ -61,7 +61,7 @@ public class SignUpInfoServiceImpl implements SignUpInfoService {
     }
 
     @Override
-    public Integer updateSignUpInfoAndRelated(QoUpdateSignUp qo) {
+    public Integer updateAndRelated(QoUpdateSignUp qo) {
         SignUpInfo signUpInfo = signUpInfoDao.findById(qo.getSignUpInfoId());
         if (signUpInfo == null) {
             return -1;
