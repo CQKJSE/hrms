@@ -41,4 +41,9 @@ public class EmployeeController {
         return Generator.genJsonStatusCode(employeeServiceImpl.update(employee));
     }
 
+    @GetMapping(path = "/group")
+    public List<Employee> find() {
+        return employeeServiceImpl.findSalesmanAndLeader();
+    }
+
 }

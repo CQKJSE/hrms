@@ -13,9 +13,42 @@
 		where id = 1;
 	</select>
 	
+	
 	<select id="findTimeLimit" resultType="int">
 		select value from system_settings
 		where id = 2;
 	</select>
+	
+	
+	<select id="findFuzzily" resultMap="systemSettingsRM">
+		select * from hrms.system_settings
+		<where>
+			<if test="SystemSettings.id != null">
+				and id = #{SystemSettings.id}
+			</if>
+			<if test="SystemSettings.item != null">
+				and item like concat('%', #{SystemSettings.item}, '%')
+			</if>
+			<if test="SystemSettings.value != null">
+				and value like concat('%', #{SystemSettings.value}, '%')
+			</if>
+		</where>
+		<if test="startIndex != null">
+			limit #{startIndex}, 10;
+		</if>
+	</select>
+	
+	<update id="update">
+		update system_settings
+		<trim prefix="set" suffixOverrides=",">
+			<if test="item != null ">
+				item=#{item},
+			</if>
+			<if test="value != null ">
+				value=#{value},
+			</if>
+		</trim>
+		where id = #{id};
+	</update>
 	
 </mapper>

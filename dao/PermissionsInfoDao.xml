@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.cqust.dao.PermissionsInfoDao">
+	
+	<parameterMap id="PermissionsInfoPM" type="cn.edu.cqust.bean.PermissionsInfo"/>
+	<resultMap id="PermissionsInfoRM" type="cn.edu.cqust.bean.PermissionsInfo"/>
+	
+	<select id="findFuzzily" resultMap="PermissionsInfoRM">
+		select * from hrms.permissions_info
+		<where>
+			<if test="permissionsInfo.id != null">
+				and id = #{permissionsInfo.id}
+			</if>
+			<if test="permissionsInfo.permissions != null">
+				and permissions like concat('%', #{permissionsInfo.permissions}, '%')
+			</if>
+			<if test="permissionsInfo.phone != null">
+				and phone like concat('%', #{permissionsInfo.phone}, '%')
+			</if>
+		</where>
+		<if test="startIndex != null">
+			limit #{startIndex}, 10;
+		</if>
+	</select>
+	
+	
+	<insert id="insert">
+		insert into permissions_info(permissions, phone)
+		values (#{permissions}, #{phone});
+	</insert>
+	
+	
+	<update id="update">
+		update permissions_info
+		<trim prefix="set" suffixOverrides=",">
+			<if test="permissions != null ">
+				permissions=#{permissions},
+			</if>
+			<if test="phone != null ">
+				phone=#{phone},
+			</if>
+		</trim>
+		where id = #{id};
+	</update>
+
+</mapper>

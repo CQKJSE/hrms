@@ -94,5 +94,47 @@
 		</trim>
 		where idWork = #{idWork};
 	</update>
+	
+	<select id="find" resultMap="employeeRM">
+		select * from hrms.employee
+		<where>
+			<if test="employee.id != null">
+				and id = #{id}
+			</if>
+			<if test="employee.idWork != null">
+				and idWork like concat('%', #{employee.idWork}, '%')
+			</if>
+			<if test="employee.name != null">
+				and name like concat('%', #{employee.name}, '%')
+			</if>
+			<if test="employee.idNumber != null">
+				and idNumber like concat('%', #{employee.idNumber}, '%')
+			</if>
+			<if test="employee.gender != null">
+				and gender like concat('%', #{employee.gender}, '%')
+			</if>
+			<if test="employee.phone != null">
+				and phone like concat('%', #{employee.phone}, '%')
+			</if>
+			<if test="employee.inductionTime != null">
+				and inductionTime like concat('%', #{employee.inductionTime}, '%')
+			</if>
+			<if test="employee.deptName != null">
+				and deptName like concat('%', #{employee.deptName}, '%')
+			</if>
+			<if test="employee.password != null">
+				and password like concat('%', #{employee.password}, '%')
+			</if>
+			<if test="employee.position != null">
+				and position like concat('%', #{employee.position}, '%')
+			</if>
+			<if test="employee.state != null">
+				and state like concat('%', #{employee.state}, '%')
+			</if>
+		</where>
+		<if test="startIndex != null">
+			limit #{startIndex}, 10;
+		</if>
+	</select>
 
 </mapper>

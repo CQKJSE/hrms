@@ -60,4 +60,13 @@ public interface EmployeeDao {
      */
     Integer update(Employee employee);
 
+    /**
+     * @desc 全字段查询
+     * @param employee 全字段可选
+     * @param startIndex 起始位置
+     * @return 结果列表
+     */
+    List<Employee> find(@Param("employee") Employee employee,
+                        @Param("startIndex") Integer startIndex);
+
 }

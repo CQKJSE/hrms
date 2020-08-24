@@ -99,7 +99,7 @@ public class Allocator {
                         PhoneCallList::getEmployeeId,
                         (Integer k1, Integer k2) -> k2)
                 );
-        pclAll = convertToCompareMap(phoneCallListDao.findAll());
+        pclAll = PclToCompareMap(phoneCallListDao.findAll());
         additionalPcl = new LinkedHashMap<>();
 
         numPerPerson = systemSettingsDao.findAllocationCount();
@@ -285,7 +285,7 @@ public class Allocator {
      * @param list 待转换列表
      * @return 转换后的结果
      */
-    private Map<Integer, String> convertToCompareMap(List<PhoneCallList> list) {
+    public static Map<Integer, String> PclToCompareMap(List<PhoneCallList> list) {
         Map<Integer, String> res = new HashMap<>();
         int index = 1;
         for (PhoneCallList pcl : list) {

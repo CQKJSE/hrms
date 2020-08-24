@@ -1,5 +1,6 @@
 package cn.edu.cqust.service;
 
+import cn.edu.cqust.bean.CustomerInfo;
 import cn.edu.cqust.bean.Employee;
 
 import java.util.List;
@@ -41,6 +42,13 @@ public interface EmployeeService {
      * @return 操作状态
      */
     Integer update(Employee employee);
+
+
+    /**
+     * @desc 查询业务员+组长
+     * @return 结果列表
+     */
+    List<Employee> findSalesmanAndLeader();
 
 
 }

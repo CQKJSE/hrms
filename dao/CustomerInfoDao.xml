@@ -54,7 +54,7 @@
 	
 	<select id="count" resultType="int">
 		select count(id)
-		from phone_call_list;
+		from customer_info;
 	</select>
 	
 	<select id="findByStateAndAfterTimeLimit" resultType="int">
@@ -67,6 +67,62 @@
 			      from system_settings
 			      where id = 4) day));
 	</select>
-
+	
+	<select id="findFuzzily" resultMap="customerInfoRM">
+		select * from hrms.customer_info
+		<where>
+			<if test="customerInfo.id != null">
+				and id = #{customerInfo.id}
+			</if>
+			<if test="customerInfo.name != null">
+				and name like concat('%', #{customerInfo.name}, '%')
+			</if>
+			<if test="customerInfo.idNumber != null">
+				and idNumber like concat('%', #{customerInfo.idNumber}, '%')
+			</if>
+			<if test="customerInfo.gender != null">
+				and gender like concat('%', #{customerInfo.gender}, '%')
+			</if>
+			<if test="customerInfo.age != null">
+				and age like concat('%', #{customerInfo.age}, '%')
+			</if>
+			<if test="customerInfo.phoneNumber != null">
+				and phoneNumber like concat('%', #{customerInfo.phoneNumber}, '%')
+			</if>
+			<if test="customerInfo.education != null">
+				and education like concat('%', #{customerInfo.education}, '%')
+			</if>
+			<if test="customerInfo.address != null">
+				and address like concat('%', #{customerInfo.address}, '%')
+			</if>
+			<if test="customerInfo.professionalSkills != null">
+				and professionalSkills like concat('%', #{customerInfo.professionalSkills}, '%')
+			</if>
+			<if test="customerInfo.hasCertificate != null">
+				and hasCertificate like concat('%', #{customerInfo.hasCertificate}, '%')
+			</if>
+			<if test="customerInfo.isDisability != null">
+				and isDisability like concat('%', #{customerInfo.isDisability}, '%')
+			</if>
+			<if test="customerInfo.sourceOfData != null">
+				and sourceOfData like concat('%', #{customerInfo.sourceOfData}, '%')
+			</if>
+			<if test="customerInfo.note != null">
+				and note like concat('%', #{customerInfo.note}, '%')
+			</if>
+			<if test="customerInfo.state != null">
+				and state like concat('%', #{customerInfo.state}, '%')
+			</if>
+			<if test="customerInfo.addedTime != null">
+				and addedTime like concat('%', #{customerInfo.addedTime}, '%')
+			</if>
+			<if test="customerInfo.addedPerson != null">
+				and addedPerson like concat('%', #{customerInfo.addedPerson}, '%')
+			</if>
+		</where>
+		<if test="startIndex != null">
+			limit #{startIndex}, 10;
+		</if>
+	</select>
 
 </mapper>

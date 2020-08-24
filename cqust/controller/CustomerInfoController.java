@@ -3,12 +3,10 @@ package cn.edu.cqust.controller;
 import cn.edu.cqust.bean.CustomerInfo;
 import cn.edu.cqust.service.CustomerInfoService;
 import cn.edu.cqust.util.Generator;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @project: HRMS_SpringbootDemo
@@ -31,6 +29,27 @@ public class CustomerInfoController {
         System.out.println(customerInfo.getName());
         return Generator.genJsonStatusCode(
                 customerInfoServiceImpl.addOne(customerInfo, name, phone)
+        );
+    }
+
+    @GetMapping(path = "/customer")
+    public List<CustomerInfo> find(CustomerInfo customerInfo,
+                                   @RequestParam(defaultValue = "1") Integer page) {
+        return customerInfoServiceImpl.findFuzzily(customerInfo, page);
+    }
+
+    @GetMapping(path = "/customerCount")
+    public String find(CustomerInfo customerInfo) {
+        return Generator.genJsonObject(
+                "count",
+                customerInfoServiceImpl.countFuzzily(customerInfo)
+        );
+    }
+
+    @PostMapping(path = "/updateCustomer")
+    public String update(CustomerInfo customerInfo) {
+        return Generator.genJsonStatusCode(
+                customerInfoServiceImpl.update(customerInfo)
         );
     }
 }

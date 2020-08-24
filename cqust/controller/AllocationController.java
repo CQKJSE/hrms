@@ -3,6 +3,7 @@ package cn.edu.cqust.controller;
 import cn.edu.cqust.service.AllocationService;
 import cn.edu.cqust.util.Generator;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -40,5 +41,22 @@ public class AllocationController {
     public String allocateOneAfterTimeLimit() {
         return Generator.genJsonStatusCode(allocationServiceImpl.allocateOneAfterTimeLimit(phone));
     }
+
+
+    /**
+     * @desc 为当前登录的业务员自动分配一条
+     * @return {"statusCode":状态码}
+     *          1 ---> 成功
+     *         -2 ---> ci中对应的state==0
+     *         -3 ---> 两键重复
+     */
+    @PostMapping(path = "/distribution")
+    public String allocateOne2(Integer id, Integer employeeId) {
+        return Generator.genJsonStatusCode(
+                allocationServiceImpl.allocateOne2(id, employeeId)
+        );
+    }
+
+
 
 }

@@ -6,6 +6,8 @@ import cn.edu.cqust.service.EmployeeService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -43,4 +45,18 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Integer update(Employee employee) {
         return employeeDao.update(employee);
     }
+
+    @Override
+    public List<Employee> findSalesmanAndLeader() {
+        Employee e1 = new Employee();
+        Employee e2 = new Employee();
+        e1.setPosition("组长");
+        e2.setPosition("业务员");
+        List<Employee> listAll = new ArrayList<>();
+        listAll.addAll(employeeDao.find(e1, null));
+        listAll.addAll(employeeDao.find(e2, null));
+        return listAll;
+    }
+
+
 }

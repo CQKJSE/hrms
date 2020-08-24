@@ -11,6 +11,7 @@ import cn.edu.cqust.util.DateUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @project: HRMS_SpringbootDemo
@@ -43,5 +44,24 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
         phoneCallList.setEmployeeId(employee.getId());
         int s2 = phoneCallListDao.insert(phoneCallList);
         return (s1 == 1 && s2 == 1) ? 1 : -1;
+    }
+
+    @Override
+    public List<CustomerInfo> findFuzzily(CustomerInfo customerInfo, Integer pageNumber) {
+        return customerInfoDao.findFuzzily(
+                customerInfo, (pageNumber - 1) * 10
+        );
+    }
+
+    @Override
+    public Integer countFuzzily(CustomerInfo customerInfo) {
+        return customerInfoDao.findFuzzily(
+                customerInfo, null
+        ).size();
+    }
+
+    @Override
+    public Integer update(CustomerInfo customerInfo) {
+        return customerInfoDao.update(customerInfo);
     }
 }

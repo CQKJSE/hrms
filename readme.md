@@ -85,4 +85,14 @@
   >71.需求71 ---> /departure  
   >72.需求72 ---> /departureCount  
   >73.需求73 ---> /updateDeparture  
+  >74.需求74 ---> /customer  
+  >75.需求75 ---> /customerCount  
+  >76.需求76 ---> /group  
+  >77.需求77 ---> /distribution  
+  >78.需求78 ---> /updateCustomer  
+  >79.需求79 ---> /permissions  
+  >80.需求80 ---> /addPermissions  
+  ******************************************  
+  >81.需求81 ---> /systemSettings  
+  >82.需求82 ---> /updateSystemSettings  
 
