@@ -1,5 +1,8 @@
 package cn.edu.cqust.bean;
 
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * @project: HRMS
  * @author: Tang.F.C
@@ -74,7 +77,6 @@ public class Employee {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
 
     public String getInductionTime() {
         return inductionTime;

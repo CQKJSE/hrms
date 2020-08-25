@@ -3,18 +3,22 @@ package cn.edu.cqust.bean.vo;
 /**
  * @project: HRMS_SpringbootDemo
  * @author: F.C.Tang
- * @date: 2020-08-21 09:37
+ * @date: 2020-08-25 18:28
  * @desc:
  **/
 @SuppressWarnings("unused")
-public class QoWaitInductionAll {
+public class QoWaitInductionAllMarket {
     private String customerName;
     private String idNumber;
     private String phoneNumber;
+
     private String recommendEnterprise;
-    private String state;
+
     private String deptName;
     private String employeeName;
+    //wi.state
+    private String stateOne;
+
     private String headName;
 
     public String getCustomerName() {
@@ -49,14 +53,6 @@ public class QoWaitInductionAll {
         this.recommendEnterprise = recommendEnterprise;
     }
 
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
     public String getDeptName() {
         return deptName;
     }
@@ -71,6 +67,14 @@ public class QoWaitInductionAll {
 
     public void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
+    }
+
+    public String getStateOne() {
+        return stateOne;
+    }
+
+    public void setStateOne(String stateOne) {
+        this.stateOne = stateOne;
     }
 
     public String getHeadName() {

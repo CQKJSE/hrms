@@ -2,10 +2,7 @@ package cn.edu.cqust.dao;
 
 import cn.edu.cqust.bean.CustomerInfo;
 import cn.edu.cqust.bean.InterviewInfo;
-import cn.edu.cqust.bean.vo.RoInterviewList;
-import cn.edu.cqust.bean.vo.RoInterviewListAll;
-import cn.edu.cqust.bean.vo.RoSignUpList;
-import cn.edu.cqust.bean.vo.RoSignUpListGroup;
+import cn.edu.cqust.bean.vo.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -121,6 +118,15 @@ public interface InterviewInfoDao {
                                     @Param("startIndex") Integer startIndex,
                                     @Param("deptName") String deptName,
                                     @Param("employeeName") String employeeName);
+
+
+    /**
+     * @desc 多条件查询4
+     * @param qo 混合查询对象
+     * @return 结果列表
+     */
+    List<RoInterviewListAll> findByMC4(@Param("qo") QoInterviewListAllMarket qo,
+                                       @Param("startIndex") Integer startIndex);
 
 
 }

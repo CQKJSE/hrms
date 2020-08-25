@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.cqust.dao.EnterpriseDemandInfoDao">
+	
+	<parameterMap id="EnterpriseDemandInfoPM" type="cn.edu.cqust.bean.EnterpriseDemandInfo"/>
+	<resultMap id="EnterpriseDemandInfoRM" type="cn.edu.cqust.bean.EnterpriseDemandInfo"/>
+	
+	
+	<select id="find" resultMap="EnterpriseDemandInfoRM">
+		select *
+		from hrms.enterprise_demand_info
+		<where>
+			<if test="enterpriseDemandInfo.id != null">
+				and id = #{enterpriseDemandInfo.id}
+			</if>
+			<if test="enterpriseDemandInfo.job != null">
+				and job = #{enterpriseDemandInfo.job}
+			</if>
+			<if test="enterpriseDemandInfo.number != null">
+				and number = #{enterpriseDemandInfo.number}
+			</if>
+			<if test="enterpriseDemandInfo.wage != null">
+				and wage = #{enterpriseDemandInfo.wage}
+			</if>
+			<if test="enterpriseDemandInfo.enterpriseId != null">
+				and enterpriseId = #{enterpriseDemandInfo.enterpriseId}
+			</if>
+		</where>
+		<if test="startIndex != null">
+			limit #{startIndex}, 10;
+		</if>
+	</select>
+	
+	<select id="findFuzzily" resultMap="EnterpriseDemandInfoRM">
+		select *
+		from hrms.enterprise_demand_info
+		<where>
+			<if test="enterpriseDemandInfo.id != null">
+				and id = #{enterpriseDemandInfo.id}
+			</if>
+			<if test="enterpriseDemandInfo.job != null">
+				and job like concat('%', #{enterpriseDemandInfo.job}, '%')
+			</if>
+			<if test="enterpriseDemandInfo.number != null">
+				and number like concat('%', #{enterpriseDemandInfo.number}, '%')
+			</if>
+			<if test="enterpriseDemandInfo.wage != null">
+				and wage like concat('%', #{enterpriseDemandInfo.wage}, '%')
+			</if>
+			<if test="enterpriseDemandInfo.enterpriseId != null">
+				and enterpriseId like concat('%', #{enterpriseDemandInfo.enterpriseId}, '%')
+			</if>
+		</where>
+		<if test="startIndex != null">
+			limit #{startIndex}, 10;
+		</if>
+	</select>
+	
+	<delete id="deleteById">
+		delete
+		from enterprise_demand_info
+		where id = #{id};
+	</delete>
+	
+	
+	<insert id="insert">
+		insert into enterprise_demand_info(job, number, wage, enterpriseId)
+		values (#{job}, #{number}, #{wage}, #{enterpriseId})
+	</insert>
+	
+	<update id="update">
+		update enterprise_demand_info
+		<trim prefix="set" suffixOverrides=",">
+			<if test="job != null ">
+				job=#{job},
+			</if>
+			<if test="number != null ">
+				number=#{number},
+			</if>
+			<if test="wage != null ">
+				wage=#{wage},
+			</if>
+		</trim>
+		where id = #{id};
+	</update>
+
+</mapper>

@@ -3,6 +3,8 @@ package cn.edu.cqust.controller;
 import cn.edu.cqust.bean.Employee;
 import cn.edu.cqust.service.EmployeeService;
 import cn.edu.cqust.util.Generator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
@@ -45,5 +47,11 @@ public class EmployeeController {
     public List<Employee> find() {
         return employeeServiceImpl.findSalesmanAndLeader();
     }
+
+    @GetMapping(path = "/market")
+    public List<Employee> findMarkedByState0AndName(String name) {
+        return employeeServiceImpl.findMarkedByState0AndName(name);
+    }
+
 
 }

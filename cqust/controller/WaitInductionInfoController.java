@@ -26,6 +26,8 @@ public class WaitInductionInfoController {
     private String phone = "15998984122";
     // TODO: 2020/8/6 session域中获取的部门
     private String deptName = "网招2部";
+    // TODO: 2020/8/25 session域中获取的企业负责人名
+    private String headName = "张";
 
     @ResponseBody
     @GetMapping(path = "/waitInduction")
@@ -103,6 +105,20 @@ public class WaitInductionInfoController {
                 waitInductionInfoServiceImpl.countByMC3(
                         customerInfo, deptName, employeeName
                 )
+        );
+    }
+
+    @GetMapping(path = "/waitInductionAllMarket")
+    public List<RoWaitInductionAllMarket> findByMC4(QoWaitInductionAllMarket qo,
+                                              @RequestParam(defaultValue = "1") Integer page) {
+        return waitInductionInfoServiceImpl.findByMC4(qo, headName, page);
+    }
+
+    @GetMapping(path = "/waitInductionAllMarketCount")
+    public String countByMC4(QoWaitInductionAllMarket qo) {
+        return Generator.genJsonObject(
+                "count",
+                waitInductionInfoServiceImpl.countByMC4(qo, headName)
         );
     }
 

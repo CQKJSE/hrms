@@ -357,5 +357,88 @@
 			limit #{startIndex}, 10;
 		</if>
 	</select>
+	
+	
+	<select id="findByMC4" resultMap="roInterviewListAllRM">
+		select t3.id as interviewInfoId,
+		t2.name as customerName,
+		t2.idNumber,
+		t2.gender,
+		t2.age,
+		t2.phoneNumber,
+		t2.education,
+		t2.address,
+		t2.professionalSkills,
+		t2.hasCertificate,
+		t2.isDisability,
+		t1.recommendEnterprise,
+		t1.recommendJob,
+		t5.interviewTime,
+		t4.deptName,
+		t4.name as employeeName,
+		t2.id as customerId,
+		t5.id as signUpId,
+		t1.id as phoneCallListId,
+		t4.id as employeeId
+		from phone_call_list as t1
+		inner join
+		(select *
+		from customer_info
+		<where>
+			<if test="qo.customerName != null">
+				and name like concat('%', #{qo.customerName}, '%')
+			</if>
+			<if test="qo.idNumber != null">
+				and idNumber like concat('%', #{qo.idNumber}, '%')
+			</if>
+			<if test="qo.gender != null">
+				and gender like concat('%', #{qo.gender}, '%')
+			</if>
+			<if test="qo.phoneNumber != null">
+				and phoneNumber like concat('%', #{qo.phoneNumber}, '%')
+			</if>
+			<if test="qo.address != null">
+				and address like concat('%', #{qo.address}, '%')
+			</if>
+		</where>
+		) as t2
+		on t1.customerId = t2.id
+		inner join
+		(select *
+		from interview_info
+		where state = #{qo.state}) as t3
+		on t1.customerId = t3.customerId and
+		t1.employeeId = t3.employeeId and
+		t1.id = t3.phoneCallListId
+		inner join (select *
+		from employee
+		<where>
+			<if test="qo.deptName != null">
+				and deptName like concat('%', #{qo.deptName}, '%')
+			</if>
+			<if test="qo.employeeName != null">
+				and name like concat('%', #{qo.employeeName}, '%')
+			</if>
+		</where>
+		) as t4
+		on t1.employeeId = t4.id
+		inner join (select *
+		from sign_up_info
+		<where>
+			<if test="qo.interviewTime != null">
+				and interviewTime like concat('%', #{qo.interviewTime}, '%')
+			</if>
+		</where>
+		) as t5
+		on t5.id = t3.signUpId
+		inner join
+		(select *
+		from enterprise_head_info
+		where name = #{qo.headName}) as t6
+		on t1.recommendEnterprise = t6.enterpriseName
+		<if test="startIndex != null">
+			limit #{startIndex}, 10;
+		</if>
+	</select>
 
 </mapper>

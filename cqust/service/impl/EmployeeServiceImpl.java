@@ -3,6 +3,7 @@ package cn.edu.cqust.service.impl;
 import cn.edu.cqust.bean.Employee;
 import cn.edu.cqust.dao.EmployeeDao;
 import cn.edu.cqust.service.EmployeeService;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -56,6 +57,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         listAll.addAll(employeeDao.find(e1, null));
         listAll.addAll(employeeDao.find(e2, null));
         return listAll;
+    }
+
+    @Override
+    public List<Employee> findMarkedByState0AndName(String name) {
+        Employee employee = new Employee();
+        employee.setState("0");
+        employee.setDeptName("市场部");
+        employee.setName(name);
+        return employeeDao.find(employee, null);
     }
 
 

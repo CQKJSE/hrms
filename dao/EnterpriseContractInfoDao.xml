@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.cqust.dao.EnterpriseContractInfoDao">
+	
+	<parameterMap id="EnterpriseContractInfoPM" type="cn.edu.cqust.bean.EnterpriseContractInfo"/>
+	<resultMap id="EnterpriseContractInfoRM" type="cn.edu.cqust.bean.EnterpriseContractInfo"/>
+	
+	<select id="find" resultMap="EnterpriseContractInfoRM">
+		select * from hrms.enterprise_contract_info
+		<where>
+			<if test="enterpriseContractInfo.id != null">
+				and id = #{enterpriseContractInfo.id}
+			</if>
+			<if test="enterpriseContractInfo.enterpriseName != null">
+				and enterpriseName = #{enterpriseContractInfo.enterpriseName}
+			</if>
+			<if test="enterpriseContractInfo.address != null">
+				and address = #{enterpriseContractInfo.address}
+			</if>
+			<if test="enterpriseContractInfo.signingTime != null">
+				and signingTime = #{enterpriseContractInfo.signingTime}
+			</if>
+			<if test="enterpriseContractInfo.type != null">
+				and type = #{enterpriseContractInfo.type}
+			</if>
+			<if test="enterpriseContractInfo.duration != null">
+				and duration = #{enterpriseContractInfo.duration}
+			</if>
+			<if test="enterpriseContractInfo.expireTime != null">
+				and expireTime = #{enterpriseContractInfo.expireTime}
+			</if>
+			<if test="enterpriseContractInfo.enterpriseHead != null">
+				and enterpriseHead = #{enterpriseContractInfo.enterpriseHead}
+			</if>
+			<if test="enterpriseContractInfo.phone != null">
+				and phone = #{enterpriseContractInfo.phone}
+			</if>
+			<if test="enterpriseContractInfo.contractor != null">
+				and contractor = #{enterpriseContractInfo.contractor}
+			</if>
+		</where>
+		<if test="startIndex != null">
+			limit #{startIndex}, 10;
+		</if>
+	</select>
+	
+	
+	<select id="findFuzzily" resultMap="EnterpriseContractInfoRM">
+		select * from hrms.enterprise_contract_info
+		<where>
+			<if test="enterpriseContractInfo.id != null">
+				and id = #{enterpriseContractInfo.id}
+			</if>
+			<if test="enterpriseContractInfo.enterpriseName != null">
+				and enterpriseName like concat('%', #{enterpriseContractInfo.enterpriseName}, '%')
+			</if>
+			<if test="enterpriseContractInfo.address != null">
+				and address like concat('%', #{enterpriseContractInfo.address}, '%')
+			</if>
+			<if test="enterpriseContractInfo.signingTime != null">
+				and signingTime like concat('%', #{enterpriseContractInfo.signingTime}, '%')
+			</if>
+			<if test="enterpriseContractInfo.type != null">
+				and type like concat('%', #{enterpriseContractInfo.type}, '%')
+			</if>
+			<if test="enterpriseContractInfo.duration != null">
+				and duration like concat('%', #{enterpriseContractInfo.duration}, '%')
+			</if>
+			<if test="enterpriseContractInfo.expireTime != null">
+				and expireTime like concat('%', #{enterpriseContractInfo.expireTime}, '%')
+			</if>
+			<if test="enterpriseContractInfo.enterpriseHead != null">
+				and enterpriseHead like concat('%', #{enterpriseContractInfo.enterpriseHead}, '%')
+			</if>
+			<if test="enterpriseContractInfo.phone != null">
+				and phone like concat('%', #{enterpriseContractInfo.phone}, '%')
+			</if>
+			<if test="enterpriseContractInfo.contractor != null">
+				and contractor like concat('%', #{enterpriseContractInfo.contractor}, '%')
+			</if>
+		</where>
+		<if test="startIndex != null">
+			limit #{startIndex}, 10;
+		</if>
+	</select>
+	
+	
+	<delete id="deleteById">
+		delete
+		from enterprise_contract_info
+		where id = #{id};
+	</delete>
+	
+	
+	<insert id="insert">
+		insert into enterprise_contract_info(enterpriseName, address, signingTime, type,
+		                                     duration, expireTime, enterpriseHead, phone, contractor)
+		values (#{enterpriseName}, #{address}, #{signingTime}, #{type},
+		        #{duration}, #{expireTime}, #{enterpriseHead}, #{phone}, #{contractor})
+	</insert>
+	
+	
+	<update id="update">
+		update enterprise_contract_info
+		<trim prefix="set" suffixOverrides=",">
+			<if test="enterpriseName != null ">enterpriseName=#{enterpriseName},</if>
+			<if test="address != null ">address=#{address},</if>
+			<if test="signingTime != null ">signingTime=#{signingTime},</if>
+			<if test="type != null ">type=#{type},</if>
+			<if test="duration != null ">duration=#{duration},</if>
+			<if test="expireTime != null">expireTime=#{expireTime},</if>
+			<if test="enterpriseHead != null ">enterpriseHead=#{enterpriseHead},</if>
+			<if test="phone != null ">phone=#{phone},</if>
+			<if test="contractor != null ">contractor=#{contractor},</if>
+		</trim>
+		where id = #{id};
+	</update>
+
+
+</mapper>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.cqust.dao.EnterpriseHeadInfoDao">
+	
+	<parameterMap id="EnterpriseHeadInfoPM" type="cn.edu.cqust.bean.EnterpriseHeadInfo"/>
+	<resultMap id="EnterpriseHeadInfoRM" type="cn.edu.cqust.bean.EnterpriseHeadInfo"/>
+	
+	
+	<select id="find" resultMap="EnterpriseHeadInfoRM">
+		select *
+		from hrms.enterprise_head_info
+		<where>
+			<if test="enterpriseHeadInfo.id != null">
+				and id = #{enterpriseHeadInfo.id}
+			</if>
+			<if test="enterpriseHeadInfo.enterpriseName != null">
+				and enterpriseName = #{enterpriseHeadInfo.enterpriseName}
+			</if>
+			<if test="enterpriseHeadInfo.name != null">
+				and name = #{enterpriseHeadInfo.name}
+			</if>
+		</where>
+		<if test="startIndex != null">
+			limit #{startIndex}, 10;
+		</if>
+	</select>
+	
+	<select id="findFuzzily" resultMap="EnterpriseHeadInfoRM">
+		select *
+		from hrms.enterprise_head_info
+		<where>
+			<if test="enterpriseHeadInfo.id != null">
+				and id = #{enterpriseHeadInfo.id}
+			</if>
+			<if test="enterpriseHeadInfo.enterpriseName != null">
+				and enterpriseName like concat('%', #{enterpriseHeadInfo.enterpriseName}, '%')
+			</if>
+			<if test="enterpriseHeadInfo.name != null">
+				and name like concat('%', #{enterpriseHeadInfo.name}, '%')
+			</if>
+		</where>
+		<if test="startIndex != null">
+			limit #{startIndex}, 10;
+		</if>
+	</select>
+	
+	<delete id="deleteById">
+		delete
+		from enterprise_head_info
+		where id = #{id};
+	</delete>
+	
+	
+	<insert id="insert">
+		insert into enterprise_head_info(enterpriseName, name)
+		values (#{enterpriseName}, #{name})
+	</insert>
+	
+
+</mapper>

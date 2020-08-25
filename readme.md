@@ -95,4 +95,30 @@
   ******************************************  
   >81.需求81 ---> /systemSettings  
   >82.需求82 ---> /updateSystemSettings  
-
+  >83.需求83 ---> /enterprise  
+  >84.需求84 ---> /enterpriseCount  
+  >85.需求85 ---> /deleteEnterprise  
+  >86.需求86 ---> /enterpriseDemand  
+  >87.需求87 ---> /addEnterpriseDemand  
+  >88.需求88 ---> /deleteEnterpriseDemand  
+  >89.需求89 ---> /updateEnterpriseDemand  
+  >90.需求90 ---> /enterpriseHead  
+  ******************************************  
+  >91.需求91 ---> /market  
+  >92.需求92 ---> /headEnterprise  
+  >93.需求93 ---> /addEnterpriseHead  
+  >94.需求94 ---> /deleteEnterpriseDemandHead  
+  >95.需求95 ---> /enterpriseContract  
+  >96.需求96 ---> /enterpriseContractCount  
+  >97.需求97 ---> /deleteEnterpriseContract  
+  >98.需求98 ---> /addEnterpriseContract  
+  >99.需求99 ---> /updateEnterpriseContract  
+  >100.需求100 ---> /addEnterprise  
+  ******************************************  
+  >101.需求101 ---> /updateEnterprise  
+  >102.需求102 ---> /enterpriseName  
+  >103.需求103 ---> /enterpriseJob  
+  >104.需求104 ---> /interviewListAllMarket  
+  >105.需求105 ---> /interviewListAllMarketCount  
+  >106.需求106 ---> /waitInductionAllMarket  
+  >107.需求107 ---> /waitInductionAllMarketCount  

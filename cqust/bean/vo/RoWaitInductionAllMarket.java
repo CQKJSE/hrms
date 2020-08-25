@@ -1,17 +1,17 @@
-package cn.edu.cqust.bean;
-
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+package cn.edu.cqust.bean.vo;
 
 /**
- * @project: HRMS
- * @author: Tang.F.C
- * @date: 2020-08-05 10:52
+ * @project: HRMS_SpringbootDemo
+ * @author: F.C.Tang
+ * @date: 2020-08-25 20:23
  * @desc:
- */
+ **/
 @SuppressWarnings("unused")
-public class CustomerInfo {
-    private Integer id;
-    private String name;
+public class RoWaitInductionAllMarket {
+    //wait_induction_info.id
+    private Integer waitInductionId;
+    //customer_info
+    private String customerName;
     private String idNumber;
     private String gender;
     private Integer age;
@@ -21,37 +21,30 @@ public class CustomerInfo {
     private String professionalSkills;
     private Integer hasCertificate;
     private Integer isDisability;
-    private String sourceOfData;
-    private String note;
+    //phone_call_list
+    private String recommendEnterprise;
+    private String recommendJob;
+    //wait_induction_info
+    private String interviewQualifiedTime;
     private String state;
-    private String addedTime;
-    private String addedPerson;
+    private String delayTime;
+    private String note;
 
-    public CustomerInfo() {
+    public Integer getWaitInductionId() {
+        return waitInductionId;
     }
 
-    public CustomerInfo(Integer id, String state) {
-        this.id = id;
-        this.state = state;
+    public void setWaitInductionId(Integer waitInductionId) {
+        this.waitInductionId = waitInductionId;
     }
 
-    public Integer getId() {
-        return id;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
 
     public String getIdNumber() {
         return idNumber;
@@ -61,7 +54,6 @@ public class CustomerInfo {
         this.idNumber = idNumber;
     }
 
-
     public String getGender() {
         return gender;
     }
@@ -69,7 +61,6 @@ public class CustomerInfo {
     public void setGender(String gender) {
         this.gender = gender;
     }
-
 
     public Integer getAge() {
         return age;
@@ -79,7 +70,6 @@ public class CustomerInfo {
         this.age = age;
     }
 
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -87,7 +77,6 @@ public class CustomerInfo {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
 
     public String getEducation() {
         return education;
@@ -97,7 +86,6 @@ public class CustomerInfo {
         this.education = education;
     }
 
-
     public String getAddress() {
         return address;
     }
@@ -105,7 +93,6 @@ public class CustomerInfo {
     public void setAddress(String address) {
         this.address = address;
     }
-
 
     public String getProfessionalSkills() {
         return professionalSkills;
@@ -115,7 +102,6 @@ public class CustomerInfo {
         this.professionalSkills = professionalSkills;
     }
 
-
     public Integer getHasCertificate() {
         return hasCertificate;
     }
@@ -123,7 +109,6 @@ public class CustomerInfo {
     public void setHasCertificate(Integer hasCertificate) {
         this.hasCertificate = hasCertificate;
     }
-
 
     public Integer getIsDisability() {
         return isDisability;
@@ -133,24 +118,29 @@ public class CustomerInfo {
         this.isDisability = isDisability;
     }
 
-
-    public String getSourceOfData() {
-        return sourceOfData;
+    public String getRecommendEnterprise() {
+        return recommendEnterprise;
     }
 
-    public void setSourceOfData(String sourceOfData) {
-        this.sourceOfData = sourceOfData;
+    public void setRecommendEnterprise(String recommendEnterprise) {
+        this.recommendEnterprise = recommendEnterprise;
     }
 
-
-    public String getNote() {
-        return note;
+    public String getRecommendJob() {
+        return recommendJob;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setRecommendJob(String recommendJob) {
+        this.recommendJob = recommendJob;
     }
 
+    public String getInterviewQualifiedTime() {
+        return interviewQualifiedTime;
+    }
+
+    public void setInterviewQualifiedTime(String interviewQualifiedTime) {
+        this.interviewQualifiedTime = interviewQualifiedTime;
+    }
 
     public String getState() {
         return state;
@@ -160,31 +150,19 @@ public class CustomerInfo {
         this.state = state;
     }
 
-    public String getAddedTime() {
-        return addedTime;
+    public String getDelayTime() {
+        return delayTime;
     }
 
-    public void setAddedTime(String addedTime) {
-        this.addedTime = addedTime;
+    public void setDelayTime(String delayTime) {
+        this.delayTime = delayTime;
     }
 
-    public String getAddedPerson() {
-        return addedPerson;
+    public String getNote() {
+        return note;
     }
 
-    public void setAddedPerson(String addedPerson) {
-        this.addedPerson = addedPerson;
-    }
-
-    @Override
-    public String toString() {
-        return "CustomerInfo{" +
-                "id=" + id +
-                ", name='" + name +
-                ", idNumber='" + idNumber +
-                ", address='" + address +
-                ", note='" + note +
-                ", state='" + state +
-                '}';
+    public void setNote(String note) {
+        this.note = note;
     }
 }

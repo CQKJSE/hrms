@@ -9,7 +9,7 @@ package cn.edu.cqust.bean.vo;
 @SuppressWarnings("unused")
 public class RoWaitInduction {
     //wait_induction_info.id
-    private Integer id;
+    private Integer waitInductionId;
     //customer_info
     private String name;
     private String idNumber;
@@ -57,12 +57,12 @@ public class RoWaitInduction {
         this.phoneCallListId = phoneCallListId;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getWaitInductionId() {
+        return waitInductionId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setWaitInductionId(Integer waitInductionId) {
+        this.waitInductionId = waitInductionId;
     }
 
     public String getName() {
@@ -196,7 +196,7 @@ public class RoWaitInduction {
     @Override
     public String toString() {
         return "RoWaitInduction{" +
-                "id=" + id +
+                "waitInductionId=" + waitInductionId +
                 ", name='" + name + '\'' +
                 ", idNumber='" + idNumber + '\'' +
                 ", gender='" + gender + '\'' +

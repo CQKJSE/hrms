@@ -9,7 +9,7 @@ package cn.edu.cqust.bean.vo;
 @SuppressWarnings("unused")
 public class RoWaitInductionAll {
     //wait_induction_info.id
-    private Integer id;
+    private Integer waitInductionId;
     //customer_info
     private String name;
     private String idNumber;
@@ -77,12 +77,20 @@ public class RoWaitInductionAll {
         this.phoneCallListId = phoneCallListId;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getWaitInductionId() {
+        return waitInductionId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setWaitInductionId(Integer waitInductionId) {
+        this.waitInductionId = waitInductionId;
+    }
+
+    public String getMedicalQualifiedTime() {
+        return medicalQualifiedTime;
+    }
+
+    public void setMedicalQualifiedTime(String medicalQualifiedTime) {
+        this.medicalQualifiedTime = medicalQualifiedTime;
     }
 
     public String getName() {
@@ -213,31 +221,4 @@ public class RoWaitInductionAll {
         this.note = note;
     }
 
-    @Override
-    public String toString() {
-        return "RoWaitInduction{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", idNumber='" + idNumber + '\'' +
-                ", gender='" + gender + '\'' +
-                ", age=" + age +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", education='" + education + '\'' +
-                ", address='" + address + '\'' +
-                ", professionalSkills='" + professionalSkills + '\'' +
-                ", hasCertificate=" + hasCertificate +
-                ", isDisability=" + isDisability +
-                ", employeeId=" + employeeId +
-                ", customerId=" + customerId +
-                ", phoneCallListId=" + phoneCallListId +
-                ", recommendEnterprise='" + recommendEnterprise + '\'' +
-                ", recommendJob='" + recommendJob + '\'' +
-                ", employeeName='" + employeeName + '\'' +
-                ", deptName='" + deptName + '\'' +
-                ", interviewQualifiedTime='" + interviewQualifiedTime + '\'' +
-                ", state='" + state + '\'' +
-                ", delayTime='" + delayTime + '\'' +
-                ", note='" + note + '\'' +
-                '}';
-    }
 }

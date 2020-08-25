@@ -4,6 +4,7 @@ import cn.edu.cqust.service.AllocationService;
 import cn.edu.cqust.util.Generator;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -15,6 +16,7 @@ import javax.annotation.Resource;
  * @desc:
  **/
 @RestController
+@RequestMapping(produces = "application/json; charset=utf-8")
 public class AllocationController {
 
     @Resource

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.cqust.dao.EnterpriseInfoDao">
+	
+	<parameterMap id="EnterpriseInfoPM" type="cn.edu.cqust.bean.EnterpriseInfo"/>
+	<resultMap id="EnterpriseInfoRM" type="cn.edu.cqust.bean.EnterpriseInfo"/>
+	
+	<select id="find" resultMap="EnterpriseInfoRM">
+		select * from hrms.enterprise_info
+		<where>
+			<if test="enterpriseInfo.id != null">
+				and id = #{enterpriseInfo.id}
+			</if>
+			<if test="enterpriseInfo.enterpriseName != null">
+				and enterpriseName = #{enterpriseInfo.enterpriseName}
+			</if>
+			<if test="enterpriseInfo.address != null">
+				and address = #{enterpriseInfo.address}
+			</if>
+			<if test="enterpriseInfo.welfare != null">
+				and welfare = #{enterpriseInfo.welfare}
+			</if>
+			<if test="enterpriseInfo.roomAndBoard != null">
+				and roomAndBoard = #{enterpriseInfo.roomAndBoard}
+			</if>
+			<if test="enterpriseInfo.head != null">
+				and head = #{enterpriseInfo.head}
+			</if>
+			<if test="enterpriseInfo.phone != null">
+				and phone = #{enterpriseInfo.phone}
+			</if>
+			<if test="enterpriseInfo.place != null">
+				and place = #{enterpriseInfo.place}
+			</if>
+			<if test="enterpriseInfo.time != null">
+				and time = #{enterpriseInfo.time}
+			</if>
+		</where>
+		<if test="startIndex != null">
+			limit #{startIndex}, 10;
+		</if>
+	</select>
+	
+	
+	<select id="findFuzzily" resultMap="EnterpriseInfoRM">
+		select * from hrms.enterprise_info
+		<where>
+			<if test="enterpriseInfo.id != null">
+				and id = #{enterpriseInfo.id}
+			</if>
+			<if test="enterpriseInfo.enterpriseName != null">
+				and enterpriseName like concat('%', #{enterpriseInfo.enterpriseName}, '%')
+			</if>
+			<if test="enterpriseInfo.address != null">
+				and address like concat('%', #{enterpriseInfo.address}, '%')
+			</if>
+			<if test="enterpriseInfo.welfare != null">
+				and welfare like concat('%', #{enterpriseInfo.welfare}, '%')
+			</if>
+			<if test="enterpriseInfo.roomAndBoard != null">
+				and roomAndBoard like concat('%', #{enterpriseInfo.roomAndBoard}, '%')
+			</if>
+			<if test="enterpriseInfo.head != null">
+				and head like concat('%', #{enterpriseInfo.head}, '%')
+			</if>
+			<if test="enterpriseInfo.phone != null">
+				and phone like concat('%', #{enterpriseInfo.phone}, '%')
+			</if>
+			<if test="enterpriseInfo.place != null">
+				and place like concat('%', #{enterpriseInfo.place}, '%')
+			</if>
+			<if test="enterpriseInfo.time != null">
+				and time like concat('%', #{enterpriseInfo.time}, '%')
+			</if>
+		</where>
+		<if test="startIndex != null">
+			limit #{startIndex}, 10;
+		</if>
+	</select>
+	
+	
+	<delete id="deleteById">
+		delete 
+		from enterprise_info
+		where id = #{id};
+	</delete>
+	
+	
+	<insert id="insert">
+		insert into enterprise_info(enterpriseName, address, welfare,
+		                            roomAndBoard, head, phone, place, time)
+		values (#{enterpriseName}, #{address}, #{welfare},
+		        #{roomAndBoard}, #{head}, #{phone}, #{place}, #{time})
+	</insert>
+	
+	
+	<update id="update">
+		update enterprise_info
+		<trim prefix="set" suffixOverrides=",">
+			<if test="enterpriseName != null ">enterpriseName=#{enterpriseName},</if>
+			<if test="address != null ">address=#{address},</if>
+			<if test="welfare != null ">welfare=#{welfare},</if>
+			<if test="roomAndBoard != null ">roomAndBoard=#{roomAndBoard},</if>
+			<if test="head != null ">head=#{head},</if>
+			<if test="phone != null">phone=#{phone},</if>
+			<if test="place != null ">place=#{place},</if>
+			<if test="time != null ">time=#{time},</if>
+		</trim>
+		where id = #{id};
+	</update>
+
+
+</mapper>

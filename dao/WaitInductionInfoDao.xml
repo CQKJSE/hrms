@@ -8,12 +8,13 @@
 	<resultMap id="roWaitInductionRM" type="cn.edu.cqust.bean.vo.RoWaitInduction"/>
 	<resultMap id="roWaitInductionAllRM" type="cn.edu.cqust.bean.vo.RoWaitInductionAll"/>
 	<resultMap id="roWaitInductionGroupRM" type="cn.edu.cqust.bean.vo.RoWaitInductionGroup"/>
+	<resultMap id="roWaitInductionAllMarketRM" type="cn.edu.cqust.bean.vo.RoWaitInductionAllMarket"/>
 	<parameterMap id="waitInductionInfoPM" type="cn.edu.cqust.bean.WaitInductionInfo"/>
 	<resultMap id="waitInductionInfoRM" type="cn.edu.cqust.bean.WaitInductionInfo"/>
 	
 	<select id="findByMC1" resultMap="roWaitInductionRM">
 		select
-		t1.id,
+		t1.id as waitInductionId,
 		t2.name,
 		t2.idNumber,
 		t2.gender,
@@ -149,7 +150,7 @@
 	
 	<select id="findByMC2" resultMap="roWaitInductionAllRM">
 		select
-		t1.id,
+		t1.id as waitInductionId,
 		t2.name,
 		t2.idNumber,
 		t2.gender,
@@ -321,6 +322,86 @@
 		inner join
 		phone_call_list as t4
 		on t1.phoneCallListId = t4.id
+		<if test="startIndex != null">
+			limit #{startIndex}, 10;
+		</if>
+	</select>
+	
+	
+	<select id="findByMC4" resultMap="roWaitInductionAllMarketRM">
+		select
+		t1.id as waitInductionId,
+		t2.name as customerName,
+		t2.idNumber,
+		t2.gender,
+		t2.age,
+		t2.phoneNumber,
+		t2.education,
+		t2.address,
+		t2.professionalSkills,
+		t2.hasCertificate,
+		t2.isDisability,
+		t4.recommendEnterprise,
+		t4.recommendJob,
+		t1.interviewQualifiedTime,
+		t1.state,
+		t1.delayTime,
+		t1.note
+		from (select *
+		from wait_induction_info
+		<where>
+			<if test="qo.stateOne != null">
+				and stateOne = #{qo.stateOne}
+			</if>
+		</where>
+		) as t1
+		inner join
+		(select id,
+		name, #
+		idNumber, #
+		gender,
+		age,
+		phoneNumber, #
+		education,
+		address,
+		professionalSkills,
+		hasCertificate,
+		isDisability
+		from customer_info
+		<where>
+			<if test="qo.customerName != null">
+				and name like concat('%', #{qo.customerName}, '%')
+			</if>
+			<if test="qo.idNumber != null">
+				and idNumber like concat('%', #{qo.idNumber}, '%')
+			</if>
+			<if test="qo.phoneNumber != null">
+				and phoneNumber like concat('%', #{qo.phoneNumber}, '%')
+			</if>
+		</where>
+		) as t2
+		on t1.customerId = t2.id
+		inner join
+		(select id,name,deptName
+		from employee
+		<where>
+			<if test="qo.employeeName != null">
+				and name like concat('%', #{qo.employeeName}, '%')
+			</if>
+			<if test="qo.deptName != null">
+				and deptName like concat('%', #{qo.deptName}, '%')
+			</if>
+		</where>
+		) as t3
+		on t1.employeeId = t3.id
+		inner join
+		phone_call_list as t4
+		on t1.phoneCallListId = t4.id
+		inner join
+		(select *
+		from enterprise_head_info
+		where name = #{qo.headName}) as t6
+		on t4.recommendEnterprise = t6.enterpriseName
 		<if test="startIndex != null">
 			limit #{startIndex}, 10;
 		</if>
