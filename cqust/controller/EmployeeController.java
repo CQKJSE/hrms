@@ -54,4 +54,9 @@ public class EmployeeController {
         return employeeServiceImpl.findSalesmanAndLeader();
     }
 
+    @GetMapping(path = "/market")
+    public List<Employee> findMarkedByState0AndName(String name) {
+        return employeeServiceImpl.findMarkedByState0AndName(name);
+    }
+
 }

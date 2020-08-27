@@ -117,4 +117,22 @@ public interface WaitInductionInfoService {
                        String deptName,
                        String employeeName);
 
+    /**
+     * @desc 多条件查询4
+     * @param qo 混合查询对象
+     * @param headName session中企业负责人名字
+     * @return 结果数量
+     */
+    List<RoWaitInductionAllMarket> findByMC4(QoWaitInductionAllMarket qo,
+                                             String headName,
+                                             Integer pageNumber);
+
+    /**
+     * @desc 多条件查询4, 统计结果条数
+     * @param qo 混合查询对象
+     * @param headName session中企业负责人名字
+     * @return 结果数量
+     */
+    Integer countByMC4(QoWaitInductionAllMarket qo, String headName);
+
 }

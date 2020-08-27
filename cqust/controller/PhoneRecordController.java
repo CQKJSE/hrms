@@ -100,7 +100,7 @@ public class PhoneRecordController {
     }
 
     @GetMapping(path = "/throughRecord")
-    private String throughRecord() {
+    public String throughRecord() {
         Integer[] resArr = phoneRecordServiceImpl.countTodayByStatus(phone);
         return Generator.genJsonObject(
                 "throughAll", resArr[0],

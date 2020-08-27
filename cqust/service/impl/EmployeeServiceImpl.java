@@ -66,5 +66,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         return listAll;
     }
 
+    @Override
+    public List<Employee> findMarkedByState0AndName(String name) {
+        Employee employee = new Employee();
+        employee.setState("0");
+        employee.setDeptName("市场部");
+        employee.setName(name);
+        return employeeDao.find(employee, null);
+    }
+
 
 }
