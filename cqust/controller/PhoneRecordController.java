@@ -70,12 +70,12 @@ public class PhoneRecordController {
 
     @GetMapping(path = "/getPhoneRecordAll")
     public List<RoGetPhoneRecordAll> findByMC3(CustomerInfo customerInfo,
-                                               @RequestParam(defaultValue = "1") Integer pageNumber,
+                                               @RequestParam(defaultValue = "1") Integer page,
                                                String employeeName,
                                                String deptName) {
         return phoneRecordServiceImpl.findByMC3(
                 customerInfo,
-                pageNumber,
+                page,
                 employeeName,
                 deptName
         );
@@ -83,12 +83,14 @@ public class PhoneRecordController {
 
     @GetMapping(path = "/getPhoneRecordAllCount")
     public String countByMC3(CustomerInfo customerInfo, String employeeName, String deptName) {
-        return Generator.genJsonStatusCode(
+        return Generator.genJsonObject(
+                "count",
                 phoneRecordServiceImpl.countByMC3(
-                customerInfo,
-                employeeName,
-                deptName
-        ));
+                        customerInfo,
+                        employeeName,
+                        deptName
+                )
+        );
     }
 
     @PostMapping(path = "/addPhoneRecord")

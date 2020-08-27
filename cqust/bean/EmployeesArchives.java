@@ -17,6 +17,7 @@ public class EmployeesArchives {
     private String addressNow;
     private String emergencyContact;
     private String relation;
+ /*   private String emergencyContactdeptName;*/
     private String emergencyContactPhone;
     private String departureTime;
     private String ginsengTime;

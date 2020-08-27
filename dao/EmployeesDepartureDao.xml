@@ -48,7 +48,7 @@
 				and state like concat('%', #{employee.state}, '%')
 			</if>
 			<if test="employee.idWork != null">
-				and idWork like concat('%', #{employee.idWork}, '%')
+				and idWork = #{employee.idWork}
 			</if>
 		</where>
 		) as t2

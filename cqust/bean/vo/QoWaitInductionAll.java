@@ -15,7 +15,6 @@ public class QoWaitInductionAll {
     private String state;
     private String deptName;
     private String employeeName;
-    private String headName;
 
     public String getCustomerName() {
         return customerName;
@@ -71,13 +70,5 @@ public class QoWaitInductionAll {
 
     public void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
-    }
-
-    public String getHeadName() {
-        return headName;
-    }
-
-    public void setHeadName(String headName) {
-        this.headName = headName;
     }
 }

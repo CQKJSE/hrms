@@ -24,7 +24,7 @@ public class EmployeesDepartureController {
     private EmployeesDepartureService employeesDepartureServiceImpl;
 
     @PostMapping(path = "/addDeparture")
-    public String addOne(EmployeesDeparture employeesDeparture) {
+    public String addOne(@RequestBody EmployeesDeparture employeesDeparture) {
         return Generator.genJsonStatusCode(
                 employeesDepartureServiceImpl.insert(employeesDeparture)
         );
@@ -47,7 +47,7 @@ public class EmployeesDepartureController {
     }
 
     @PostMapping(path = "/updateDeparture")
-    public String update(EmployeesDeparture employeesDeparture) {
+    public String update(@RequestBody EmployeesDeparture employeesDeparture) {
         return Generator.genJsonStatusCode(
                 employeesDepartureServiceImpl.update(employeesDeparture)
         );

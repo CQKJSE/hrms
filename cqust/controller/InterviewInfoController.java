@@ -2,7 +2,6 @@ package cn.edu.cqust.controller;
 
 import cn.edu.cqust.bean.CustomerInfo;
 import cn.edu.cqust.bean.InterviewInfo;
-import cn.edu.cqust.bean.vo.QoInterviewListAllMarket;
 import cn.edu.cqust.bean.vo.RoInterviewList;
 import cn.edu.cqust.bean.vo.RoInterviewListAll;
 import cn.edu.cqust.bean.vo.RoSignUpList;
@@ -29,8 +28,6 @@ public class InterviewInfoController {
     private String phone = "15998984122";
     // TODO: 2020/8/6 session域中获取的部门
     private String deptName = "网招2部";
-    // TODO: 2020/8/25 session域中获取的企业负责人名
-    private String headName = "唐";
 
     @ResponseBody
     @GetMapping(path = "/interviewList")
@@ -102,21 +99,6 @@ public class InterviewInfoController {
                 interviewInfoServiceImpl.countByMC3(
                         customerInfo, deptName, employeeName
                 )
-        );
-    }
-
-
-    @GetMapping(path = "/interviewListAllMarket")
-    public List<RoInterviewListAll> findByMC4(QoInterviewListAllMarket qo,
-                                              @RequestParam(defaultValue = "1") Integer page) {
-        return interviewInfoServiceImpl.findByMC4(qo, headName, page);
-    }
-
-    @GetMapping(path = "/interviewListAllMarketCount")
-    public String countByMC4(QoInterviewListAllMarket qo) {
-        return Generator.genJsonObject(
-                "count",
-                interviewInfoServiceImpl.countByMC4(qo, headName)
         );
     }
 

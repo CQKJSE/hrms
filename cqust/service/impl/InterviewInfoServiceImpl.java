@@ -3,7 +3,6 @@ package cn.edu.cqust.service.impl;
 import cn.edu.cqust.bean.CustomerInfo;
 import cn.edu.cqust.bean.InterviewInfo;
 import cn.edu.cqust.bean.SignUpInfo;
-import cn.edu.cqust.bean.vo.QoInterviewListAllMarket;
 import cn.edu.cqust.bean.vo.RoInterviewList;
 import cn.edu.cqust.bean.vo.RoInterviewListAll;
 import cn.edu.cqust.bean.vo.RoSignUpList;
@@ -11,7 +10,6 @@ import cn.edu.cqust.dao.CustomerInfoDao;
 import cn.edu.cqust.dao.InterviewInfoDao;
 import cn.edu.cqust.dao.SignUpInfoDao;
 import cn.edu.cqust.service.InterviewInfoService;
-import cn.edu.cqust.util.PagingUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -111,20 +109,4 @@ public class InterviewInfoServiceImpl implements InterviewInfoService {
                 deptName, employeeName
         ).size();
     }
-
-    @Override
-    public List<RoInterviewListAll> findByMC4(QoInterviewListAllMarket qo, String headName, Integer pageNumber) {
-        qo.setHeadName(headName);
-        qo.setState(0);
-        return interviewInfoDao.findByMC4(qo, PagingUtil.paging(pageNumber));
-    }
-
-    @Override
-    public Integer countByMC4(QoInterviewListAllMarket qo, String headName) {
-        qo.setHeadName(headName);
-        qo.setState(0);
-        return interviewInfoDao.findByMC4(qo, null).size();
-    }
-
-
 }

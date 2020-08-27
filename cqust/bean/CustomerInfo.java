@@ -1,7 +1,5 @@
 package cn.edu.cqust.bean;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 /**
  * @project: HRMS
  * @author: Tang.F.C
@@ -10,6 +8,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
  */
 @SuppressWarnings("unused")
 public class CustomerInfo {
+
     private Integer id;
     private String name;
     private String idNumber;

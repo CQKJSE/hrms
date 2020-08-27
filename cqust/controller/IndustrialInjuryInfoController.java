@@ -27,7 +27,7 @@ public class IndustrialInjuryInfoController {
         return Generator.genJsonStatusCode(industrialInjuryInfoServiceImpl.insert(industrialInjuryInfo));
     }
 
-    @PostMapping(path = "/injury")
+    @GetMapping(path = "/injury")
     public List<RoInjury> findByMC1(CustomerInfo customerInfo,
                                     @RequestParam(defaultValue = "1") Integer page) {
         return industrialInjuryInfoServiceImpl.findByMC1(
@@ -35,7 +35,7 @@ public class IndustrialInjuryInfoController {
         );
     }
 
-    @PostMapping(path = "/injuryCount")
+    @GetMapping(path = "/injuryCount")
     public String countByMC1(CustomerInfo customerInfo) {
         return Generator.genJsonObject(
                 "count",
@@ -44,7 +44,7 @@ public class IndustrialInjuryInfoController {
     }
 
     @PostMapping(path = "/updateInjury")
-    public String update(IndustrialInjuryInfo industrialInjuryInfo) {
+    public String update(@RequestBody IndustrialInjuryInfo industrialInjuryInfo) {
         return Generator.genJsonStatusCode(industrialInjuryInfoServiceImpl.update(industrialInjuryInfo));
     }
 

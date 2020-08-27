@@ -2,7 +2,9 @@ package cn.edu.cqust.dao;
 
 import cn.edu.cqust.bean.CustomerInfo;
 import cn.edu.cqust.bean.WaitInductionInfo;
-import cn.edu.cqust.bean.vo.*;
+import cn.edu.cqust.bean.vo.QoWaitInductionAll;
+import cn.edu.cqust.bean.vo.RoWaitInduction;
+import cn.edu.cqust.bean.vo.RoWaitInductionGroup;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -93,12 +95,4 @@ public interface WaitInductionInfoDao {
                                          @Param("startIndex") Integer startIndex,
                                          @Param("deptName") String deptName,
                                          @Param("employeeName") String employeeName);
-
-    /**
-     * @desc 多条件查询4
-     * @param qo 混合查询对象
-     * @return 结果列表
-     */
-    List<RoWaitInductionAllMarket> findByMC4(@Param("qo") QoWaitInductionAllMarket qo,
-                                       @Param("startIndex") Integer startIndex);
 }

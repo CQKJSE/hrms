@@ -2,7 +2,6 @@ package cn.edu.cqust.util;
 
 import com.alibaba.fastjson.JSONObject;
 
-import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
@@ -57,6 +56,5 @@ public class Generator {
     public static int genRandomNumber(int upperLimit) {
         return new Random().nextInt(upperLimit) + 1;
     }
-
 
 }

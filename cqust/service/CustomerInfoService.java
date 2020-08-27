@@ -27,7 +27,7 @@ public interface CustomerInfoService {
     /**
      * @desc 全字段查询
      * @param customerInfo 全字段可选
-     * @param pageNumber 页码
+     * @param pageNumber 起始位置
      * @return 结果列表
      */
     List<CustomerInfo> findFuzzily(CustomerInfo customerInfo, Integer pageNumber);

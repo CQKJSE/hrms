@@ -27,6 +27,7 @@
 		name,
 		idNumber,
 		gender,
+		phone,
 		inductionTime,
 		deptName,
 		position,
@@ -60,7 +61,7 @@
 				and state like concat('%', #{employee.state}, '%')
 			</if>
 			<if test="employee.idWork != null">
-				and idWork like concat('%', #{employee.idWork}, '%')
+				and idWork = #{employee.idWork}
 			</if>
 		</where>
 		) as t2
@@ -79,7 +80,7 @@
 			<if test="education != null ">education=#{education},</if>
 			<if test="address != null ">address=#{address},</if>
 			<if test="addressNow != null">addressNow=#{addressNow},</if>
-			<if test="emergencyContact != null ">emergencyContact=#{emergencyContactdeptName},</if>
+			<if test="emergencyContact != null ">emergencyContact=#{emergencyContact},</if>
 			<if test="relation != null ">relation=#{relation},</if>
 			<if test="emergencyContactPhone != null ">emergencyContactPhone=#{emergencyContactPhone},</if>
 			<if test="departureTime != null ">departureTime=#{departureTime},</if>

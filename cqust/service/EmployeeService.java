@@ -2,8 +2,6 @@ package cn.edu.cqust.service;
 
 import cn.edu.cqust.bean.CustomerInfo;
 import cn.edu.cqust.bean.Employee;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
@@ -51,14 +49,6 @@ public interface EmployeeService {
      * @return 结果列表
      */
     List<Employee> findSalesmanAndLeader();
-
-
-    /**
-     * @desc 根据name, 查询state=0且deptName=市场部
-     * @param name 查询的名字
-     * @return 结果列表
-     */
-    List<Employee> findMarkedByState0AndName(String name);
 
 
 }

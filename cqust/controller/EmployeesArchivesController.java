@@ -47,7 +47,8 @@ public class EmployeesArchivesController {
     }
 
     @PostMapping(path = "/updateEmployeesArchives")
-    public String update(EmployeesArchives employeesArchives) {
+    public String update(@RequestBody EmployeesArchives employeesArchives) {
+        System.out.println(employeesArchives.getBirthday());
         return Generator.genJsonStatusCode(
                 employeesArchivesServiceImpl.update(employeesArchives)
         );

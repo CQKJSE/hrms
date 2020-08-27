@@ -12,7 +12,6 @@ import cn.edu.cqust.dao.WaitInductionInfoDao;
 import cn.edu.cqust.service.WaitInductionInfoService;
 import cn.edu.cqust.util.BeanHelper;
 import cn.edu.cqust.util.DateUtil;
-import cn.edu.cqust.util.PagingUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -207,18 +206,5 @@ public class WaitInductionInfoServiceImpl implements WaitInductionInfoService {
         ).size();
     }
 
-    @Override
-    public List<RoWaitInductionAllMarket> findByMC4(QoWaitInductionAllMarket qo, String headName, Integer pageNumber) {
-        qo.setStateOne("0");
-        qo.setHeadName(headName);
-        return waitInductionInfoDao.findByMC4(qo, PagingUtil.paging(pageNumber));
-    }
-
-    @Override
-    public Integer countByMC4(QoWaitInductionAllMarket qo, String headName) {
-        qo.setStateOne("0");
-        qo.setHeadName(headName);
-        return waitInductionInfoDao.findByMC4(qo, null).size();
-    }
 
 }

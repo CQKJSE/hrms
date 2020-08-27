@@ -1,8 +1,10 @@
 package cn.edu.cqust.service.impl;
 
 import cn.edu.cqust.bean.Employee;
+import cn.edu.cqust.bean.EmployeesArchives;
 import cn.edu.cqust.bean.EmployeesDeparture;
 import cn.edu.cqust.bean.vo.RoDeparture;
+import cn.edu.cqust.dao.EmployeeDao;
 import cn.edu.cqust.dao.EmployeesDepartureDao;
 import cn.edu.cqust.service.EmployeesDepartureService;
 import org.springframework.stereotype.Service;
@@ -20,10 +22,18 @@ import java.util.List;
 public class EmployeesDepartureServiceImpl implements EmployeesDepartureService {
 
     @Resource
+    private EmployeeDao employeeDao;
+    @Resource
     private EmployeesDepartureDao employeesDepartureDao;
 
     @Override
     public Integer insert(EmployeesDeparture employeesDeparture) {
+        Employee employee = new Employee();
+        System.out.println(employeesDeparture.getEmployeeId());
+        employee.setId(employeesDeparture.getEmployeeId());
+        employee.setState("1");
+        System.out.println(employee);
+        employeeDao.update(employee);
         return employeesDepartureDao.insert(employeesDeparture);
     }
 

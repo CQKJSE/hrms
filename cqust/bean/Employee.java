@@ -1,8 +1,5 @@
 package cn.edu.cqust.bean;
 
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 /**
  * @project: HRMS
  * @author: Tang.F.C
@@ -15,7 +12,7 @@ public class Employee {
     private Integer id;
     private Integer idWork;
     private String name;
-    private Integer idNumber;
+    private String idNumber;
     private String gender;
     private String phone;
     private String inductionTime;
@@ -24,6 +21,13 @@ public class Employee {
     private String position;
     private String state;
 
+    public String getIdNumber() {
+        return idNumber;
+    }
+
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
+    }
 
     public Integer getId() {
         return id;
@@ -52,15 +56,6 @@ public class Employee {
     }
 
 
-    public Integer getIdNumber() {
-        return idNumber;
-    }
-
-    public void setIdNumber(Integer idNumber) {
-        this.idNumber = idNumber;
-    }
-
-
     public String getGender() {
         return gender;
     }
@@ -77,6 +72,7 @@ public class Employee {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
 
     public String getInductionTime() {
         return inductionTime;

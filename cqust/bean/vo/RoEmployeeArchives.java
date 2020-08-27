@@ -17,6 +17,7 @@ public class RoEmployeeArchives {
     private String inductionTime; 
     private String deptName;
     private String position;
+    private String phone;
 
     private String birthday;
     private String category;
@@ -32,6 +33,14 @@ public class RoEmployeeArchives {
     private String stopTime; 
     private String note; 
     private Integer employeeId;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public Integer getEmployeeArchivesId() {
         return employeeArchivesId;

@@ -33,7 +33,7 @@
 	</select>
 	
 	<select id="findByMC" resultMap="employeeRM">
-		select *
+		select id,idWork,name,idNumber,gender,phone,inductionTime,deptName,password,position
 		from employee
 		<where>
 			<if test="employee.idWork != null">
@@ -86,13 +86,14 @@
 			<if test="name != null ">name=#{name},</if>
 			<if test="idNumber != null ">idNumber=#{idNumber},</if>
 			<if test="phone != null ">phone=#{phone},</if>
+			<if test="gender != null ">gender=#{gender},</if>
 			<if test="inductionTime != null">inductionTime=#{inductionTime},</if>
 			<if test="deptName != null ">deptName=#{deptName},</if>
 			<if test="password != null ">password=#{password},</if>
 			<if test="position != null ">position=#{position},</if>
 			<if test="state != null ">state=#{state},</if>
 		</trim>
-		where idWork = #{idWork};
+		where id = #{id};
 	</update>
 	
 	<select id="find" resultMap="employeeRM">
